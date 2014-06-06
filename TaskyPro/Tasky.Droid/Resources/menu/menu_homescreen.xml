@@ -4,4 +4,8 @@
         android:icon="@drawable/ic_action_addtask" 
         android:title="Add Task" 
         android:showAsAction="ifRoom|withText" />
+<item android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_action_settings" 
+        android:title="Settings" 
+        android:showAsAction="ifRoom|withText" />
 </menu>
