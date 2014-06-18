@@ -5,10 +5,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
-using TaskyWin8.SyncTodayServiceReference;
-using Windows.Security.Cryptography;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
 
 namespace Tasky.BL.Managers
 {
@@ -40,6 +36,7 @@ namespace Tasky.BL.Managers
         // http://stackoverflow.com/questions/23023058/using-pbkdf2-encryption-in-a-metro-winrt-application
         private static byte[] PBKDF2(string password, byte[] salt, int iterations, int outputBytes)
         {
+			#if Win8
             byte[] encryptionKeyOut;
             IBuffer saltBuffer = CryptographicBuffer.CreateFromByteArray(salt);
             KeyDerivationParameters kdfParameters = KeyDerivationParameters.BuildForPbkdf2(saltBuffer, PBKDF2_ITERATIONS);
@@ -58,8 +55,9 @@ namespace Tasky.BL.Managers
             CryptographicBuffer.CopyToByteArray(key, out encryptionKeyOut);
 
             return encryptionKeyOut;  // success
-
-            
+			#else
+			return null;
+			#endif
         }
 
         public static long DateTimeUtcNowOurTicks()
@@ -92,7 +90,8 @@ namespace Tasky.BL.Managers
                 Convert.ToBase64String(hash).Substring(0, 32);
         }
 
-        private async static void Login()
+		#if Win8
+		private async static void Login()
         {
             if (loggedUser != null && clientAccount != null) return;
             Binding binding = new BasicHttpBinding();
@@ -118,5 +117,33 @@ namespace Tasky.BL.Managers
 
             wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
         }
+		#else
+		private static void Login()
+		{
+			if (loggedUser != null && clientAccount != null) return;
+			Binding binding = new BasicHttpBinding();
+			EndpointAddress address = new EndpointAddress(ServerUrl);
+
+			wsdl = new TaskDatabaseSoapClient(binding, address);
+			string salt = wsdl.GetUserSalt(UserName);
+			string hashedPasword = CreateHash1(Password, salt);
+			string finalPassword = CreateHash2(hashedPasword, salt);
+			loggedUser = wsdl.LoginUser2(UserName, finalPassword);
+			clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+		}
+
+		public static void SaveTask(Task item)
+		{
+			Login();
+
+			NuTask task = new NuTask();
+			task.Body = item.Notes;
+			task.Completed = item.Done;
+			task.ExternalId = item.ID.ToString();
+			task.Subject = item.Name;
+
+			wsdl.SaveTask(clientAccount, loggedUser, task);
+		}
+		#endif
     }
 }

@@ -5,23 +5,25 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
+#if Win8
 using TaskyWin8.SyncTodayServiceReference;
+using Windows.Storage.Streams;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
+#endif
 
 namespace Tasky.BL.Managers
 {
     public static class RemoteTaskManager
     {
-        public static string UserName = "test@test.com";
+		public static string UserName = "test@test.com";
         public static string Password = "Password123";
         public static string ClientRegistrationID = "8c3a75ed-5c06-4b36-bd6e-87b8c7f20452";
         public static string ServerUrl = "http://wsdl.sync.today/TaskDatabase.asmx";
 
         internal static User loggedUser;
         internal static Account clientAccount;
-        internal static TaskDatabaseSoapClient wsdl;
+		internal static TaskDatabaseSoapClient wsdl;
 
         /// <summary>
         /// Salted password hashing with PBKDF2-SHA1.
@@ -31,7 +33,7 @@ namespace Tasky.BL.Managers
         /// </summary>
         public const int SALT_BYTE_SIZE = 24;
         public const int HASH_BYTE_SIZE = 24;
-        public const int PBKDF2_ITERATIONS = 1000;
+		public const int PBKDF2_ITERATIONS = 1000;
 
         public const int ITERATION_INDEX = 0;
         public const int SALT_INDEX = 1;
@@ -40,6 +42,7 @@ namespace Tasky.BL.Managers
         // http://stackoverflow.com/questions/23023058/using-pbkdf2-encryption-in-a-metro-winrt-application
         private static byte[] PBKDF2(string password, byte[] salt, int iterations, int outputBytes)
         {
+			#if Win8
             byte[] encryptionKeyOut;
             IBuffer saltBuffer = CryptographicBuffer.CreateFromByteArray(salt);
             KeyDerivationParameters kdfParameters = KeyDerivationParameters.BuildForPbkdf2(saltBuffer, PBKDF2_ITERATIONS);
@@ -58,8 +61,9 @@ namespace Tasky.BL.Managers
             CryptographicBuffer.CopyToByteArray(key, out encryptionKeyOut);
 
             return encryptionKeyOut;  // success
-
-            
+			#else
+			return null;
+			#endif
         }
 
         public static long DateTimeUtcNowOurTicks()
@@ -92,7 +96,8 @@ namespace Tasky.BL.Managers
                 Convert.ToBase64String(hash).Substring(0, 32);
         }
 
-        private async static void Login()
+		#if Win8
+		private async static void Login()
         {
             if (loggedUser != null && clientAccount != null) return;
             Binding binding = new BasicHttpBinding();
@@ -118,5 +123,33 @@ namespace Tasky.BL.Managers
 
             wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
         }
+		#else
+		private static void Login()
+		{
+			if (loggedUser != null && clientAccount != null) return;
+			Binding binding = new BasicHttpBinding();
+			EndpointAddress address = new EndpointAddress(ServerUrl);
+
+			wsdl = new TaskDatabaseSoapClient(binding, address);
+			string salt = wsdl.GetUserSalt(UserName);
+			string hashedPasword = CreateHash1(Password, salt);
+			string finalPassword = CreateHash2(hashedPasword, salt);
+			loggedUser = wsdl.LoginUser2(UserName, finalPassword);
+			clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+		}
+
+		public static void SaveTask(Task item)
+		{
+			Login();
+
+			NuTask task = new NuTask();
+			task.Body = item.Notes;
+			task.Completed = item.Done;
+			task.ExternalId = item.ID.ToString();
+			task.Subject = item.Name;
+
+			wsdl.SaveTask(clientAccount, loggedUser, task);
+		}
+		#endif
     }
 }

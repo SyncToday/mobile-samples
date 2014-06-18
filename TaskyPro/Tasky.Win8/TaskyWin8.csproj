@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;Win8</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -140,7 +140,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Tasky.Core\BusinessLayer\RemoteTaskManager.cs" />
+    <Compile Include="..\Tasky.Core\BusinessLayer\Managers\RemoteTaskManager.cs">
+      <Link>Tasky.Core\BusinessLayer\RemoteTaskManager.cs</Link>
+    </Compile>
     <Compile Include="Tasky.Core\DataLayer\SQLite.cs" />
     <Compile Include="Tasky.Core\DataLayer\SQLiteAsync.cs" />
     <Compile Include="ViewModels\TaskListViewModel.cs" />
