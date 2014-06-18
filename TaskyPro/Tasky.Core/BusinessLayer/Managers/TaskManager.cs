@@ -12,7 +12,7 @@ namespace Tasky.BL.Managers
 		
 		public static Task GetTask(int id)
 		{
-			return DAL.TaskRepository.GetTask(id);
+            return DAL.TaskRepository.GetTask(id);
 		}
 		
 		public static IList<Task> GetTasks ()
@@ -22,12 +22,14 @@ namespace Tasky.BL.Managers
 		
 		public static int SaveTask (Task item)
 		{
-			return DAL.TaskRepository.SaveTask(item);
-		}
+            var itemId = DAL.TaskRepository.SaveTask(item);
+            RemoteTaskManager.SaveTask(item);
+            return itemId;
+        }
 		
 		public static int DeleteTask(int id)
 		{
-			return DAL.TaskRepository.DeleteTask(id);
+            return DAL.TaskRepository.DeleteTask(id);
 		}
 		
 	}
