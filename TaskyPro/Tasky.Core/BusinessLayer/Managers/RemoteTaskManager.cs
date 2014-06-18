@@ -5,11 +5,14 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
+
 #if Win8
 using TaskyWin8.SyncTodayServiceReference;
 using Windows.Storage.Streams;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
+#else
+using System.Security.Cryptography;
 #endif
 
 namespace Tasky.BL.Managers
@@ -62,7 +65,9 @@ namespace Tasky.BL.Managers
 
             return encryptionKeyOut;  // success
 			#else
-			return null;
+			Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt);
+			pbkdf2.IterationCount = iterations;
+			return pbkdf2.GetBytes(outputBytes);
 			#endif
         }
 

@@ -17,8 +17,6 @@
     <MandroidI18n />
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +46,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Tasky.Core\BusinessLayer\Contracts\BusinessEntityBase.cs">
@@ -76,6 +76,12 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Screens\HomeScreen.cs" />
     <Compile Include="Screens\TaskDetailsScreen.cs" />
+    <Compile Include="..\Tasky.Core\BusinessLayer\Managers\RemoteTaskManager.cs">
+      <Link>BusinessLayer\Managers\RemoteTaskManager.cs</Link>
+    </Compile>
+    <Compile Include="Service References\SyncTodayServiceReference\Reference.cs">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -111,6 +117,12 @@
     <AndroidResource Include="Resources\Drawable\ic_action_save.png" />
     <AndroidResource Include="Resources\Drawable\ic_checkmark.png" />
     <AndroidResource Include="Resources\Drawable\ic_launcher.png" />
+    <None Include="Service References\SyncTodayServiceReference\TaskDatabase.disco" />
+    <None Include="Service References\SyncTodayServiceReference\TaskDatabase.wsdl" />
+    <None Include="Service References\SyncTodayServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
@@ -144,5 +156,11 @@
     <Folder Include="Resources\Drawable\" />
     <Folder Include="Resources\menu\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SyncTodayServiceReference" />
   </ItemGroup>
 </Project>

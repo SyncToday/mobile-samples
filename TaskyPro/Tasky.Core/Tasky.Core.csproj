@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0C3C87F3-B754-4196-A371-08EAE5BDC2DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -37,6 +35,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\Contracts\BusinessEntityBase.cs" />
@@ -47,6 +47,10 @@
     <Compile Include="DataLayer\SQLite.cs" />
     <Compile Include="DataLayer\TaskDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BusinessLayer\Managers\RemoteTaskManager.cs" />
+    <Compile Include="Service References\SyncTodayServiceReference\Reference.cs">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BusinessLayer\About.txt" />
@@ -61,4 +65,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <WCFMetadata Include="Service References" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SyncTodayServiceReference" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncTodayServiceReference\TaskDatabase.disco" />
+    <None Include="Service References\SyncTodayServiceReference\TaskDatabase.wsdl" />
+    <None Include="Service References\SyncTodayServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
 </Project>
