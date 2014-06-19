@@ -45,6 +45,10 @@ namespace Tasky.Droid.Screens {
 			// create our adapter
 			taskList = new Adapters.TaskListAdapter(this, tasks);
 
+			//Find our controls
+			if(taskListView==null)
+				taskListView = FindViewById<ListView> (Resource.Id.lstTasks);
+
 			//Hook up our adapter to our ListView
 			taskListView.Adapter = taskList;
 		}

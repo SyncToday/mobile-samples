@@ -13,6 +13,7 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 #else
 using System.Security.Cryptography;
+using Tasky.Droid.SyncTodayServiceReference;
 #endif
 
 namespace Tasky.BL.Managers
@@ -26,7 +27,11 @@ namespace Tasky.BL.Managers
 
         internal static User loggedUser;
         internal static Account clientAccount;
-		internal static TaskDatabaseSoapClient wsdl;
+#if Win8
+        internal static TaskDatabaseSoapClient wsdl; 
+#else        
+        internal static TaskDatabase wsdl;
+#endif
 
         /// <summary>
         /// Salted password hashing with PBKDF2-SHA1.
@@ -132,28 +137,30 @@ namespace Tasky.BL.Managers
 		private static void Login()
 		{
 			if (loggedUser != null && clientAccount != null) return;
-			Binding binding = new BasicHttpBinding();
-			EndpointAddress address = new EndpointAddress(ServerUrl);
 
-			wsdl = new TaskDatabaseSoapClient(binding, address);
+			wsdl = new TaskDatabase();
 			string salt = wsdl.GetUserSalt(UserName);
 			string hashedPasword = CreateHash1(Password, salt);
 			string finalPassword = CreateHash2(hashedPasword, salt);
 			loggedUser = wsdl.LoginUser2(UserName, finalPassword);
-			clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+			if (loggedUser != null) {
+				clientAccount = wsdl.GetAccountForClient (loggedUser.InternalId, Guid.Parse (ClientRegistrationID));
+			}
 		}
 
 		public static void SaveTask(Task item)
 		{
 			Login();
 
-			NuTask task = new NuTask();
-			task.Body = item.Notes;
-			task.Completed = item.Done;
-			task.ExternalId = item.ID.ToString();
-			task.Subject = item.Name;
+			if (loggedUser != null) {
+				NuTask task = new NuTask ();
+				task.Body = item.Notes;
+				task.Completed = item.Done;
+				task.ExternalId = item.ID.ToString ();
+				task.Subject = item.Name;
 
-			wsdl.SaveTask(clientAccount, loggedUser, task);
+				wsdl.SaveTask (clientAccount, loggedUser, task);
+			}
 		}
 		#endif
     }
