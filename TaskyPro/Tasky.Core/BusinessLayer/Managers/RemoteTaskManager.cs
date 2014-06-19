@@ -109,7 +109,11 @@ namespace Tasky.BL.Managers
 
 		#if Win8
 		private async static void Login()
+#else
+		private static void Login()
+#endif
         {
+		#if Win8
             if (loggedUser != null && clientAccount != null) return;
             Binding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress(ServerUrl);
@@ -120,8 +124,22 @@ namespace Tasky.BL.Managers
             string finalPassword = CreateHash2(hashedPasword, salt);
             loggedUser = await wsdl.LoginUser2Async(UserName, finalPassword);
             clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+#else
+            if (loggedUser != null && clientAccount != null) return;
+
+            wsdl = new TaskDatabase();
+            string salt = wsdl.GetUserSalt(UserName);
+            string hashedPasword = CreateHash1(Password, salt);
+            string finalPassword = CreateHash2(hashedPasword, salt);
+            loggedUser = wsdl.LoginUser2(UserName, finalPassword);
+            if (loggedUser != null)
+            {
+                clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+            }
+#endif
         }
 
+		#if Win8
         public static void SaveTask(Task item)
         {
             Login();
@@ -138,12 +156,36 @@ namespace Tasky.BL.Managers
             }
         }
 
-        public static async Task<NuTask[]> GetNewTasks(Task[] localTasks) {
+        public static async Task<NuTask[]> GetNewTasks(Task[] localTasks )
+        {
             Login();
 
             if (loggedUser != null)
             {
                 NuTask[] remoteTasks = await wsdl.GetTasksAsync(clientAccount, loggedUser);
+
+                // find changes from remote
+                var remoteLocallyMappedTasks = remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 1).ToArray();
+                var needsLocalUpdate = remoteLocallyMappedTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).FirstOrDefault().Modified < p.LastModified).ToArray();
+                foreach (NuTask newTask in needsLocalUpdate)
+                {
+                    Task task = new Task();
+                    task.Done = newTask.Completed;
+                    task.Name = newTask.Subject;
+                    task.Notes = newTask.Body;
+                    task.Modified = newTask.LastModified;
+                    task.ID = int.Parse(newTask.ExternalId);
+                    var itemId = DAL.TaskRepository.SaveTask(task);
+                }
+
+                // find changes from local
+                var localRemotellyMappedTasks = localTasks.Where(p => remoteTasks.Where(r => p.ID.ToString() == r.ExternalId).Count() == 1).ToArray();
+                var needsRemoteUpdate = localRemotellyMappedTasks.Where(p => remoteTasks.Where(r => p.ID.ToString() == r.ExternalId).FirstOrDefault().LastModified < p.Modified).ToArray();
+                foreach (var localTask in needsRemoteUpdate)
+                {
+                    SaveTask(localTask);
+                }
+
                 return remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 0).ToArray();
             }
 
@@ -166,20 +208,6 @@ namespace Tasky.BL.Managers
         }
 
 		#else
-		private static void Login()
-		{
-			if (loggedUser != null && clientAccount != null) return;
-
-			wsdl = new TaskDatabase();
-			string salt = wsdl.GetUserSalt(UserName);
-			string hashedPasword = CreateHash1(Password, salt);
-			string finalPassword = CreateHash2(hashedPasword, salt);
-			loggedUser = wsdl.LoginUser2(UserName, finalPassword);
-			if (loggedUser != null) {
-				clientAccount = wsdl.GetAccountForClient (loggedUser.InternalId, Guid.Parse (ClientRegistrationID));
-			}
-		}
-
 		public static void SaveTask(Task item)
 		{
 			Login();

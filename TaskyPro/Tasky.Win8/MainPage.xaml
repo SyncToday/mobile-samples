@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="340"/>
             <ColumnDefinition Width="600"/>
@@ -36,23 +36,23 @@
                         Text="todo list" 
                         Style="{StaticResource HeaderTextStyle}"
                         Foreground="LightBlue"/>
-            
+
         </Grid>
-        
+
         <Grid Grid.Column="0" Grid.Row="1"
               Margin="10,10,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-        
+
             <Button Content="Add" Foreground="White"
                         Grid.Row="0"
                         HorizontalAlignment="Center" 
                         x:Name="AddButton" 
-                        Width="300"  
-                        Click="Add_Click" />
-             <ListBox Grid.Row="1" 
+                        Width="113"  
+                        Click="Add_Click" Margin="15,11,202,11" />
+            <ListBox Grid.Row="1" 
                 ItemsSource="{Binding Items}"
                  Tapped="Task_Tap"
                 Visibility="{Binding ListVisibility}"
@@ -80,6 +80,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Button Content="Refresh" HorizontalAlignment="Left" Margin="168,11,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.057,0.339" Width="129" Click="Button_Click" />
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1"
@@ -112,7 +113,7 @@
                 Grid.Row="3" Grid.ColumnSpan="3"
                 x:Name="NotesText"
                 Text="{Binding Task.Notes,Mode=TwoWay}"></TextBox>
-            
+
             <TextBlock Grid.Row="4" Grid.Column="0"
                        Text="Done:"
                        Style="{StaticResource BasicTextStyle}" />

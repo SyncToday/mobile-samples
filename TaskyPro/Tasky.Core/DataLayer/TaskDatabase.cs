@@ -25,6 +25,7 @@ namespace Tasky.DL
 		public TaskDatabase (string path) : base (path)
 		{
 			// create the tables
+            //DropTable<Task>();
 			CreateTable<Task> ();
 		}
 		

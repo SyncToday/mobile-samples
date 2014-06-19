@@ -19,6 +19,7 @@ namespace Tasky.BL
 		public string Notes { get; set; }
 		// new property
 		public bool Done { get; set; }
+        public DateTime Modified { get; set; }
 	}
 }
 

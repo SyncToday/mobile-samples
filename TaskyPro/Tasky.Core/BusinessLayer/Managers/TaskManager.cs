@@ -42,6 +42,8 @@ namespace Tasky.BL.Managers
                     task.Done = newTask.Completed;
                     task.Name = newTask.Subject;
                     task.Notes = newTask.Body;
+                    task.Modified = newTask.LastModified;
+                    //task.ID = int.Parse(newTask.ExternalId); NOT HERE!
                     var itemId = DAL.TaskRepository.SaveTask(task);
                     RemoteTaskManager.ChangeExternalId(newTask.ExternalId, task);
                 }
@@ -52,6 +54,7 @@ namespace Tasky.BL.Managers
 		
 		public static int SaveTask (Task item)
 		{
+            item.Modified = DateTime.UtcNow;
             var itemId = DAL.TaskRepository.SaveTask(item);
             RemoteTaskManager.SaveTask(item);
             return itemId;
