@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tasky.BL;
+
+#if Win8
 using TaskyWin8.SyncTodayServiceReference;
+#else
+using Tasky.Droid.SyncTodayServiceReference;
+#endif
 
 namespace Tasky.BL.Managers
 {
@@ -17,10 +22,18 @@ namespace Tasky.BL.Managers
             return DAL.TaskRepository.GetTask(id);
 		}
 		
+		#if Win8
 		public static async Task<IList<Task>> GetTasks ()
+		#else
+		public static IList<Task> GetTasks ()
+		#endif
 		{
             var localTasks = new List<Task>(DAL.TaskRepository.GetTasks());
-            NuTask[] newTasks = await RemoteTaskManager.GetNewTasks(localTasks.ToArray());
+			#if Win8
+			NuTask[] newTasks = await RemoteTaskManager.GetNewTasks(localTasks.ToArray());
+			#else
+			NuTask[] newTasks = RemoteTaskManager.GetNewTasks(localTasks.ToArray());
+			#endif
             if (newTasks.Length > 0)
             {
                 foreach (NuTask newTask in newTasks)

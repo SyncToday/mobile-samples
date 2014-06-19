@@ -194,6 +194,32 @@ namespace Tasky.BL.Managers
 				wsdl.SaveTask (clientAccount, loggedUser, task);
 			}
 		}
+		public static NuTask[] GetNewTasks(Task[] localTasks) {
+			Login();
+
+			if (loggedUser != null)
+			{
+				NuTask[] remoteTasks = wsdl.GetTasks(clientAccount, loggedUser);
+				return remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 0).ToArray();
+			}
+
+			return new NuTask[] { };
+		}
+
+		public static void ChangeExternalId(string oldId, Task newTask)
+		{
+			Login();
+
+			if (loggedUser != null)
+			{
+				NuTask remoteTask = new NuTask();
+				remoteTask.Body = newTask.Notes;
+				remoteTask.Completed = newTask.Done;
+				remoteTask.ExternalId = newTask.ID.ToString();
+				remoteTask.Subject = newTask.Name;
+				wsdl.ChangeTaskExternalId(clientAccount, loggedUser, oldId, remoteTask);
+			}
+		}
 		#endif
     }
 }
