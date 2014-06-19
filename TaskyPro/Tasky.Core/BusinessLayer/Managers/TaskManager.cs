@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Tasky.BL;
+using TaskyWin8.SyncTodayServiceReference;
 
 namespace Tasky.BL.Managers
 {
@@ -15,9 +17,24 @@ namespace Tasky.BL.Managers
             return DAL.TaskRepository.GetTask(id);
 		}
 		
-		public static IList<Task> GetTasks ()
+		public static async Task<IList<Task>> GetTasks ()
 		{
-			return new List<Task>(DAL.TaskRepository.GetTasks());
+            var localTasks = new List<Task>(DAL.TaskRepository.GetTasks());
+            NuTask[] newTasks = await RemoteTaskManager.GetNewTasks(localTasks.ToArray());
+            if (newTasks.Length > 0)
+            {
+                foreach (NuTask newTask in newTasks)
+                {
+                    Task task = new Task();
+                    task.Done = newTask.Completed;
+                    task.Name = newTask.Subject;
+                    task.Notes = newTask.Body;
+                    var itemId = DAL.TaskRepository.SaveTask(task);
+                    RemoteTaskManager.ChangeExternalId(newTask.ExternalId, task);
+                }
+                localTasks = new List<Task>(DAL.TaskRepository.GetTasks());
+            }
+			return localTasks;
 		}
 		
 		public static int SaveTask (Task item)

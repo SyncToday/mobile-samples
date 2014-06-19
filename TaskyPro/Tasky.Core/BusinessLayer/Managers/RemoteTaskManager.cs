@@ -126,14 +126,45 @@ namespace Tasky.BL.Managers
         {
             Login();
 
-            NuTask task = new NuTask();
-            task.Body = item.Notes;
-            task.Completed = item.Done;
-            task.ExternalId = item.ID.ToString();
-            task.Subject = item.Name;
+            if (loggedUser != null)
+            {
+                NuTask task = new NuTask();
+                task.Body = item.Notes;
+                task.Completed = item.Done;
+                task.ExternalId = item.ID.ToString();
+                task.Subject = item.Name;
 
-            wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
+                wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
+            }
         }
+
+        public static async Task<NuTask[]> GetNewTasks(Task[] localTasks) {
+            Login();
+
+            if (loggedUser != null)
+            {
+                NuTask[] remoteTasks = await wsdl.GetTasksAsync(clientAccount, loggedUser);
+                return remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 0).ToArray();
+            }
+
+            return new NuTask[] { };
+        }
+
+        public static void ChangeExternalId(string oldId, Task newTask)
+        {
+            Login();
+
+            if (loggedUser != null)
+            {
+                NuTask remoteTask = new NuTask();
+                remoteTask.Body = newTask.Notes;
+                remoteTask.Completed = newTask.Done;
+                remoteTask.ExternalId = newTask.ID.ToString();
+                remoteTask.Subject = newTask.Name;
+                wsdl.ChangeTaskExternalIdAsync(clientAccount, loggedUser, oldId, remoteTask);
+            }
+        }
+
 		#else
 		private static void Login()
 		{

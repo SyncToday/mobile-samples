@@ -30,7 +30,7 @@ namespace TaskyWin8
 
         //Dispatcher dispatcher;
 
-        public void BeginUpdate() //Dispatcher dispatcher)
+        public async void BeginUpdate() //Dispatcher dispatcher)
         {
            // this.dispatcher = dispatcher;
 
@@ -38,7 +38,7 @@ namespace TaskyWin8
 
             //ThreadPool.QueueUserWorkItem(delegate
             //{
-                var entries = TaskManager.GetTasks();
+                var entries = await TaskManager.GetTasks();
                 PopulateData(entries);
             //});
         }
