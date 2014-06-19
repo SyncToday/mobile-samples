@@ -113,30 +113,33 @@ namespace Tasky.BL.Managers
 		private static void Login()
 #endif
         {
-		#if Win8
             if (loggedUser != null && clientAccount != null) return;
+#if Win8
             Binding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress(ServerUrl);
-
             wsdl = new TaskDatabaseSoapClient(binding, address);
             string salt = await wsdl.GetUserSaltAsync(UserName);
-            string hashedPasword = CreateHash1(Password, salt);
-            string finalPassword = CreateHash2(hashedPasword, salt);
-            loggedUser = await wsdl.LoginUser2Async(UserName, finalPassword);
-            clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
 #else
-            if (loggedUser != null && clientAccount != null) return;
-
             wsdl = new TaskDatabase();
             string salt = wsdl.GetUserSalt(UserName);
+#endif
+
             string hashedPasword = CreateHash1(Password, salt);
             string finalPassword = CreateHash2(hashedPasword, salt);
+#if Win8
+            loggedUser = await wsdl.LoginUser2Async(UserName, finalPassword);
+#else
             loggedUser = wsdl.LoginUser2(UserName, finalPassword);
+#endif
             if (loggedUser != null)
             {
+#if Win8
+                clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+#else
+
                 clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
-            }
 #endif
+            }
         }
 
 		#if Win8
