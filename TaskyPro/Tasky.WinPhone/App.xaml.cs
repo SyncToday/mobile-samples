@@ -96,6 +96,10 @@ namespace TaskyWinPhone {
                 // An unhandled exception has occurred; break into the debugger
                 System.Diagnostics.Debugger.Break();
             }
+            e.Handled = true;
+            ErrorPage.Exception = e.ExceptionObject;
+            (RootVisual as Microsoft.Phone.Controls.PhoneApplicationFrame).Source =
+                new Uri("/ErrorPage.xaml", UriKind.Relative);
         }
 
         #region Phone application initialization
