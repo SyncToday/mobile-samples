@@ -251,7 +251,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="0c3c87f3-b754-4196-a371-08eae5bdc2dc" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="0c3c87f3-b754-4196-a371-08eae5bdc2dc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
