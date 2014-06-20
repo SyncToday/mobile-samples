@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
+
 #if Win8
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using TaskyWin8.SyncTodayServiceReference;
 using Windows.Storage.Streams;
 using Windows.Security.Cryptography;
@@ -17,8 +18,13 @@ using Windows.Storage.Streams;
 using System.Security.Cryptography;
 using Tasky.WinPhone.SyncTodayServiceReference;
 #else
+#if iOS
+using Tasky.SyncTodayServiceReference;
+using System.Security.Cryptography;
+#else
 using System.Security.Cryptography;
 using Tasky.Droid.SyncTodayServiceReference;
+#endif
 #endif
 #endif
 
@@ -135,6 +141,7 @@ namespace Tasky.BL.Managers
 #else
             wsdl = new TaskDatabase();
             string salt = wsdl.GetUserSalt(UserName);
+			CalculateFinalPassword( salt );
 #endif
 
 #if Win8
@@ -156,9 +163,13 @@ namespace Tasky.BL.Managers
                 clientAccount = null;
                 // clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));<- done in wsdl_LoginUser2Completed
 #else
+				#if iOS
+				clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, (ClientRegistrationID));
+				#else
                 clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
 #endif
 #endif
+				#endif
             }
         }
 
