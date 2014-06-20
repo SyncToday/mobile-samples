@@ -8,13 +8,15 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tasky</RootNamespace>
     <AssemblyName>TaskyiOS</AssemblyName>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;iOS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -63,10 +65,17 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Info.plist" />
+    <None Include="Web References\SyncTodayServiceReference\TaskDatabase.disco" />
+    <None Include="Web References\SyncTodayServiceReference\TaskDatabase.wsdl" />
+    <None Include="Web References\SyncTodayServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Tasky.Core\BusinessLayer\Contracts\BusinessEntityBase.cs">
@@ -96,6 +105,12 @@
     <Compile Include="ApplicationLayer\EditingSource.cs" />
     <Compile Include="ApplicationLayer\LocalizableBindingContext.cs" />
     <Compile Include="ApplicationLayer\TaskDialog.cs" />
+    <Compile Include="Web References\SyncTodayServiceReference\Reference.cs">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="..\Tasky.Core\BusinessLayer\Managers\RemoteTaskManager.cs">
+      <Link>BusinessLayer\Managers\RemoteTaskManager.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup />
@@ -137,5 +152,15 @@
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://wsdl.sync.today/TaskDatabase.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SyncTodayServiceReference</RelPath>
+      <UpdateFromURL>http://wsdl.sync.today/TaskDatabase.asmx</UpdateFromURL>
+    </WebReferenceUrl>
   </ItemGroup>
 </Project>

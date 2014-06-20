@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tasky.BL;
 
+
 #if Win8
 using TaskyWin8.SyncTodayServiceReference;
 #else
 #if WINDOWS_PHONE
 using Tasky.WinPhone.SyncTodayServiceReference;
 #else
+#if iOS
+using Tasky.SyncTodayServiceReference;
+#else
 using Tasky.Droid.SyncTodayServiceReference;
+#endif
 #endif
 #endif
 
