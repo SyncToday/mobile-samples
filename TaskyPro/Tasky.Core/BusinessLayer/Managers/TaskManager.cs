@@ -6,7 +6,11 @@ using Tasky.BL;
 #if Win8
 using TaskyWin8.SyncTodayServiceReference;
 #else
+#if WINDOWS_PHONE
+using Tasky.WinPhone.SyncTodayServiceReference;
+#else
 using Tasky.Droid.SyncTodayServiceReference;
+#endif
 #endif
 
 namespace Tasky.BL.Managers
@@ -29,11 +33,11 @@ namespace Tasky.BL.Managers
 		#endif
 		{
             var localTasks = new List<Task>(DAL.TaskRepository.GetTasks());
-			#if Win8
-			NuTask[] newTasks = await RemoteTaskManager.GetNewTasks(localTasks.ToArray());
+#if Win8
+            NuTask[] newTasks = await RemoteTaskManager.GetNewTasks(localTasks.ToArray());
 			#else
-			NuTask[] newTasks = RemoteTaskManager.GetNewTasks(localTasks.ToArray());
-			#endif
+            NuTask[] newTasks = RemoteTaskManager.GetNewTasks(localTasks.ToArray());
+            #endif
             if (newTasks.Length > 0)
             {
                 foreach (NuTask newTask in newTasks)

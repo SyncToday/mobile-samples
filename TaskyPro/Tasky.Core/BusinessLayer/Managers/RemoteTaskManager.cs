@@ -12,8 +12,14 @@ using Windows.Storage.Streams;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 #else
+#if WINDOWS_PHONE
+using Windows.Storage.Streams;
+using System.Security.Cryptography;
+using Tasky.WinPhone.SyncTodayServiceReference;
+#else
 using System.Security.Cryptography;
 using Tasky.Droid.SyncTodayServiceReference;
+#endif
 #endif
 
 namespace Tasky.BL.Managers
@@ -25,9 +31,10 @@ namespace Tasky.BL.Managers
         public static string ClientRegistrationID = "8c3a75ed-5c06-4b36-bd6e-87b8c7f20452";
         public static string ServerUrl = "http://wsdl.sync.today/TaskDatabase.asmx";
 
+        private static string finalPassword;
         internal static User loggedUser;
         internal static Account clientAccount;
-#if Win8
+#if Win8 || WINDOWS_PHONE
         internal static TaskDatabaseSoapClient wsdl; 
 #else        
         internal static TaskDatabase wsdl;
@@ -107,41 +114,80 @@ namespace Tasky.BL.Managers
                 Convert.ToBase64String(hash).Substring(0, 32);
         }
 
-		#if Win8
-		private async static void Login()
+#if Win8
+        private async static void Login()
 #else
 		private static void Login()
 #endif
         {
             if (loggedUser != null && clientAccount != null) return;
-#if Win8
+#if Win8 || WINDOWS_PHONE
             Binding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress(ServerUrl);
             wsdl = new TaskDatabaseSoapClient(binding, address);
+#if Win8
             string salt = await wsdl.GetUserSaltAsync(UserName);
+            CalculateFinalPassword( salt );
+#else
+            wsdl.GetUserSaltCompleted += wsdl_GetUserSaltCompleted;
+            wsdl.GetUserSaltAsync(UserName);
+#endif
 #else
             wsdl = new TaskDatabase();
             string salt = wsdl.GetUserSalt(UserName);
 #endif
 
-            string hashedPasword = CreateHash1(Password, salt);
-            string finalPassword = CreateHash2(hashedPasword, salt);
 #if Win8
             loggedUser = await wsdl.LoginUser2Async(UserName, finalPassword);
 #else
+#if WINDOWS_PHONE
+            loggedUser = null;
+            //wsdl.LoginUser2Async(UserName, finalPassword); <- done in wsdl_GetUserSaltCompleted
+#else
             loggedUser = wsdl.LoginUser2(UserName, finalPassword);
+#endif
 #endif
             if (loggedUser != null)
             {
 #if Win8
                 clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
 #else
-
+#if WINDOWS_PHONE
+                clientAccount = null;
+                // clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));<- done in wsdl_LoginUser2Completed
+#else
                 clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+#endif
 #endif
             }
         }
 
+        private static void CalculateFinalPassword(string salt)
+        {
+            string hashedPasword = CreateHash1(Password, salt);
+            finalPassword = CreateHash2(hashedPasword, salt);
+        }
+
+#if WINDOWS_PHONE
+        static void wsdl_GetUserSaltCompleted(object sender, GetUserSaltCompletedEventArgs e)
+        {
+            CalculateFinalPassword(e.Result);
+            wsdl.LoginUser2Completed += wsdl_LoginUser2Completed;
+            wsdl.LoginUser2Async(UserName, finalPassword);
+        }
+
+        static void wsdl_LoginUser2Completed(object sender, LoginUser2CompletedEventArgs e)
+        {
+            loggedUser = e.Result;
+            wsdl.GetAccountForClientCompleted += wsdl_GetAccountForClientCompleted;
+            wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+        }
+
+        static void wsdl_GetAccountForClientCompleted(object sender, GetAccountForClientCompletedEventArgs e)
+        {
+            clientAccount = e.Result;
+        }
+#endif
         public static void SaveTask(Task item)
         {
             Login();
@@ -154,7 +200,7 @@ namespace Tasky.BL.Managers
                 task.ExternalId = item.ID.ToString();
                 task.Subject = item.Name;
 
-#if Win8
+#if Win8 || WINDOWS_PHONE
                 wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
 #else
                 wsdl.SaveTask(clientAccount, loggedUser, task);
@@ -173,12 +219,39 @@ namespace Tasky.BL.Managers
                 remoteTask.Completed = newTask.Done;
                 remoteTask.ExternalId = newTask.ID.ToString();
                 remoteTask.Subject = newTask.Name;
-#if Win8
+#if Win8|| WINDOWS_PHONE
                 wsdl.ChangeTaskExternalIdAsync(clientAccount, loggedUser, oldId, remoteTask);
 #else
                 wsdl.ChangeTaskExternalId(clientAccount, loggedUser, oldId, remoteTask);
 #endif
             }
+        }
+
+        private static NuTask[] DoTasksComparison(Task[] localTasks, NuTask[] remoteTasks)
+        {
+            // find changes from remote
+            var remoteLocallyMappedTasks = remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 1).ToArray();
+            var needsLocalUpdate = remoteLocallyMappedTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).FirstOrDefault().Modified < p.LastModified).ToArray();
+            foreach (NuTask newTask in needsLocalUpdate)
+            {
+                Task task = new Task();
+                task.Done = newTask.Completed;
+                task.Name = newTask.Subject;
+                task.Notes = newTask.Body;
+                task.Modified = newTask.LastModified;
+                task.ID = int.Parse(newTask.ExternalId);
+                var itemId = DAL.TaskRepository.SaveTask(task);
+            }
+
+            // find changes from local
+            var localRemotellyMappedTasks = localTasks.Where(p => remoteTasks.Where(r => p.ID.ToString() == r.ExternalId).Count() == 1).ToArray();
+            var needsRemoteUpdate = localRemotellyMappedTasks.Where(p => remoteTasks.Where(r => p.ID.ToString() == r.ExternalId).FirstOrDefault().LastModified < p.Modified).ToArray();
+            foreach (var localTask in needsRemoteUpdate)
+            {
+                SaveTask(localTask);
+            }
+
+            return remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 0).ToArray();
         }
 
 #if Win8
@@ -191,39 +264,33 @@ namespace Tasky.BL.Managers
 
             if (loggedUser != null)
             {
+                NuTask[] remoteTasks = null;
 #if Win8
-                NuTask[] remoteTasks = await wsdl.GetTasksAsync(clientAccount, loggedUser);
+                remoteTasks = await wsdl.GetTasksAsync(clientAccount, loggedUser);
 #else
-                NuTask[] remoteTasks = wsdl.GetTasks(clientAccount, loggedUser);
+#if WINDOWS_PHONE
+                wsdl.GetTasksCompleted += wsdl_GetTasksCompleted;
+                wsdl.GetTasksAsync(clientAccount, loggedUser, localTasks);
+#else
+                remoteTasks = wsdl.GetTasks(clientAccount, loggedUser);
 #endif
-
-                // find changes from remote
-                var remoteLocallyMappedTasks = remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 1).ToArray();
-                var needsLocalUpdate = remoteLocallyMappedTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).FirstOrDefault().Modified < p.LastModified).ToArray();
-                foreach (NuTask newTask in needsLocalUpdate)
+#endif
+                if (remoteTasks != null) // <- for Windows_Phone done in wsdl_GetTasksCompleted
                 {
-                    Task task = new Task();
-                    task.Done = newTask.Completed;
-                    task.Name = newTask.Subject;
-                    task.Notes = newTask.Body;
-                    task.Modified = newTask.LastModified;
-                    task.ID = int.Parse(newTask.ExternalId);
-                    var itemId = DAL.TaskRepository.SaveTask(task);
+                    DoTasksComparison(localTasks, remoteTasks);
                 }
 
-                // find changes from local
-                var localRemotellyMappedTasks = localTasks.Where(p => remoteTasks.Where(r => p.ID.ToString() == r.ExternalId).Count() == 1).ToArray();
-                var needsRemoteUpdate = localRemotellyMappedTasks.Where(p => remoteTasks.Where(r => p.ID.ToString() == r.ExternalId).FirstOrDefault().LastModified < p.Modified).ToArray();
-                foreach (var localTask in needsRemoteUpdate)
-                {
-                    SaveTask(localTask);
-                }
-
-                return remoteTasks.Where(p => localTasks.Where(r => r.ID.ToString() == p.ExternalId).Count() == 0).ToArray();
             }
 
             return new NuTask[] { };
         }
 
+#if WINDOWS_PHONE
+        static void wsdl_GetTasksCompleted(object sender, GetTasksCompletedEventArgs e)
+            {
+                Task[] localTasks = (Task[])(e.UserState);
+                DoTasksComparison(localTasks, e.Result);
+            }
+#endif
     }
 }

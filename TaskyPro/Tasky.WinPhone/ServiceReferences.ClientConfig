@@ -1,0 +1,16 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="TaskDatabaseSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://wsdl.sync.today/TaskDatabase.asmx"
+                binding="basicHttpBinding" bindingConfiguration="TaskDatabaseSoap"
+                contract="SyncTodayServiceReference.TaskDatabaseSoap" name="TaskDatabaseSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

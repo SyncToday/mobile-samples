@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sync.today/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://sync.today/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sync.today/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="accountId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountResult" type="tns:Account" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Account">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="InternalId" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="BelongsToUser" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Server" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConnectInfo" type="tns:CommunicatorConnectInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountAssemblyName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CommunicatorConnectInfo" abstract="true" />
+      <s:complexType name="SimpleCommunicatorConnectInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CommunicatorConnectInfo">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Server" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="InternalId" type="s1:guid" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetAccount2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccount2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccount2Result" type="tns:Account" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTasks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="tns:Account" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="InternalId" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsBlocked" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Maintenance" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTasksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTasksResult" type="tns:ArrayOfNuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNuTask">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NuTask" nillable="true" type="tns:NuTask" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NuTask">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NuObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="StartDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="DueDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Reminder" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Priority" type="tns:NuTaskPriority" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsPrivate" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Company" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Completed" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Parents" type="tns:ArrayOfNuRequirement" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NuObject" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ExternalId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastModified" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="NuTaskPriority">
+        <s:restriction base="s:string">
+          <s:enumeration value="Low" />
+          <s:enumeration value="Normal" />
+          <s:enumeration value="High" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfNuRequirement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NuRequirement" nillable="true" type="tns:NuRequirement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NuRequirement">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NuTask" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetTasks2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userInternalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTasks2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTasks2Result" type="tns:ArrayOfNuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTask">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="tns:Account" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTaskResult" type="tns:NuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTask2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userInternalId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTask2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTask2Result" type="tns:NuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveTask">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="tns:Account" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="task" type="tns:NuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveTaskResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveTaskResult" type="tns:NuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeTaskExternalId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="tns:Account" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="task" type="tns:NuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeTaskExternalIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeTaskExternalIdResult" type="tns:NuTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserSalt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserSaltResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserSaltResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUser2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUser2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginUser2Result" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountForClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="clientId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountForClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountForClientResult" type="tns:Account" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Account" nillable="true" type="tns:Account" />
+      <s:element name="ArrayOfNuTask" nillable="true" type="tns:ArrayOfNuTask" />
+      <s:element name="NuTask" nillable="true" type="tns:NuTask" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="User" nillable="true" type="tns:User" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccount" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccount2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccount2" />
+  </wsdl:message>
+  <wsdl:message name="GetAccount2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccount2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetTasksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTasks" />
+  </wsdl:message>
+  <wsdl:message name="GetTasksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTasks2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetTasks2" />
+  </wsdl:message>
+  <wsdl:message name="GetTasks2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetTasks2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTask" />
+  </wsdl:message>
+  <wsdl:message name="GetTaskSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTask2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetTask2" />
+  </wsdl:message>
+  <wsdl:message name="GetTask2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetTask2Response" />
+  </wsdl:message>
+  <wsdl:message name="SaveTaskSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveTask" />
+  </wsdl:message>
+  <wsdl:message name="SaveTaskSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeTaskExternalIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeTaskExternalId" />
+  </wsdl:message>
+  <wsdl:message name="ChangeTaskExternalIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeTaskExternalIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSaltSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserSalt" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSaltSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserSaltResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginUser2SoapIn">
+    <wsdl:part name="parameters" element="tns:LoginUser2" />
+  </wsdl:message>
+  <wsdl:message name="LoginUser2SoapOut">
+    <wsdl:part name="parameters" element="tns:LoginUser2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountForClientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountForClient" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountForClientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountForClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccount2HttpGetIn">
+    <wsdl:part name="accountId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccount2HttpGetOut">
+    <wsdl:part name="Body" element="tns:Account" />
+  </wsdl:message>
+  <wsdl:message name="GetTasks2HttpGetIn">
+    <wsdl:part name="accountId" type="s:string" />
+    <wsdl:part name="userInternalId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTasks2HttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfNuTask" />
+  </wsdl:message>
+  <wsdl:message name="GetTask2HttpGetIn">
+    <wsdl:part name="accountId" type="s:string" />
+    <wsdl:part name="userInternalId" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTask2HttpGetOut">
+    <wsdl:part name="Body" element="tns:NuTask" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSaltHttpGetIn">
+    <wsdl:part name="email" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSaltHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginUser2HttpGetIn">
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginUser2HttpGetOut">
+    <wsdl:part name="Body" element="tns:User" />
+  </wsdl:message>
+  <wsdl:message name="GetAccount2HttpPostIn">
+    <wsdl:part name="accountId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccount2HttpPostOut">
+    <wsdl:part name="Body" element="tns:Account" />
+  </wsdl:message>
+  <wsdl:message name="GetTasks2HttpPostIn">
+    <wsdl:part name="accountId" type="s:string" />
+    <wsdl:part name="userInternalId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTasks2HttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfNuTask" />
+  </wsdl:message>
+  <wsdl:message name="GetTask2HttpPostIn">
+    <wsdl:part name="accountId" type="s:string" />
+    <wsdl:part name="userInternalId" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTask2HttpPostOut">
+    <wsdl:part name="Body" element="tns:NuTask" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSaltHttpPostIn">
+    <wsdl:part name="email" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSaltHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginUser2HttpPostIn">
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginUser2HttpPostOut">
+    <wsdl:part name="Body" element="tns:User" />
+  </wsdl:message>
+  <wsdl:portType name="TaskDatabaseSoap">
+    <wsdl:operation name="GetAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get account from assigned id (API client ID for example).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;accountId:&lt;/td&gt;&lt;td&gt;ID you got from server admin&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAccountSoapIn" />
+      <wsdl:output message="tns:GetAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get account from assigned id (API client ID for example).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;accountId:&lt;/td&gt;&lt;td&gt;ID you got from server admin&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAccount2SoapIn" />
+      <wsdl:output message="tns:GetAccount2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTasksSoapIn" />
+      <wsdl:output message="tns:GetTasksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTasks2SoapIn" />
+      <wsdl:output message="tns:GetTasks2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTaskSoapIn" />
+      <wsdl:output message="tns:GetTaskSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTask2SoapIn" />
+      <wsdl:output message="tns:GetTask2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTask">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Save user's task.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:SaveTaskSoapIn" />
+      <wsdl:output message="tns:SaveTaskSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeTaskExternalId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Change task external ID.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:ChangeTaskExternalIdSoapIn" />
+      <wsdl:output message="tns:ChangeTaskExternalIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get the salt for the user. Compute the password using code from https://crackstation.net/hashing-security.htm. &lt;/td&gt;
+    &lt;/tr&gt;
+
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUserSaltSoapIn" />
+      <wsdl:output message="tns:GetUserSaltSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Logs the user. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;basic user attributes.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginUserSoapIn" />
+      <wsdl:output message="tns:LoginUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Logs the user. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;basic user attributes.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginUser2SoapIn" />
+      <wsdl:output message="tns:LoginUser2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountForClient">
+      <wsdl:input message="tns:GetAccountForClientSoapIn" />
+      <wsdl:output message="tns:GetAccountForClientSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TaskDatabaseHttpGet">
+    <wsdl:operation name="GetAccount2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get account from assigned id (API client ID for example).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;accountId:&lt;/td&gt;&lt;td&gt;ID you got from server admin&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAccount2HttpGetIn" />
+      <wsdl:output message="tns:GetAccount2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTasks2HttpGetIn" />
+      <wsdl:output message="tns:GetTasks2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTask2HttpGetIn" />
+      <wsdl:output message="tns:GetTask2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get the salt for the user. Compute the password using code from https://crackstation.net/hashing-security.htm. &lt;/td&gt;
+    &lt;/tr&gt;
+
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUserSaltHttpGetIn" />
+      <wsdl:output message="tns:GetUserSaltHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Logs the user. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;basic user attributes.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginUser2HttpGetIn" />
+      <wsdl:output message="tns:LoginUser2HttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TaskDatabaseHttpPost">
+    <wsdl:operation name="GetAccount2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get account from assigned id (API client ID for example).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;accountId:&lt;/td&gt;&lt;td&gt;ID you got from server admin&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetAccount2HttpPostIn" />
+      <wsdl:output message="tns:GetAccount2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTasks2HttpPostIn" />
+      <wsdl:output message="tns:GetTasks2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get user tasks.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;Logged user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTask2HttpPostIn" />
+      <wsdl:output message="tns:GetTask2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Get the salt for the user. Compute the password using code from https://crackstation.net/hashing-security.htm. &lt;/td&gt;
+    &lt;/tr&gt;
+
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUserSaltHttpPostIn" />
+      <wsdl:output message="tns:GetUserSaltHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Logs the user. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Parameters:&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;User:&lt;/td&gt;&lt;td&gt;basic user attributes.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:LoginUser2HttpPostIn" />
+      <wsdl:output message="tns:LoginUser2HttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TaskDatabaseSoap" type="tns:TaskDatabaseSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAccount">
+      <soap:operation soapAction="http://sync.today/GetAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount2">
+      <soap:operation soapAction="http://sync.today/GetAccount2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <soap:operation soapAction="http://sync.today/GetTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <soap:operation soapAction="http://sync.today/GetTasks2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap:operation soapAction="http://sync.today/GetTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <soap:operation soapAction="http://sync.today/GetTask2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTask">
+      <soap:operation soapAction="http://sync.today/SaveTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeTaskExternalId">
+      <soap:operation soapAction="http://sync.today/ChangeTaskExternalId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <soap:operation soapAction="http://sync.today/GetUserSalt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://sync.today/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <soap:operation soapAction="http://sync.today/LoginUser2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountForClient">
+      <soap:operation soapAction="http://sync.today/GetAccountForClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TaskDatabaseSoap12" type="tns:TaskDatabaseSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAccount">
+      <soap12:operation soapAction="http://sync.today/GetAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount2">
+      <soap12:operation soapAction="http://sync.today/GetAccount2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <soap12:operation soapAction="http://sync.today/GetTasks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <soap12:operation soapAction="http://sync.today/GetTasks2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap12:operation soapAction="http://sync.today/GetTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <soap12:operation soapAction="http://sync.today/GetTask2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTask">
+      <soap12:operation soapAction="http://sync.today/SaveTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeTaskExternalId">
+      <soap12:operation soapAction="http://sync.today/ChangeTaskExternalId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <soap12:operation soapAction="http://sync.today/GetUserSalt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap12:operation soapAction="http://sync.today/LoginUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <soap12:operation soapAction="http://sync.today/LoginUser2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountForClient">
+      <soap12:operation soapAction="http://sync.today/GetAccountForClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TaskDatabaseHttpGet" type="tns:TaskDatabaseHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetAccount2">
+      <http:operation location="/GetAccount2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <http:operation location="/GetTasks2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <http:operation location="/GetTask2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <http:operation location="/GetUserSalt" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <http:operation location="/LoginUser2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TaskDatabaseHttpPost" type="tns:TaskDatabaseHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetAccount2">
+      <http:operation location="/GetAccount2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks2">
+      <http:operation location="/GetTasks2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask2">
+      <http:operation location="/GetTask2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSalt">
+      <http:operation location="/GetUserSalt" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser2">
+      <http:operation location="/LoginUser2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TaskDatabase">
+    <wsdl:port name="TaskDatabaseSoap" binding="tns:TaskDatabaseSoap">
+      <soap:address location="http://wsdl.sync.today/TaskDatabase.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TaskDatabaseSoap12" binding="tns:TaskDatabaseSoap12">
+      <soap12:address location="http://wsdl.sync.today/TaskDatabase.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TaskDatabaseHttpGet" binding="tns:TaskDatabaseHttpGet">
+      <http:address location="http://wsdl.sync.today/TaskDatabase.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TaskDatabaseHttpPost" binding="tns:TaskDatabaseHttpPost">
+      <http:address location="http://wsdl.sync.today/TaskDatabase.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
