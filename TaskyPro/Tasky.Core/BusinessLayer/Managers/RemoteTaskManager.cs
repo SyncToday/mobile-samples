@@ -277,7 +277,7 @@ namespace Tasky.BL.Managers
 #endif
                 if (remoteTasks != null) // <- for Windows_Phone done in wsdl_GetTasksCompleted
                 {
-                    DoTasksComparison(localTasks, remoteTasks);
+                    return DoTasksComparison(localTasks, remoteTasks);
                 }
 
             }
@@ -289,7 +289,22 @@ namespace Tasky.BL.Managers
         static void wsdl_GetTasksCompleted(object sender, GetTasksCompletedEventArgs e)
             {
                 Task[] localTasks = (Task[])(e.UserState);
-                DoTasksComparison(localTasks, e.Result);
+                NuTask[] newTasks = DoTasksComparison(localTasks, e.Result);
+
+                if (newTasks.Length > 0)
+                {
+                    foreach (NuTask newTask in newTasks)
+                    {
+                        Task task = new Task();
+                        task.Done = newTask.Completed;
+                        task.Name = newTask.Subject;
+                        task.Notes = newTask.Body;
+                        task.Modified = newTask.LastModified;
+                        //task.ID = int.Parse(newTask.ExternalId); NOT HERE!
+                        var itemId = DAL.TaskRepository.SaveTask(task);
+                        RemoteTaskManager.ChangeExternalId(newTask.ExternalId, task);
+                    }
+                }
             }
 #endif
     }

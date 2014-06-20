@@ -32,6 +32,11 @@ namespace TaskyWinPhone {
             NavigationService.Navigate(new Uri("/TaskDetailsPage.xaml?id=-1", UriKind.RelativeOrAbsolute));
         }
 
+        private void HandleRefresh(object sender, EventArgs e)
+        {
+            ((TaskListViewModel)DataContext).BeginUpdate(Dispatcher);
+        }
+
         private void HandleTaskTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var item = ((Grid)sender).DataContext as TaskViewModel;

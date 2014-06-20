@@ -68,7 +68,10 @@
                 IconUri="/Images/add.png"
                 Text="add" 
                 Click="HandleAdd"/>
-                
+            <shell:ApplicationBarIconButton 
+                IconUri="/Images/save.png"
+                Text="refresh" 
+                Click="HandleRefresh"/>                
         </shell:ApplicationBar>
 
     </phone:PhoneApplicationPage.ApplicationBar>
