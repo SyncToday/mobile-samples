@@ -14,6 +14,8 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 #else
 #if WINDOWS_PHONE
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using Windows.Storage.Streams;
 using System.Security.Cryptography;
 using Tasky.WinPhone.SyncTodayServiceReference;
