@@ -159,7 +159,7 @@ namespace Tasky.BL.Managers
             if (loggedUser != null)
             {
 #if Win8
-                clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+                clientAccount = await wsdl.GetAccountForClient2Async(loggedUser.InternalId.ToString(), Guid.Parse(ClientRegistrationID).ToString());
 #else
 #if WINDOWS_PHONE
                 clientAccount = null;
