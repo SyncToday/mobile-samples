@@ -127,14 +127,26 @@ namespace Tasky.BL.Managers
 
         public delegate void GetUsersCompleted();
 
-        public async static void GetUsers(GetUsersCompleted OnGetUsersCompleted)
+        public 
+		#if Win8
+		async 
+		#endif 
+		static void GetUsers(GetUsersCompleted OnGetUsersCompleted)
         {
-            await Login();            
+			#if Win8
+			await 
+#endif 
+			Login();            
 
             if (loggedUser != null)
             {
                 List<string> locUsers = new List<string>();
-                User[] remoteUsers = await wsdl.GetUsers2Async();
+                User[] remoteUsers = 
+					#if Win8
+					await wsdl.GetUsers2Async();
+					#else
+					wsdl.GetUsers2();
+					#endif
                 foreach (var remoteUser in remoteUsers)
                 {
                     locUsers.Add(remoteUser.Email);
@@ -224,9 +236,16 @@ namespace Tasky.BL.Managers
             clientAccount = e.Result;
         }
 #endif
-        public static async void SaveTask(Task item)
+        public static 
+		#if Win8
+		async 
+		#endif 
+		void SaveTask(Task item)
         {
-            await Login();
+			#if Win8
+			await 
+			#endif 
+			Login();   
 
             if (loggedUser != null)
             {
@@ -245,9 +264,16 @@ namespace Tasky.BL.Managers
             }
         }
 
-        public static async void ChangeExternalId(string oldId, Task newTask)
+        public static 
+		#if Win8
+		async 
+		#endif 
+		void ChangeExternalId(string oldId, Task newTask)
         {
-            await Login();
+			#if Win8
+			await 
+			#endif 
+			Login();   
 
             if (loggedUser != null)
             {
@@ -297,7 +323,10 @@ namespace Tasky.BL.Managers
             public static NuTask[] GetNewTasks(Task[] localTasks)
 #endif
         {
-            await Login();
+			#if Win8
+			await 
+			#endif 
+			Login();   
 
             if (loggedUser != null)
             {
