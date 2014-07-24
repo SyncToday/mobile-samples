@@ -166,9 +166,9 @@ namespace Tasky.BL.Managers
                 // clientAccount = await wsdl.GetAccountForClientAsync(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));<- done in wsdl_LoginUser2Completed
 #else
 				#if iOS
-				clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, (ClientRegistrationID));
+				clientAccount = wsdl.GetAccountForClient2(loggedUser.InternalId, (ClientRegistrationID));
 				#else
-                clientAccount = wsdl.GetAccountForClient(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+				clientAccount = wsdl.GetAccountForClient2(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
 #endif
 #endif
 				#endif
