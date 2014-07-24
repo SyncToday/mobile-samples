@@ -36,6 +36,8 @@ namespace TaskyWin8
         {
             foreach (var userName in RemoteTaskManager.Users)
                 OwnerComboBox.Items.Add(userName);
+
+            OwnerComboBox.SelectedItem = RemoteTaskManager.UserName;
         }
 
         /// <summary>
@@ -62,12 +64,14 @@ namespace TaskyWin8
             var lb = sender as ListBox;
             var tvm = lb.SelectedItem as TaskViewModel;
             ((TaskListViewModel)DataContext).PopulateTaskViewModel(tvm);
+            OwnerComboBox.SelectedValue = string.IsNullOrWhiteSpace(tvm.Owner) ? RemoteTaskManager.UserName : tvm.Owner;
         }
 
         private void Save_Tap(object sender, TappedRoutedEventArgs e)
         {
             var t = ((TaskListViewModel)DataContext).GetTask();
             if (t != null) {
+                t.Owner = OwnerComboBox.SelectedValue.ToString();
                 TaskManager.SaveTask(t);
                 ((TaskListViewModel)DataContext).BeginUpdate();
             }
@@ -94,6 +98,7 @@ namespace TaskyWin8
             if (t != null && OwnerComboBox.SelectedValue != null)
             {
                 t.Owner = OwnerComboBox.SelectedValue.ToString();
+                TaskManager.SaveTask(t);
                 ((TaskListViewModel)DataContext).BeginUpdate();
             }
         }

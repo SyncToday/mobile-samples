@@ -235,9 +235,10 @@ namespace Tasky.BL.Managers
                 task.Completed = item.Done;
                 task.ExternalId = item.ID.ToString();
                 task.Subject = item.Name;
+                if (string.IsNullOrWhiteSpace(item.Owner)) item.Owner = UserName;
 
 #if Win8 || WINDOWS_PHONE
-                await wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
+                await wsdl.SaveTask2Async(item.Owner, task, ClientRegistrationID);
 #else
                 wsdl.SaveTask(clientAccount, loggedUser, task);
 #endif
