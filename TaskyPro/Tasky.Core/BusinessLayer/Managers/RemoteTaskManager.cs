@@ -122,8 +122,31 @@ namespace Tasky.BL.Managers
                 Convert.ToBase64String(hash).Substring(0, 32);
         }
 
+        private static string[] users;
+        public static string[] Users { get { return users; } }
+
+        public delegate void GetUsersCompleted();
+
+        public async static void GetUsers(GetUsersCompleted OnGetUsersCompleted)
+        {
+            await Login();            
+
+            if (loggedUser != null)
+            {
+                List<string> locUsers = new List<string>();
+                User[] remoteUsers = await wsdl.GetUsers2Async();
+                foreach (var remoteUser in remoteUsers)
+                {
+                    locUsers.Add(remoteUser.Email);
+                }
+                users = locUsers.ToArray();
+                if (OnGetUsersCompleted != null)
+                    OnGetUsersCompleted();
+            }
+        }
+
 #if Win8
-        private async static void Login()
+        private async static System.Threading.Tasks.Task Login()
 #else
 		private static void Login()
 #endif
@@ -168,7 +191,7 @@ namespace Tasky.BL.Managers
 				#if iOS
 				clientAccount = wsdl.GetAccountForClient2(loggedUser.InternalId, (ClientRegistrationID));
 				#else
-				clientAccount = wsdl.GetAccountForClient2(loggedUser.InternalId, Guid.Parse(ClientRegistrationID));
+				clientAccount = wsdl.GetAccountForClient2(loggedUser.InternalId.ToString(), Guid.Parse(ClientRegistrationID).ToString());
 #endif
 #endif
 				#endif
@@ -201,9 +224,9 @@ namespace Tasky.BL.Managers
             clientAccount = e.Result;
         }
 #endif
-        public static void SaveTask(Task item)
+        public static async void SaveTask(Task item)
         {
-            Login();
+            await Login();
 
             if (loggedUser != null)
             {
@@ -214,16 +237,16 @@ namespace Tasky.BL.Managers
                 task.Subject = item.Name;
 
 #if Win8 || WINDOWS_PHONE
-                wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
+                await wsdl.SaveTaskAsync(clientAccount, loggedUser, task);
 #else
                 wsdl.SaveTask(clientAccount, loggedUser, task);
 #endif
             }
         }
 
-        public static void ChangeExternalId(string oldId, Task newTask)
+        public static async void ChangeExternalId(string oldId, Task newTask)
         {
-            Login();
+            await Login();
 
             if (loggedUser != null)
             {
@@ -233,7 +256,7 @@ namespace Tasky.BL.Managers
                 remoteTask.ExternalId = newTask.ID.ToString();
                 remoteTask.Subject = newTask.Name;
 #if Win8|| WINDOWS_PHONE
-                wsdl.ChangeTaskExternalIdAsync(clientAccount, loggedUser, oldId, remoteTask);
+                await wsdl.ChangeTaskExternalIdAsync(clientAccount, loggedUser, oldId, remoteTask);
 #else
                 wsdl.ChangeTaskExternalId(clientAccount, loggedUser, oldId, remoteTask);
 #endif
@@ -273,7 +296,7 @@ namespace Tasky.BL.Managers
             public static NuTask[] GetNewTasks(Task[] localTasks)
 #endif
         {
-            Login();
+            await Login();
 
             if (loggedUser != null)
             {

@@ -28,6 +28,14 @@ namespace TaskyWin8
             this.InitializeComponent();
 
             DataContext = new TaskListViewModel();
+
+            RemoteTaskManager.GetUsers(OnGetUsersCompleted);
+        }
+
+        public void OnGetUsersCompleted()
+        {
+            foreach (var userName in RemoteTaskManager.Users)
+                OwnerComboBox.Items.Add(userName);
         }
 
         /// <summary>
@@ -78,6 +86,16 @@ namespace TaskyWin8
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ((TaskListViewModel)DataContext).BeginUpdate();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var t = ((TaskListViewModel)DataContext).GetTask();
+            if (t != null && OwnerComboBox.SelectedValue != null)
+            {
+                t.Owner = OwnerComboBox.SelectedValue.ToString();
+                ((TaskListViewModel)DataContext).BeginUpdate();
+            }
         }
     }
 }

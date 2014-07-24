@@ -10,7 +10,9 @@ namespace TaskyWin8
         public string Name { get; set; }
         public string Notes { get; set; }
         public bool Done { get; set; }
-    
+
+        public string Owner { get; set; }
+
         public TaskViewModel ()
         {
         }
@@ -25,6 +27,7 @@ namespace TaskyWin8
             Name = item.Name;
             Notes = item.Notes;
             Done = item.Done;
+            Owner = item.Owner;
         }
 
         public Task GetTask() {
@@ -32,7 +35,8 @@ namespace TaskyWin8
                 ID = this.ID,
                 Name = this.Name,
                 Notes = this.Notes,
-                Done = this.Done
+                Done = this.Done,
+                Owner = this.Owner
             };
         }
     }

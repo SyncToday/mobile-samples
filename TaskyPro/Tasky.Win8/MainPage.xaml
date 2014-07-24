@@ -125,13 +125,19 @@
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="Save"
                     Width="300"
-                Tapped="Save_Tap"
+                Tapped="Save_Tap" Margin="0,79,0,420" Grid.RowSpan="3"
                 />
             <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="Delete"
                     Width="300"
-                Tapped="Delete_Tap"
+                Tapped="Delete_Tap" Margin="0,123,0,376" Grid.RowSpan="2"
                 />
+            <ComboBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="87,32,0,0" Grid.Row="7" VerticalAlignment="Top" Width="493" x:Name="OwnerComboBox"                      
+            SelectionChanged="ComboBox_SelectionChanged"
+                      />
+            <TextBlock Grid.Row="7" Grid.Column="0"
+            	Text="Owner:"
+            	Style="{StaticResource BasicTextStyle}" Margin="0,35,0,475" />
         </Grid>
     </Grid>
 </Page>

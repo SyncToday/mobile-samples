@@ -277,11 +277,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetUsers2">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUsers2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsers2Result" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="Account" nillable="true" type="tns:Account" />
       <s:element name="ArrayOfNuTask" nillable="true" type="tns:ArrayOfNuTask" />
       <s:element name="NuTask" nillable="true" type="tns:NuTask" />
       <s:element name="string" nillable="true" type="s:string" />
       <s:element name="User" nillable="true" type="tns:User" />
+      <s:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -351,6 +367,12 @@
   <wsdl:message name="GetAccountForClient2SoapOut">
     <wsdl:part name="parameters" element="tns:GetAccountForClient2Response" />
   </wsdl:message>
+  <wsdl:message name="GetUsers2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsers2" />
+  </wsdl:message>
+  <wsdl:message name="GetUsers2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsers2Response" />
+  </wsdl:message>
   <wsdl:message name="GetAccount2HttpGetIn">
     <wsdl:part name="accountId" type="s:string" />
   </wsdl:message>
@@ -392,6 +414,10 @@
   <wsdl:message name="GetAccountForClient2HttpGetOut">
     <wsdl:part name="Body" element="tns:Account" />
   </wsdl:message>
+  <wsdl:message name="GetUsers2HttpGetIn" />
+  <wsdl:message name="GetUsers2HttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUser" />
+  </wsdl:message>
   <wsdl:message name="GetAccount2HttpPostIn">
     <wsdl:part name="accountId" type="s:string" />
   </wsdl:message>
@@ -432,6 +458,10 @@
   </wsdl:message>
   <wsdl:message name="GetAccountForClient2HttpPostOut">
     <wsdl:part name="Body" element="tns:Account" />
+  </wsdl:message>
+  <wsdl:message name="GetUsers2HttpPostIn" />
+  <wsdl:message name="GetUsers2HttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUser" />
   </wsdl:message>
   <wsdl:portType name="TaskDatabaseSoap">
     <wsdl:operation name="GetAccount2">
@@ -577,6 +607,16 @@
       <wsdl:input message="tns:GetAccountForClient2SoapIn" />
       <wsdl:output message="tns:GetAccountForClient2SoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Return all synchronized users. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUsers2SoapIn" />
+      <wsdl:output message="tns:GetUsers2SoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="TaskDatabaseHttpGet">
     <wsdl:operation name="GetAccount2">
@@ -658,6 +698,16 @@
       <wsdl:input message="tns:GetAccountForClient2HttpGetIn" />
       <wsdl:output message="tns:GetAccountForClient2HttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Return all synchronized users. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUsers2HttpGetIn" />
+      <wsdl:output message="tns:GetUsers2HttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="TaskDatabaseHttpPost">
     <wsdl:operation name="GetAccount2">
@@ -738,6 +788,16 @@
     <wsdl:operation name="GetAccountForClient2">
       <wsdl:input message="tns:GetAccountForClient2HttpPostIn" />
       <wsdl:output message="tns:GetAccountForClient2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Summary:&lt;/td&gt;&lt;td&gt;Return all synchronized users. Real user accounts are connected to this user.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUsers2HttpPostIn" />
+      <wsdl:output message="tns:GetUsers2HttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TaskDatabaseSoap" type="tns:TaskDatabaseSoap">
@@ -825,6 +885,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAccountForClient2">
       <soap:operation soapAction="http://sync.today/GetAccountForClient2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <soap:operation soapAction="http://sync.today/GetUsers2" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -925,6 +994,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <soap12:operation soapAction="http://sync.today/GetUsers2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="TaskDatabaseHttpGet" type="tns:TaskDatabaseHttpGet">
     <http:binding verb="GET" />
@@ -982,6 +1060,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <http:operation location="/GetUsers2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="TaskDatabaseHttpPost" type="tns:TaskDatabaseHttpPost">
     <http:binding verb="POST" />
@@ -1032,6 +1119,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAccountForClient2">
       <http:operation location="/GetAccountForClient2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers2">
+      <http:operation location="/GetUsers2" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

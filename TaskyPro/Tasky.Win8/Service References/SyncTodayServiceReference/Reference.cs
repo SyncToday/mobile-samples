@@ -77,6 +77,12 @@ namespace TaskyWin8.SyncTodayServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.Account> GetAccountForClient2Async(string userid, string clientId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/GetUsers2", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.User[]> GetUsers2Async();
     }
     
     /// <remarks/>
@@ -787,6 +793,10 @@ namespace TaskyWin8.SyncTodayServiceReference {
         
         public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.Account> GetAccountForClient2Async(string userid, string clientId) {
             return base.Channel.GetAccountForClient2Async(userid, clientId);
+        }
+        
+        public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.User[]> GetUsers2Async() {
+            return base.Channel.GetUsers2Async();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {
