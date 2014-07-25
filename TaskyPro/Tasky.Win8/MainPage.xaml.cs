@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,6 +30,7 @@ namespace TaskyWin8
 
             DataContext = new TaskListViewModel();
 
+            GetLoginInformation();
             RemoteTaskManager.GetUsers(OnGetUsersCompleted);
         }
 
@@ -100,6 +102,92 @@ namespace TaskyWin8
                 t.Owner = OwnerComboBox.SelectedValue.ToString();
                 TaskManager.SaveTask(t);
                 ((TaskListViewModel)DataContext).BeginUpdate();
+            }
+        }
+
+        // http://msdn.microsoft.com/en-us/library/windows/apps/br241801.aspx?cs-save-lang=1&cs-lang=csharp#code-snippet-3
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            // The URI to launch
+            string uriToLaunch = @"http://sync.today";
+
+            // Create a Uri object from a URI string 
+            var uri = new Uri(uriToLaunch);
+
+           // Launch the URI
+            Windows.System.Launcher.LaunchUriAsync(uri);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            // The URI to launch
+            string uriToLaunch = @"http://wsdl.sync.today/register";
+
+            // Create a Uri object from a URI string 
+            var uri = new Uri(uriToLaunch);
+
+            // Launch the URI
+            Windows.System.Launcher.LaunchUriAsync(uri);
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            RemoteTaskManager.UserName = UserNameText.Text;
+            RemoteTaskManager.Password = PasswordText.Password;
+
+            var vault = new Windows.Security.Credentials.PasswordVault();
+            vault.Add(new Windows.Security.Credentials.PasswordCredential(
+                resourceName, RemoteTaskManager.UserName, RemoteTaskManager.Password));
+
+            RemoteTaskManager.Login();
+        }
+
+        // http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh465069.aspx
+        private string resourceName = "TaskyPro/Windows 8 for Sync.Today Demo";
+
+        private void GetLoginInformation()
+        {
+            var loginCredential = GetCredentialFromLocker();
+
+            if (loginCredential != null)
+            {
+                // There is a credential stored in the locker.
+                // Populate the Password property of the credential
+                // for automatic login.
+                loginCredential.RetrievePassword();
+            }
+
+            if (loginCredential != null)
+            {
+                // Log the user in.
+                RemoteTaskManager.UserName = loginCredential.UserName;
+                RemoteTaskManager.Password = loginCredential.Password;
+                UserNameText.Text = loginCredential.UserName;
+                PasswordText.Password = loginCredential.Password;
+            }
+        }
+
+        private Windows.Security.Credentials.PasswordCredential GetCredentialFromLocker()
+        {
+            try
+            {
+                Windows.Security.Credentials.PasswordCredential credential = null;
+
+                var vault = new Windows.Security.Credentials.PasswordVault();
+                var credentialList = vault.FindAllByResource(resourceName);
+                if (credentialList.Count > 0)
+                {
+                    if (credentialList.Count == 1)
+                    {
+                        credential = credentialList[0];
+                    }
+                }
+
+                return credential;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     }

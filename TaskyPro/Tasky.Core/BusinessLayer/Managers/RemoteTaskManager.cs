@@ -197,12 +197,13 @@ namespace Tasky.BL.Managers
 #endif
 
 #if Win8
-        private async static System.Threading.Tasks.Task Login()
+        internal async static System.Threading.Tasks.Task Login()
 #else
         private static void Login()
 #endif
         {
             if (loggedUser != null && clientAccount != null) return;
+            if (string.IsNullOrWhiteSpace(UserName)) return;
 #if Win8 || WINDOWS_PHONE
             Binding binding = new BasicHttpBinding();
             EndpointAddress address = new EndpointAddress(ServerUrl);
