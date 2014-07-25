@@ -22,6 +22,7 @@ namespace Tasky.Droid.Screens {
 		protected EditText notesTextEdit;
 		protected EditText nameTextEdit;
 		CheckBox doneCheckbox;
+		private String[] array_spinner;
 		
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -49,6 +50,16 @@ namespace Tasky.Droid.Screens {
 			if(notesTextEdit != null) { notesTextEdit.Text = task.Notes; }
 			
 			if(doneCheckbox != null) { doneCheckbox.Checked = task.Done; }
+
+			array_spinner=new String[5];
+			array_spinner[0]="option 1";
+			array_spinner[1]="option 2";
+			array_spinner[2]="option 3";
+			array_spinner[3]="option 4";
+			array_spinner[4]="option 5";
+
+			Spinner s = FindViewById<Spinner>(Resource.Id.Owner);
+			s.Adapter = new ArrayAdapter ();
 		}
 
 		protected void Save()
