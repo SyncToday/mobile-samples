@@ -93,12 +93,9 @@ namespace Tasky.BL.Managers
 
         public static long DateTimeUtcNowOurTicks()
         {
-			DateTime centuryBegin = new DateTime (631139004000000000); //new DateTime(2001, 1, 1).ToUniversalTime();
-            DateTime currentDate = DateTime.UtcNow;
-            long elapsedTicks = currentDate.Ticks - centuryBegin.Ticks;
-            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-			var result = (long)elapsedSpan.TotalSeconds / 10;
-			return result;
+            var task = wsdl.DateTimeUtcNowOurTicksAsync();
+            task.Wait();
+            return task.Result;
         }
 
         public static string CreateHash1(string password, string salt2)

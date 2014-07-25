@@ -89,6 +89,12 @@ namespace TaskyWin8.SyncTodayServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.User[]> GetUsers2Async();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/DateTimeUtcNowOurTicks", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.Threading.Tasks.Task<long> DateTimeUtcNowOurTicksAsync();
     }
     
     /// <remarks/>
@@ -807,6 +813,10 @@ namespace TaskyWin8.SyncTodayServiceReference {
         
         public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.User[]> GetUsers2Async() {
             return base.Channel.GetUsers2Async();
+        }
+        
+        public System.Threading.Tasks.Task<long> DateTimeUtcNowOurTicksAsync() {
+            return base.Channel.DateTimeUtcNowOurTicksAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {
