@@ -183,6 +183,7 @@ namespace Tasky.BL.Managers
                 {
                     locUsers.Add(remoteUser.Email);
                 }
+                if (!locUsers.Contains(UserName)) locUsers.Add(UserName);                
                 users = locUsers.ToArray();
                 if (OnGetUsersCompleted != null)
                     OnGetUsersCompleted();
