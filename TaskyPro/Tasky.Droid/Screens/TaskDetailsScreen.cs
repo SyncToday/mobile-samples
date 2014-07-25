@@ -63,8 +63,6 @@ namespace Tasky.Droid.Screens {
 
 		public void OnGetUsersCompleted()
 		{
-			Toast.MakeText (this, string.Format("Logged user is '{0}'. Count of all users is '{1}'",Tasky.BL.Managers.RemoteTaskManager.UserName, Tasky.BL.Managers.RemoteTaskManager.Users.Length ), ToastLength.Long).Show ();
-
 			var users = Tasky.BL.Managers.RemoteTaskManager.Users;
 			List<string> items = new List<string> ();
 			foreach (var item in users) {
@@ -76,13 +74,13 @@ namespace Tasky.Droid.Screens {
 			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			spinner.Adapter = adapter;
 
-			spinner.SetSelection (GetPositionOfUsername(Tasky.BL.Managers.RemoteTaskManager.UserName, Tasky.BL.Managers.RemoteTaskManager.Users));
+			spinner.SetSelection (GetPositionOfUsername(task.Owner, Tasky.BL.Managers.RemoteTaskManager.Users));
 		}
 
 		private int GetPositionOfUsername(string username, string[] users)
 		{
 			for (int i = 0; i < users.Length; i++) {
-				if (username.Equals (users [i]))
+				if (username == users[i])
 					return i;
 			}
 			//select first position in spinner
@@ -94,7 +92,7 @@ namespace Tasky.Droid.Screens {
 			Spinner spinner = (Spinner)sender;
 			//Merchant merch = (Merchant)spinner.SelectedItem;
 			spinnerPositionSelected = e.Position;
-			string toast = string.Format ("Selected text is {0} on the position {1}.", spinner.GetItemAtPosition (e.Position), e.Position);
+			string toast = string.Format ("Selected owner is {0}.", spinner.GetItemAtPosition (e.Position));
 			Toast.MakeText (this, toast, ToastLength.Long).Show ();
 		}
 
