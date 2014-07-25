@@ -13,16 +13,22 @@ using Android.Views;
 
 using Tasky.BL;
 using Android.Util;
+using Tasky.Droid.SyncTodayServiceReference;
+using Tasky.BL.Managers;
 
 namespace Tasky.Droid.Screens {
 	//TODO: implement proper lifecycle methods
 	[Activity (Label = "Task Details")]			
 	public class TaskDetailsScreen : Activity {
+
+		protected TaskDatabase wsdl;
 		protected Task task = new Task();
 		protected EditText notesTextEdit;
 		protected EditText nameTextEdit;
+		protected Spinner spinner;
 		CheckBox doneCheckbox;
 		private String[] array_spinner;
+		private int spinnerPositionSelected;
 		
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -51,16 +57,45 @@ namespace Tasky.Droid.Screens {
 			
 			if(doneCheckbox != null) { doneCheckbox.Checked = task.Done; }
 
-			/*
-			array_spinner=new String[5];
-			array_spinner[0]="option 1";
-			array_spinner[1]="option 2";
-			array_spinner[2]="option 3";
-			array_spinner[3]="option 4";
-			array_spinner[4]="option 5";
+			//setting spinner with users from Tasky.Core
+			RemoteTaskManager.GetUsers(OnGetUsersCompleted);
+		}
 
-			Spinner s = FindViewById<Spinner>(Resource.Id.Owner);
-			s.Adapter = new ArrayAdapter ();*/
+		public void OnGetUsersCompleted()
+		{
+			Toast.MakeText (this, string.Format("Logged user is '{0}'. Count of all users is '{1}'",Tasky.BL.Managers.RemoteTaskManager.UserName, Tasky.BL.Managers.RemoteTaskManager.Users.Length ), ToastLength.Long).Show ();
+
+			var users = Tasky.BL.Managers.RemoteTaskManager.Users;
+			List<string> items = new List<string> ();
+			foreach (var item in users) {
+				items.Add (item);
+			}
+
+			var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, items);
+			var spinner = FindViewById<Spinner>(Resource.Id.spinner);
+			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
+			spinner.Adapter = adapter;
+
+			spinner.SetSelection (GetPositionOfUsername(Tasky.BL.Managers.RemoteTaskManager.UserName, Tasky.BL.Managers.RemoteTaskManager.Users));
+		}
+
+		private int GetPositionOfUsername(string username, string[] users)
+		{
+			for (int i = 0; i < users.Length; i++) {
+				if (username.Equals (users [i]))
+					return i;
+			}
+			//select first position in spinner
+			return 0;
+		}
+			
+		private void spinner_ItemSelected (object sender, AdapterView.ItemSelectedEventArgs e)
+		{
+			Spinner spinner = (Spinner)sender;
+			//Merchant merch = (Merchant)spinner.SelectedItem;
+			spinnerPositionSelected = e.Position;
+			string toast = string.Format ("Selected text is {0} on the position {1}.", spinner.GetItemAtPosition (e.Position), e.Position);
+			Toast.MakeText (this, toast, ToastLength.Long).Show ();
 		}
 
 		protected void Save()
@@ -68,6 +103,8 @@ namespace Tasky.Droid.Screens {
 			task.Name = nameTextEdit.Text;
 			task.Notes = notesTextEdit.Text;
 			task.Done = doneCheckbox.Checked;
+			var spinner = FindViewById<Spinner>(Resource.Id.spinner);
+			task.Owner = spinner.GetItemAtPosition(spinnerPositionSelected).ToString();
 			Tasky.BL.Managers.TaskManager.SaveTask(task);
 			Finish();
 		}

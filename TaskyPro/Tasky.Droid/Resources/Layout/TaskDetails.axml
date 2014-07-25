@@ -7,6 +7,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minLines="4"
         android:id="@+id/NameLabel" />
     <EditText
         android:id="@+id/txtName"
@@ -47,9 +48,9 @@
         android:text="Done"
         android:layout_alignParentRight="true"
         android:paddingRight="25dp" />
-    <Spinner android:id="@+id/Owner"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/chkDone"
-		 />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chkDone" />
 </RelativeLayout>
