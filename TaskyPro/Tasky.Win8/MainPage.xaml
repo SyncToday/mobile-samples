@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
             <TextBlock x:Name="ApplicationTitle" 
                     Grid.Row="0"
-                        Text="TaskyPro" 
+                        Text="TaskyPro for Sync.Today Demo" 
                         Style="{StaticResource BasicTextStyle}" 
                         Foreground="LightBlue"/>
             <TextBlock x:Name="PageTitle" 
