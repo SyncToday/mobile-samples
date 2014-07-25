@@ -303,6 +303,24 @@ namespace Tasky.Droid.SyncTodayServiceReference {
             object[] results = this.EndInvoke(asyncResult);
             return ((User[])(results[0]));
         }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/DateTimeUtcNowOurTicks", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public long DateTimeUtcNowOurTicks() {
+            object[] results = this.Invoke("DateTimeUtcNowOurTicks", new object[0]);
+            return ((long)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("DateTimeUtcNowOurTicks", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public long EndDateTimeUtcNowOurTicks(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((long)(results[0]));
+        }
     }
     
     /// <remarks/>

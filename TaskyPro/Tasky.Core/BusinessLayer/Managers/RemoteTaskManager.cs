@@ -93,9 +93,13 @@ namespace Tasky.BL.Managers
 
         public static long DateTimeUtcNowOurTicks()
         {
-            var task = wsdl.DateTimeUtcNowOurTicksAsync();
+			#if Win8
+			var task = wsdl.DateTimeUtcNowOurTicksAsync();
             task.Wait();
             return task.Result;
+			#else
+			return wsdl.DateTimeUtcNowOurTicks();
+			#endif
         }
 
         public static string CreateHash1(string password, string salt2)

@@ -51,6 +51,7 @@ namespace Tasky.Droid.Screens {
 			
 			if(doneCheckbox != null) { doneCheckbox.Checked = task.Done; }
 
+			/*
 			array_spinner=new String[5];
 			array_spinner[0]="option 1";
 			array_spinner[1]="option 2";
@@ -59,7 +60,7 @@ namespace Tasky.Droid.Screens {
 			array_spinner[4]="option 5";
 
 			Spinner s = FindViewById<Spinner>(Resource.Id.Owner);
-			s.Adapter = new ArrayAdapter ();
+			s.Adapter = new ArrayAdapter ();*/
 		}
 
 		protected void Save()
