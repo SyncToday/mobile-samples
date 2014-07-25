@@ -130,7 +130,7 @@ namespace TaskyWin8
             Windows.System.Launcher.LaunchUriAsync(uri);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private async void Button_Click_3(object sender, RoutedEventArgs e)
         {
             RemoteTaskManager.UserName = UserNameText.Text;
             RemoteTaskManager.Password = PasswordText.Password;
@@ -139,7 +139,8 @@ namespace TaskyWin8
             vault.Add(new Windows.Security.Credentials.PasswordCredential(
                 resourceName, RemoteTaskManager.UserName, RemoteTaskManager.Password));
 
-            RemoteTaskManager.Login();
+            await RemoteTaskManager.Login();
+            ((TaskListViewModel)DataContext).BeginUpdate();
         }
 
         // http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh465069.aspx
@@ -189,6 +190,13 @@ namespace TaskyWin8
             {
                 return null;
             }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var vault = new Windows.Security.Credentials.PasswordVault();
+            vault.Remove(new Windows.Security.Credentials.PasswordCredential(
+                resourceName, RemoteTaskManager.UserName, RemoteTaskManager.Password));
         }
     }
 }

@@ -145,6 +145,7 @@
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="192,19,0,0" TextWrapping="Wrap" Text="User name:" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" />
         <PasswordBox  Password="Password123" Grid.Column="1" HorizontalAlignment="Left" Margin="281,53,0,0" VerticalAlignment="Top" Width="224" x:Name="PasswordText" PasswordChar="*" />
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="200,59,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" RenderTransformOrigin="0.094,-0.15" />
-        <Button Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="507,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.182,0.132" Click="Button_Click_3"/>
+        <Button Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="507,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.182,0.132" Click="Button_Click_3" Width="78"/>
+        <Button Content="Forget" Grid.Column="1" HorizontalAlignment="Left" Margin="507,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.2,0.129" Click="Button_Click_4"/>
     </Grid>
 </Page>
