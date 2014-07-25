@@ -35,7 +35,7 @@ namespace Tasky.BL.Managers
 {
     public static class RemoteTaskManager
     {
-		public static string UserName = "test@test.com";
+        public static string UserName = string.Empty; //"test@test.com";
         public static string Password = "Password123";
         public static string ClientRegistrationID = "8c3a75ed-5c06-4b36-bd6e-87b8c7f20452";
         public static string ServerUrl = "http://wsdl.sync.today/TaskDatabase.asmx";
