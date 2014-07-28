@@ -4,13 +4,12 @@
   <Languages xmlns="">
     <Language code="en-US" />
   </Languages>
-  <App xmlns="" ProductID="{f6b00602-6e50-4749-bda1-9a8d235ea645}" Title="TaskyWP7" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Gassumo, Xamarin" Description="Sample description" Publisher="Gassumo" PublisherID="{b7d490c4-ed72-41e8-8781-d3f825a15459}">
-    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{f6b00602-6e50-4749-bda1-9a8d235ea645}" Title="Tasky for Sync.Today (demo)" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Gassumo" Description="TaskyPro is a simple cross-platform todo/task application sample that allows you to track todo tasks and synchronize them with your favourite task applications (e.g. Office 365, Producteev, Evernote, Google Apps or even ERP) using Sync.Today demo server." Publisher="Gassumo" PublisherID="{b7d490c4-ed72-41e8-8781-d3f825a15459}">
+    <IconPath IsRelative="true" IsResource="false">Assets\appicon99x99.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
       <Capability Name="ID_CAP_IDENTITY_USER" />
       <Capability Name="ID_CAP_NETWORKING" />
-      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
     </Capabilities>
     <Tasks>
@@ -18,21 +17,26 @@
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="TaskyWP7Token" TaskName="_default">
-        <TemplateFlip>
-          <SmallImageURI IsResource="false" IsRelative="true">Background.png</SmallImageURI>
+        <TemplateIconic>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\tile110x110.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
-          <Title>TaskyWP7</Title>
-          <BackContent>
-          </BackContent>
-          <BackBackgroundImageURI>
-          </BackBackgroundImageURI>
-          <BackTitle>
-          </BackTitle>
-          <DeviceLockImageURI>
-          </DeviceLockImageURI>
+          <IconImageURI IsRelative="true" IsResource="false">Assets\tile202x202.png</IconImageURI>
+          <Title>
+          </Title>
+          <Message>
+          </Message>
+          <BackgroundColor>
+          </BackgroundColor>
           <HasLarge>false</HasLarge>
-        </TemplateFlip>
+          <LargeContent1>
+          </LargeContent1>
+          <LargeContent2>
+          </LargeContent2>
+          <LargeContent3>
+          </LargeContent3>
+          <DeviceLockImageURI IsRelative="true" IsResource="false">
+          </DeviceLockImageURI>
+        </TemplateIconic>
       </PrimaryToken>
     </Tokens>
     <ScreenResolutions>
