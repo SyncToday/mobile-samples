@@ -21,7 +21,7 @@
     <MetadataSource Address="http://wsdl.sync.today/TaskDatabase.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TaskDatabase.disco" MetadataType="Disco" ID="8e052f28-a33d-4156-ae79-729781577f97" SourceId="1" SourceUrl="http://wsdl.sync.today/TaskDatabase.asmx?disco" />
-    <MetadataFile FileName="TaskDatabase.wsdl" MetadataType="Wsdl" ID="f92e77a1-5744-4260-a10c-23b055f45b9b" SourceId="1" SourceUrl="http://wsdl.sync.today/TaskDatabase.asmx?wsdl" />
+    <MetadataFile FileName="TaskDatabase.disco" MetadataType="Disco" ID="e9834d44-7602-41c8-aa05-f01335fceb84" SourceId="1" SourceUrl="http://wsdl.sync.today/TaskDatabase.asmx?disco" />
+    <MetadataFile FileName="TaskDatabase.wsdl" MetadataType="Wsdl" ID="7a4ba4a5-9b20-4a73-9bf9-4c24d12ad249" SourceId="1" SourceUrl="http://wsdl.sync.today/TaskDatabase.asmx?wsdl" />
   </Metadata>
 </ReferenceGroup>
