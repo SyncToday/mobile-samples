@@ -74,7 +74,8 @@ namespace Tasky.Droid.Screens {
 			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			spinner.Adapter = adapter;
 
-			spinner.SetSelection (GetPositionOfUsername(task.Owner, Tasky.BL.Managers.RemoteTaskManager.Users));
+			spinnerPositionSelected = GetPositionOfUsername (task.Owner, Tasky.BL.Managers.RemoteTaskManager.Users);
+			spinner.SetSelection (spinnerPositionSelected);
 		}
 
 		private int GetPositionOfUsername(string username, string[] users)
