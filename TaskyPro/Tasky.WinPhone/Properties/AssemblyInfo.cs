@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TaskyWP7")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("TaskyPro/Windows Phone 8 for Sync.Today Demo")]
+[assembly: AssemblyDescription("TaskyPro connected to Sync.Today demo server")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TaskyWP7")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("Gassumo")]
+[assembly: AssemblyProduct("TaskyPro/Windows Phone 8 for Sync.Today Demo")]
+[assembly: AssemblyCopyright("Copyright ©  2012 Xamarin, Copyright ©  2014 Gassumo")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

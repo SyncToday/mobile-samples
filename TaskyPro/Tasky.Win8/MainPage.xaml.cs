@@ -140,6 +140,9 @@ namespace TaskyWin8
                 resourceName, RemoteTaskManager.UserName, RemoteTaskManager.Password));
 
             await RemoteTaskManager.Login();
+
+            RemoteTaskManager.GetUsers(OnGetUsersCompleted);
+
             ((TaskListViewModel)DataContext).BeginUpdate();
         }
 
