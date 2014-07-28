@@ -66,7 +66,7 @@ namespace TaskyWin8
             var lb = sender as ListBox;
             var tvm = lb.SelectedItem as TaskViewModel;
             ((TaskListViewModel)DataContext).PopulateTaskViewModel(tvm);
-            OwnerComboBox.SelectedValue = string.IsNullOrWhiteSpace(tvm.Owner) ? RemoteTaskManager.UserName : tvm.Owner;
+            OwnerComboBox.SelectedValue = ( tvm == null || string.IsNullOrWhiteSpace(tvm.Owner) ) ? RemoteTaskManager.UserName : tvm.Owner;
         }
 
         private void Save_Tap(object sender, TappedRoutedEventArgs e)

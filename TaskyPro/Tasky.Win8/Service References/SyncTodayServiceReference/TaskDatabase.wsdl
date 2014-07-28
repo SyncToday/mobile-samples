@@ -249,6 +249,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="DeleteTask">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="tns:Account" />
+            <s:element minOccurs="0" maxOccurs="1" name="externalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTaskResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteTaskResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetUserSalt">
         <s:complexType>
           <s:sequence>
@@ -381,6 +396,12 @@
   </wsdl:message>
   <wsdl:message name="ChangeTaskExternalIdSoapOut">
     <wsdl:part name="parameters" element="tns:ChangeTaskExternalIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTaskSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteTask" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTaskSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteTaskResponse" />
   </wsdl:message>
   <wsdl:message name="GetUserSaltSoapIn">
     <wsdl:part name="parameters" element="tns:GetUserSalt" />
@@ -638,6 +659,10 @@
 &lt;/table&gt;</wsdl:documentation>
       <wsdl:input message="tns:ChangeTaskExternalIdSoapIn" />
       <wsdl:output message="tns:ChangeTaskExternalIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <wsdl:input message="tns:DeleteTaskSoapIn" />
+      <wsdl:output message="tns:DeleteTaskSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetUserSalt">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
@@ -949,6 +974,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <soap:operation soapAction="http://sync.today/DeleteTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserSalt">
       <soap:operation soapAction="http://sync.today/GetUserSalt" style="document" />
       <wsdl:input>
@@ -1062,6 +1096,15 @@
     </wsdl:operation>
     <wsdl:operation name="ChangeTaskExternalId">
       <soap12:operation soapAction="http://sync.today/ChangeTaskExternalId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTask">
+      <soap12:operation soapAction="http://sync.today/DeleteTask" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

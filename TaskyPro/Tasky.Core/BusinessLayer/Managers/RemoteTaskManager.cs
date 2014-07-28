@@ -313,6 +313,35 @@ namespace Tasky.BL.Managers
             }
         }
 
+        public static
+#if Win8
+        async
+#endif
+        void DeleteTask(int externalId)
+        {
+			#if Win8
+			await 
+			#endif 
+            Login();
+
+            if (loggedUser != null)
+            {
+#if Win8
+                await
+#endif
+				#if Win8
+				wsdl.DeleteTaskAsync
+				#else
+#if WINDOWS_PHONE
+                wsdl.DeleteTaskAsync
+#else
+				wsdl.DeleteTask
+				#endif
+				#endif
+				(clientAccount, externalId.ToString());
+            }
+        }
+
         public static 
 		#if Win8
 		async 

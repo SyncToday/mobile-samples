@@ -82,6 +82,14 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask EndChangeTaskExternalId(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/DeleteTask", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.IAsyncResult BeginDeleteTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, System.AsyncCallback callback, object asyncState);
+        
+        bool EndDeleteTask(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetUserSalt", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
@@ -908,6 +916,25 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DeleteTaskCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DeleteTaskCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetUserSaltCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -1053,6 +1080,12 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         private System.Threading.SendOrPostCallback onChangeTaskExternalIdCompletedDelegate;
         
+        private BeginOperationDelegate onBeginDeleteTaskDelegate;
+        
+        private EndOperationDelegate onEndDeleteTaskDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteTaskCompletedDelegate;
+        
         private BeginOperationDelegate onBeginGetUserSaltDelegate;
         
         private EndOperationDelegate onEndGetUserSaltDelegate;
@@ -1151,6 +1184,8 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         public event System.EventHandler<SaveTask2CompletedEventArgs> SaveTask2Completed;
         
         public event System.EventHandler<ChangeTaskExternalIdCompletedEventArgs> ChangeTaskExternalIdCompleted;
+        
+        public event System.EventHandler<DeleteTaskCompletedEventArgs> DeleteTaskCompleted;
         
         public event System.EventHandler<GetUserSaltCompletedEventArgs> GetUserSaltCompleted;
         
@@ -1558,6 +1593,54 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
                         user,
                         oldId,
                         task}, this.onEndChangeTaskExternalIdDelegate, this.onChangeTaskExternalIdCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginDeleteTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeleteTask(account, externalId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndDeleteTask(System.IAsyncResult result) {
+            return base.Channel.EndDeleteTask(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeleteTask(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Tasky.WinPhone.SyncTodayServiceReference.Account account = ((Tasky.WinPhone.SyncTodayServiceReference.Account)(inValues[0]));
+            string externalId = ((string)(inValues[1]));
+            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginDeleteTask(account, externalId, callback, asyncState);
+        }
+        
+        private object[] OnEndDeleteTask(System.IAsyncResult result) {
+            bool retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndDeleteTask(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDeleteTaskCompleted(object state) {
+            if ((this.DeleteTaskCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteTaskCompleted(this, new DeleteTaskCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteTaskAsync(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId) {
+            this.DeleteTaskAsync(account, externalId, null);
+        }
+        
+        public void DeleteTaskAsync(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, object userState) {
+            if ((this.onBeginDeleteTaskDelegate == null)) {
+                this.onBeginDeleteTaskDelegate = new BeginOperationDelegate(this.OnBeginDeleteTask);
+            }
+            if ((this.onEndDeleteTaskDelegate == null)) {
+                this.onEndDeleteTaskDelegate = new EndOperationDelegate(this.OnEndDeleteTask);
+            }
+            if ((this.onDeleteTaskCompletedDelegate == null)) {
+                this.onDeleteTaskCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteTaskCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteTaskDelegate, new object[] {
+                        account,
+                        externalId}, this.onEndDeleteTaskDelegate, this.onDeleteTaskCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1980,6 +2063,20 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             public Tasky.WinPhone.SyncTodayServiceReference.NuTask EndChangeTaskExternalId(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Tasky.WinPhone.SyncTodayServiceReference.NuTask _result = ((Tasky.WinPhone.SyncTodayServiceReference.NuTask)(base.EndInvoke("ChangeTaskExternalId", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginDeleteTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = account;
+                _args[1] = externalId;
+                System.IAsyncResult _result = base.BeginInvoke("DeleteTask", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndDeleteTask(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("DeleteTask", _args, result)));
                 return _result;
             }
             

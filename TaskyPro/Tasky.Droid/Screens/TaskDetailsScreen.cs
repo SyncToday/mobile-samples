@@ -27,7 +27,6 @@ namespace Tasky.Droid.Screens {
 		protected EditText nameTextEdit;
 		protected Spinner spinner;
 		CheckBox doneCheckbox;
-		private String[] array_spinner;
 		private int spinnerPositionSelected;
 		
 		protected override void OnCreate (Bundle bundle)
@@ -58,7 +57,7 @@ namespace Tasky.Droid.Screens {
 			if(doneCheckbox != null) { doneCheckbox.Checked = task.Done; }
 
 			//setting spinner with users from Tasky.Core
-			RemoteTaskManager.GetUsers(OnGetUsersCompleted);
+			Tasky.BL.Managers.RemoteTaskManager.GetUsers(OnGetUsersCompleted);
 		}
 
 		public void OnGetUsersCompleted()
@@ -66,7 +65,7 @@ namespace Tasky.Droid.Screens {
 			var users = Tasky.BL.Managers.RemoteTaskManager.Users;
 			List<string> items = new List<string> ();
 			if (users == null) {
-				items.Add ("Empty");
+				items.Add (Tasky.BL.Managers.RemoteTaskManager.UserName);
 			}
 			foreach (var item in users) {
 				items.Add (item);
@@ -77,7 +76,7 @@ namespace Tasky.Droid.Screens {
 			spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs> (spinner_ItemSelected);
 			spinner.Adapter = adapter;
 
-			spinnerPositionSelected = GetPositionOfUsername (task.Owner, Tasky.BL.Managers.RemoteTaskManager.Users);
+			spinnerPositionSelected = GetPositionOfUsername (string.IsNullOrEmpty(task.Owner) ? Tasky.BL.Managers.RemoteTaskManager.UserName: task.Owner, Tasky.BL.Managers.RemoteTaskManager.Users);
 			spinner.SetSelection (spinnerPositionSelected);
 		}
 
@@ -96,7 +95,7 @@ namespace Tasky.Droid.Screens {
 			Spinner spinner = (Spinner)sender;
 			//Merchant merch = (Merchant)spinner.SelectedItem;
 			spinnerPositionSelected = e.Position;
-			string toast = string.Format ("Selected owner is {0}.", spinner.GetItemAtPosition (e.Position));
+			string toast = string.Format ("Selected owner: {0}.", spinner.GetItemAtPosition (e.Position));
 			Toast.MakeText (this, toast, ToastLength.Long).Show ();
 		}
 
@@ -107,9 +106,6 @@ namespace Tasky.Droid.Screens {
 			task.Done = doneCheckbox.Checked;
 			var spinner = FindViewById<Spinner>(Resource.Id.spinner);
 			task.Owner = spinner.GetItemAtPosition(spinnerPositionSelected).ToString();
-			if (task.Owner == "Empty") {
-				task.Owner = null;
-			}
 			Tasky.BL.Managers.TaskManager.SaveTask(task);
 			Finish();
 		}

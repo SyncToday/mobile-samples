@@ -223,6 +223,28 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/DeleteTask", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool DeleteTask(Account account, string externalId) {
+            object[] results = this.Invoke("DeleteTask", new object[] {
+                        account,
+                        externalId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginDeleteTask(Account account, string externalId, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("DeleteTask", new object[] {
+                        account,
+                        externalId}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public bool EndDeleteTask(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/GetUserSalt", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GetUserSalt(string email) {
             object[] results = this.Invoke("GetUserSalt", new object[] {
