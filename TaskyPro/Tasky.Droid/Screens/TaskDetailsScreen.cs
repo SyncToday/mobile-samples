@@ -65,6 +65,9 @@ namespace Tasky.Droid.Screens {
 		{
 			var users = Tasky.BL.Managers.RemoteTaskManager.Users;
 			List<string> items = new List<string> ();
+			if (users == null) {
+				items.Add ("Empty");
+			}
 			foreach (var item in users) {
 				items.Add (item);
 			}
@@ -104,6 +107,9 @@ namespace Tasky.Droid.Screens {
 			task.Done = doneCheckbox.Checked;
 			var spinner = FindViewById<Spinner>(Resource.Id.spinner);
 			task.Owner = spinner.GetItemAtPosition(spinnerPositionSelected).ToString();
+			if (task.Owner == "Empty") {
+				task.Owner = null;
+			}
 			Tasky.BL.Managers.TaskManager.SaveTask(task);
 			Finish();
 		}
