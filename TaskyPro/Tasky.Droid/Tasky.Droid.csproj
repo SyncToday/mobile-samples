@@ -28,7 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <Commandlineparameters>/p:Configuration=Release</Commandlineparameters>
+    <Commandlineparameters>/p:Configuration=Debug</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -37,8 +37,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidStoreUncompressedFileExtensions>
-    </AndroidStoreUncompressedFileExtensions>
+    <Externalconsole>true</Externalconsole>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="BeforeExecute" command="" />
+      </CustomCommands>
+    </CustomCommands>
+    <Commandlineparameters>/p:Configuration=Release</Commandlineparameters>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
