@@ -35,7 +35,7 @@ namespace Tasky.BL.Managers
 {
     public static class RemoteTaskManager
     {
-#if Win8
+#if Win8|| WINDOWS_PHONE
         public static string UserName = string.Empty; //"test@test.com";
 #else
         public static string UserName = "test@test.com";

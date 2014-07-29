@@ -69,9 +69,13 @@
                 Text="add" 
                 Click="HandleAdd"/>
             <shell:ApplicationBarIconButton 
-                IconUri="/Images/save.png"
+                IconUri="/Images/refresh.png"
                 Text="refresh" 
-                Click="HandleRefresh"/>                
+                Click="HandleRefresh"/>
+            <shell:ApplicationBarIconButton 
+                IconUri="/Images/settings.png"
+                Text="settings" 
+                Click="HandleSettings"/>
         </shell:ApplicationBar>
 
     </phone:PhoneApplicationPage.ApplicationBar>

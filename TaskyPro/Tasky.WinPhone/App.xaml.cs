@@ -12,6 +12,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Security.Cryptography;
+using System.Text;
+using System.IO.IsolatedStorage;
+using System.IO;
+using Tasky.BL.Managers;
 
 namespace TaskyWinPhone {
     public partial class App : Application {
@@ -54,6 +59,56 @@ namespace TaskyWinPhone {
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            GetLoginInformation();
+        }
+
+        //http://stackoverflow.com/questions/21007033/username-and-password-data-windows-phone-8-app
+        internal static string FilePath = "TaskyPinfile";
+
+        //http://stackoverflow.com/questions/21007033/username-and-password-data-windows-phone-8-app
+        internal static void GetLoginInformation()
+        {
+            // Retrieve the PIN from isolated storage.
+            byte[] ProtectedPinByte = ReadPinFromFile();
+
+            if (ProtectedPinByte == null || ProtectedPinByte.Length == 0) return;
+
+            // Decrypt the PIN by using the Unprotect method.
+            byte[] PinByte = ProtectedData.Unprotect(ProtectedPinByte, null);
+
+            // Convert the PIN from byte to string and display it in the text box.
+            string pin = Encoding.UTF8.GetString(PinByte, 0, PinByte.Length);
+
+            if (!string.IsNullOrWhiteSpace(pin))
+            {
+                string[] parts = pin.Split('|');
+                RemoteTaskManager.UserName = parts[0];
+                RemoteTaskManager.Password = parts[1];
+            }
+        }
+
+        private static byte[] ReadPinFromFile()
+        {
+            try
+            {
+                // Access the file in the application's isolated storage.
+                IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication();
+                IsolatedStorageFileStream readstream = new IsolatedStorageFileStream(FilePath, System.IO.FileMode.Open, FileAccess.Read, file);
+
+                // Read the PIN from the file.
+                Stream reader = new StreamReader(readstream).BaseStream;
+                byte[] pinArray = new byte[reader.Length];
+
+                reader.Read(pinArray, 0, pinArray.Length);
+                reader.Close();
+                readstream.Close();
+
+                return pinArray;
+            }
+            catch (Exception ex)
+            {
+                return new byte[] { };
+            }
         }
 
         // Code to execute when the application is launching (eg, from Start)
