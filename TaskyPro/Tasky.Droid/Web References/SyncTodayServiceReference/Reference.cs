@@ -15,6 +15,7 @@ namespace Tasky.Droid.SyncTodayServiceReference {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Data;
     
     
     /// <remarks/>
@@ -23,6 +24,7 @@ namespace Tasky.Droid.SyncTodayServiceReference {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="TaskDatabaseSoap", Namespace="http://sync.today/")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuObject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DataNuObjectRelation))]
     public partial class TaskDatabase : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         /// <remarks/>
@@ -32,26 +34,6 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         
         public TaskDatabase(string url) {
             this.Url = url;
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/GetAccount", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Account GetAccount(System.Guid accountId) {
-            object[] results = this.Invoke("GetAccount", new object[] {
-                        accountId});
-            return ((Account)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginGetAccount(System.Guid accountId, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetAccount", new object[] {
-                        accountId}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public Account EndGetAccount(System.IAsyncResult asyncResult) {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((Account)(results[0]));
         }
         
         /// <remarks/>
@@ -191,6 +173,30 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/SaveTask2", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public NuTask SaveTask2(string userEmail, NuTask task, string clientId) {
+            object[] results = this.Invoke("SaveTask2", new object[] {
+                        userEmail,
+                        task,
+                        clientId});
+            return ((NuTask)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginSaveTask2(string userEmail, NuTask task, string clientId, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("SaveTask2", new object[] {
+                        userEmail,
+                        task,
+                        clientId}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public NuTask EndSaveTask2(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((NuTask)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/ChangeTaskExternalId", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public NuTask ChangeTaskExternalId(Account account, User user, string oldId, NuTask task) {
             object[] results = this.Invoke("ChangeTaskExternalId", new object[] {
@@ -217,6 +223,28 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/DeleteTask", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool DeleteTask(Account account, string externalId) {
+            object[] results = this.Invoke("DeleteTask", new object[] {
+                        account,
+                        externalId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginDeleteTask(Account account, string externalId, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("DeleteTask", new object[] {
+                        account,
+                        externalId}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public bool EndDeleteTask(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/GetUserSalt", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string GetUserSalt(string email) {
             object[] results = this.Invoke("GetUserSalt", new object[] {
@@ -234,26 +262,6 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         public string EndGetUserSalt(System.IAsyncResult asyncResult) {
             object[] results = this.EndInvoke(asyncResult);
             return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/LoginUser", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool LoginUser(User user) {
-            object[] results = this.Invoke("LoginUser", new object[] {
-                        user});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginLoginUser(User user, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("LoginUser", new object[] {
-                        user}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public bool EndLoginUser(System.IAsyncResult asyncResult) {
-            object[] results = this.EndInvoke(asyncResult);
-            return ((bool)(results[0]));
         }
         
         /// <remarks/>
@@ -279,25 +287,61 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/GetAccountForClient", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Account GetAccountForClient(System.Guid userid, System.Guid clientId) {
-            object[] results = this.Invoke("GetAccountForClient", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/GetAccountForClient2", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Account GetAccountForClient2(string userid, string clientId) {
+            object[] results = this.Invoke("GetAccountForClient2", new object[] {
                         userid,
                         clientId});
             return ((Account)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetAccountForClient(System.Guid userid, System.Guid clientId, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetAccountForClient", new object[] {
+        public System.IAsyncResult BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetAccountForClient2", new object[] {
                         userid,
                         clientId}, callback, asyncState);
         }
         
         /// <remarks/>
-        public Account EndGetAccountForClient(System.IAsyncResult asyncResult) {
+        public Account EndGetAccountForClient2(System.IAsyncResult asyncResult) {
             object[] results = this.EndInvoke(asyncResult);
             return ((Account)(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/GetUsers2", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public User[] GetUsers2() {
+            object[] results = this.Invoke("GetUsers2", new object[0]);
+            return ((User[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetUsers2(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetUsers2", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public User[] EndGetUsers2(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((User[])(results[0]));
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://sync.today/DateTimeUtcNowOurTicks", RequestNamespace="http://sync.today/", ResponseNamespace="http://sync.today/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public long DateTimeUtcNowOurTicks() {
+            object[] results = this.Invoke("DateTimeUtcNowOurTicks", new object[0]);
+            return ((long)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("DateTimeUtcNowOurTicks", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public long EndDateTimeUtcNowOurTicks(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((long)(results[0]));
         }
     }
     
@@ -325,23 +369,20 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         public string Server;
         
         /// <remarks/>
-        public CommunicatorConnectInfo ConnectInfo;
-        
-        /// <remarks/>
         public string AccountAssemblyName;
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SimpleCommunicatorConnectInfo))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-    public abstract partial class CommunicatorConnectInfo {
+    public abstract partial class NuContactName {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuContact))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuTask))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuRequirement))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
@@ -356,6 +397,36 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         
         /// <remarks/>
         public System.DateTime LastModified;
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+    public abstract partial class NuContact : NuObject {
+        
+        /// <remarks/>
+        public NuContactName Name;
+        
+        /// <remarks/>
+        public System.Data.DataSet PhoneNumbers;
+        
+        /// <remarks/>
+        public System.Data.DataSet EmailAddresses;
+        
+        /// <remarks/>
+        public string Address;
+        
+        /// <remarks/>
+        public System.Data.DataSet PhysicalAddresses;
+        
+        /// <remarks/>
+        public string JobPosition;
+        
+        /// <remarks/>
+        public string Company;
     }
     
     /// <remarks/>
@@ -398,6 +469,9 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         public bool Completed;
         
         /// <remarks/>
+        public string ProjectName;
+        
+        /// <remarks/>
         public NuRequirement[] Parents;
     }
     
@@ -427,15 +501,39 @@ namespace Tasky.Droid.SyncTodayServiceReference {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DataNuObjectRelationOfNuUser))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(User))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-    public partial class User {
+    public abstract partial class DataNuObjectRelation {
         
         /// <remarks/>
         public System.Guid InternalId;
+        
+        /// <remarks/>
+        public System.Guid BelongsToUser;
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(User))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+    public abstract partial class DataNuObjectRelationOfNuUser : DataNuObjectRelation {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+    public partial class User : DataNuObjectRelationOfNuUser {
         
         /// <remarks/>
         public System.DateTime Created;
@@ -457,26 +555,5 @@ namespace Tasky.Droid.SyncTodayServiceReference {
         
         /// <remarks/>
         public string Password;
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-    public partial class SimpleCommunicatorConnectInfo : CommunicatorConnectInfo {
-        
-        /// <remarks/>
-        public string Username;
-        
-        /// <remarks/>
-        public string Password;
-        
-        /// <remarks/>
-        public string Server;
-        
-        /// <remarks/>
-        public System.Guid InternalId;
     }
 }

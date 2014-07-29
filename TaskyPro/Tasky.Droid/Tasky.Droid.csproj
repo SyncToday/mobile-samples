@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tasky.Droid</RootNamespace>
-    <AssemblyName>Tasky.Android</AssemblyName>
+    <AssemblyName>TaskyPro4Sync.Today.Demo</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -17,6 +17,7 @@
     <MandroidI18n />
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,17 +28,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <Commandlineparameters>/p:Configuration=Debug</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidStoreUncompressedFileExtensions>
-    </AndroidStoreUncompressedFileExtensions>
+    <Externalconsole>true</Externalconsole>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="BeforeExecute" command="" />
+      </CustomCommands>
+    </CustomCommands>
+    <Commandlineparameters>/p:Configuration=Release</Commandlineparameters>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -49,6 +55,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Tasky.Core\BusinessLayer\Contracts\BusinessEntityBase.cs">

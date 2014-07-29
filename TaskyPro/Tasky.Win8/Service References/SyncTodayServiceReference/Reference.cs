@@ -54,11 +54,23 @@ namespace TaskyWin8.SyncTodayServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.NuTask> SaveTaskAsync(TaskyWin8.SyncTodayServiceReference.Account account, TaskyWin8.SyncTodayServiceReference.User user, TaskyWin8.SyncTodayServiceReference.NuTask task);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/SaveTask2", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.NuTask> SaveTask2Async(string userEmail, TaskyWin8.SyncTodayServiceReference.NuTask task, string clientId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/ChangeTaskExternalId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.NuTask> ChangeTaskExternalIdAsync(TaskyWin8.SyncTodayServiceReference.Account account, TaskyWin8.SyncTodayServiceReference.User user, string oldId, TaskyWin8.SyncTodayServiceReference.NuTask task);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/DeleteTask", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.Threading.Tasks.Task<bool> DeleteTaskAsync(TaskyWin8.SyncTodayServiceReference.Account account, string externalId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/GetUserSalt", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -77,6 +89,18 @@ namespace TaskyWin8.SyncTodayServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.Account> GetAccountForClient2Async(string userid, string clientId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/GetUsers2", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.User[]> GetUsers2Async();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/DateTimeUtcNowOurTicks", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.Threading.Tasks.Task<long> DateTimeUtcNowOurTicksAsync();
     }
     
     /// <remarks/>
@@ -773,8 +797,16 @@ namespace TaskyWin8.SyncTodayServiceReference {
             return base.Channel.SaveTaskAsync(account, user, task);
         }
         
+        public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.NuTask> SaveTask2Async(string userEmail, TaskyWin8.SyncTodayServiceReference.NuTask task, string clientId) {
+            return base.Channel.SaveTask2Async(userEmail, task, clientId);
+        }
+        
         public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.NuTask> ChangeTaskExternalIdAsync(TaskyWin8.SyncTodayServiceReference.Account account, TaskyWin8.SyncTodayServiceReference.User user, string oldId, TaskyWin8.SyncTodayServiceReference.NuTask task) {
             return base.Channel.ChangeTaskExternalIdAsync(account, user, oldId, task);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteTaskAsync(TaskyWin8.SyncTodayServiceReference.Account account, string externalId) {
+            return base.Channel.DeleteTaskAsync(account, externalId);
         }
         
         public System.Threading.Tasks.Task<string> GetUserSaltAsync(string email) {
@@ -787,6 +819,14 @@ namespace TaskyWin8.SyncTodayServiceReference {
         
         public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.Account> GetAccountForClient2Async(string userid, string clientId) {
             return base.Channel.GetAccountForClient2Async(userid, clientId);
+        }
+        
+        public System.Threading.Tasks.Task<TaskyWin8.SyncTodayServiceReference.User[]> GetUsers2Async() {
+            return base.Channel.GetUsers2Async();
+        }
+        
+        public System.Threading.Tasks.Task<long> DateTimeUtcNowOurTicksAsync() {
+            return base.Channel.DateTimeUtcNowOurTicksAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

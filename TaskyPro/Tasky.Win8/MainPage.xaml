@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
             <TextBlock x:Name="ApplicationTitle" 
                     Grid.Row="0"
-                        Text="TaskyPro" 
+                        Text="TaskyPro for Sync.Today Demo" 
                         Style="{StaticResource BasicTextStyle}" 
                         Foreground="LightBlue"/>
             <TextBlock x:Name="PageTitle" 
@@ -125,13 +125,27 @@
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="Save"
                     Width="300"
-                Tapped="Save_Tap"
+                Tapped="Save_Tap" Margin="0,79,0,420" Grid.RowSpan="3"
                 />
             <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="Delete"
                     Width="300"
-                Tapped="Delete_Tap"
+                Tapped="Delete_Tap" Margin="0,123,0,376" Grid.RowSpan="2"
                 />
+            <ComboBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="87,32,0,0" Grid.Row="7" VerticalAlignment="Top" Width="493" x:Name="OwnerComboBox"                      
+            SelectionChanged="ComboBox_SelectionChanged"
+                      />
+            <TextBlock Grid.Row="7" Grid.Column="0"
+            	Text="Owner:"
+            	Style="{StaticResource BasicTextStyle}" Margin="0,35,0,475" />
         </Grid>
+        <Button Content="Launch Sync.Today" Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="167" Click="Button_Click_1"/>
+        <Button Content="Register" Grid.Column="1" HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top" Width="167" Click="Button_Click_2"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="281,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" x:Name="UserNameText" />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="192,19,0,0" TextWrapping="Wrap" Text="User name:" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" />
+        <PasswordBox Grid.Column="1" HorizontalAlignment="Left" Margin="281,53,0,0" VerticalAlignment="Top" Width="224" x:Name="PasswordText" PasswordChar="*" />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="200,59,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" RenderTransformOrigin="0.094,-0.15" />
+        <Button Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="507,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.182,0.132" Click="Button_Click_3" Width="78"/>
+        <Button Content="Forget" Grid.Column="1" HorizontalAlignment="Left" Margin="507,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.2,0.129" Click="Button_Click_4"/>
     </Grid>
 </Page>

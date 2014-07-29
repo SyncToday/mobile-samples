@@ -20,6 +20,7 @@ namespace Tasky.BL
 		// new property
 		public bool Done { get; set; }
         public DateTime Modified { get; set; }
+		public string Owner { get; set; }
 	}
 }
 

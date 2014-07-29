@@ -37,6 +37,11 @@ namespace TaskyWinPhone {
             ((TaskListViewModel)DataContext).BeginUpdate(Dispatcher);
         }
 
+        private void HandleSettings(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         private void HandleTaskTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var item = ((Grid)sender).DataContext as TaskViewModel;

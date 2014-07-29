@@ -146,6 +146,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TaskDetailsPage.xaml.cs">
       <DependentUpon>TaskDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TaskDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -198,6 +205,10 @@
     <None Include="Service References\SyncTodayServiceReference\Tasky.WinPhone.SyncTodayServiceReference.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <Content Include="Assets\appicon62x62.png" />
+    <Content Include="Assets\appicon99x99.png" />
+    <Content Include="Assets\tile110x110.png" />
+    <Content Include="Assets\tile202x202.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>

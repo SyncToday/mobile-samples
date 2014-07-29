@@ -17,21 +17,11 @@ namespace Tasky.Core.SyncTodayServiceReference {
 [System.ServiceModel.ServiceContractAttribute(Namespace="Tasky.Core.SyncTodayServiceReference", ConfigurationName="TaskDatabaseSoap")]
 public interface TaskDatabaseSoap {
     
-    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message GetAccountRequest does not match the default value (Tasky.Core.SyncTodayServiceReference)
-    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetAccountRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccountResponse")]
-    [System.ServiceModel.XmlSerializerFormatAttribute()]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
-    GetAccountResponse GetAccount(GetAccountRequest request);
-    
-    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetAccountRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccountResponse")]
-    System.IAsyncResult BeginGetAccount(GetAccountRequest request, System.AsyncCallback callback, object asyncState);
-    
-    GetAccountResponse EndGetAccount(System.IAsyncResult result);
-    
     // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message GetAccount2Request does not match the default value (Tasky.Core.SyncTodayServiceReference)
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetAccount2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccount2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetAccount2Response GetAccount2(GetAccount2Request request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetAccount2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccount2Response")]
@@ -43,6 +33,7 @@ public interface TaskDatabaseSoap {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetTasksRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTasksResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTasksResponse GetTasks(GetTasksRequest request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetTasksRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTasksResponse")]
@@ -54,6 +45,7 @@ public interface TaskDatabaseSoap {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetTasks2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTasks2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTasks2Response GetTasks2(GetTasks2Request request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetTasks2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTasks2Response")]
@@ -65,6 +57,7 @@ public interface TaskDatabaseSoap {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetTaskRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTaskResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTaskResponse GetTask(GetTaskRequest request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetTaskRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTaskResponse")]
@@ -76,6 +69,7 @@ public interface TaskDatabaseSoap {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetTask2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTask2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTask2Response GetTask2(GetTask2Request request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetTask2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetTask2Response")]
@@ -87,6 +81,7 @@ public interface TaskDatabaseSoap {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/SaveTaskRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/SaveTaskResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     SaveTaskResponse SaveTask(SaveTaskRequest request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/SaveTaskRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/SaveTaskResponse")]
@@ -94,10 +89,23 @@ public interface TaskDatabaseSoap {
     
     SaveTaskResponse EndSaveTask(System.IAsyncResult result);
     
+    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message SaveTask2Request does not match the default value (Tasky.Core.SyncTodayServiceReference)
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/SaveTask2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/SaveTask2Response")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    SaveTask2Response SaveTask2(SaveTask2Request request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/SaveTask2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/SaveTask2Response")]
+    System.IAsyncResult BeginSaveTask2(SaveTask2Request request, System.AsyncCallback callback, object asyncState);
+    
+    SaveTask2Response EndSaveTask2(System.IAsyncResult result);
+    
     // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message ChangeTaskExternalIdRequest does not match the default value (Tasky.Core.SyncTodayServiceReference)
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/ChangeTaskExternalIdRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/ChangeTaskExternalIdResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     ChangeTaskExternalIdResponse ChangeTaskExternalId(ChangeTaskExternalIdRequest request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/ChangeTaskExternalIdRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/ChangeTaskExternalIdResponse")]
@@ -109,6 +117,7 @@ public interface TaskDatabaseSoap {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetUserSaltRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetUserSaltResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetUserSaltResponse GetUserSalt(GetUserSaltRequest request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetUserSaltRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetUserSaltResponse")]
@@ -116,21 +125,11 @@ public interface TaskDatabaseSoap {
     
     GetUserSaltResponse EndGetUserSalt(System.IAsyncResult result);
     
-    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message LoginUserRequest does not match the default value (Tasky.Core.SyncTodayServiceReference)
-    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/LoginUserRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/LoginUserResponse")]
-    [System.ServiceModel.XmlSerializerFormatAttribute()]
-    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
-    LoginUserResponse LoginUser(LoginUserRequest request);
-    
-    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/LoginUserRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/LoginUserResponse")]
-    System.IAsyncResult BeginLoginUser(LoginUserRequest request, System.AsyncCallback callback, object asyncState);
-    
-    LoginUserResponse EndLoginUser(System.IAsyncResult result);
-    
     // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message LoginUser2Request does not match the default value (Tasky.Core.SyncTodayServiceReference)
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/LoginUser2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/LoginUser2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     LoginUser2Response LoginUser2(LoginUser2Request request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/LoginUser2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/LoginUser2Response")]
@@ -138,50 +137,41 @@ public interface TaskDatabaseSoap {
     
     LoginUser2Response EndLoginUser2(System.IAsyncResult result);
     
-    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message GetAccountForClientRequest does not match the default value (Tasky.Core.SyncTodayServiceReference)
-    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetAccountForClientRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccountForClientResponse")]
+    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message GetAccountForClient2Request does not match the default value (Tasky.Core.SyncTodayServiceReference)
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetAccountForClient2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccountForClient2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
-    GetAccountForClientResponse GetAccountForClient(GetAccountForClientRequest request);
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    GetAccountForClient2Response GetAccountForClient2(GetAccountForClient2Request request);
     
-    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetAccountForClientRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccountForClientResponse")]
-    System.IAsyncResult BeginGetAccountForClient(GetAccountForClientRequest request, System.AsyncCallback callback, object asyncState);
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetAccountForClient2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetAccountForClient2Response")]
+    System.IAsyncResult BeginGetAccountForClient2(GetAccountForClient2Request request, System.AsyncCallback callback, object asyncState);
     
-    GetAccountForClientResponse EndGetAccountForClient(System.IAsyncResult result);
-}
-
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute(WrapperName="GetAccount", WrapperNamespace="http://sync.today/", IsWrapped=true)]
-public partial class GetAccountRequest {
+    GetAccountForClient2Response EndGetAccountForClient2(System.IAsyncResult result);
     
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
-    public System.Guid accountId;
+    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message GetUsers2Request does not match the default value (Tasky.Core.SyncTodayServiceReference)
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/GetUsers2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetUsers2Response")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    GetUsers2Response GetUsers2(GetUsers2Request request);
     
-    public GetAccountRequest() {
-    }
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/GetUsers2Request", ReplyAction="http://sync.today/TaskDatabaseSoap/GetUsers2Response")]
+    System.IAsyncResult BeginGetUsers2(GetUsers2Request request, System.AsyncCallback callback, object asyncState);
     
-    public GetAccountRequest(System.Guid accountId) {
-        this.accountId = accountId;
-    }
-}
-
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountResponse", WrapperNamespace="http://sync.today/", IsWrapped=true)]
-public partial class GetAccountResponse {
+    GetUsers2Response EndGetUsers2(System.IAsyncResult result);
     
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
-    public Account GetAccountResult;
+    // CODEGEN: Generating message contract since the wrapper namespace (http://sync.today/) of message DateTimeUtcNowOurTicksRequest does not match the default value (Tasky.Core.SyncTodayServiceReference)
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseSoap/DateTimeUtcNowOurTicksRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/DateTimeUtcNowOurTicksResponse")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    DateTimeUtcNowOurTicksResponse DateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest request);
     
-    public GetAccountResponse() {
-    }
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseSoap/DateTimeUtcNowOurTicksRequest", ReplyAction="http://sync.today/TaskDatabaseSoap/DateTimeUtcNowOurTicksResponse")]
+    System.IAsyncResult BeginDateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest request, System.AsyncCallback callback, object asyncState);
     
-    public GetAccountResponse(Account GetAccountResult) {
-        this.GetAccountResult = GetAccountResult;
-    }
+    DateTimeUtcNowOurTicksResponse EndDateTimeUtcNowOurTicks(System.IAsyncResult result);
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -423,6 +413,48 @@ public partial class SaveTaskResponse {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(WrapperName="SaveTask2", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class SaveTask2Request {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    public string userEmail;
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=1)]
+    public NuTask task;
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=2)]
+    public string clientId;
+    
+    public SaveTask2Request() {
+    }
+    
+    public SaveTask2Request(string userEmail, NuTask task, string clientId) {
+        this.userEmail = userEmail;
+        this.task = task;
+        this.clientId = clientId;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(WrapperName="SaveTask2Response", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class SaveTask2Response {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    public NuTask SaveTask2Result;
+    
+    public SaveTask2Response() {
+    }
+    
+    public SaveTask2Response(NuTask SaveTask2Result) {
+        this.SaveTask2Result = SaveTask2Result;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
 [System.ServiceModel.MessageContractAttribute(WrapperName="ChangeTaskExternalId", WrapperNamespace="http://sync.today/", IsWrapped=true)]
 public partial class ChangeTaskExternalIdRequest {
     
@@ -503,40 +535,6 @@ public partial class GetUserSaltResponse {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute(WrapperName="LoginUser", WrapperNamespace="http://sync.today/", IsWrapped=true)]
-public partial class LoginUserRequest {
-    
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
-    public User user;
-    
-    public LoginUserRequest() {
-    }
-    
-    public LoginUserRequest(User user) {
-        this.user = user;
-    }
-}
-
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute(WrapperName="LoginUserResponse", WrapperNamespace="http://sync.today/", IsWrapped=true)]
-public partial class LoginUserResponse {
-    
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
-    public bool LoginUserResult;
-    
-    public LoginUserResponse() {
-    }
-    
-    public LoginUserResponse(bool LoginUserResult) {
-        this.LoginUserResult = LoginUserResult;
-    }
-}
-
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
 [System.ServiceModel.MessageContractAttribute(WrapperName="LoginUser2", WrapperNamespace="http://sync.today/", IsWrapped=true)]
 public partial class LoginUser2Request {
     
@@ -575,19 +573,19 @@ public partial class LoginUser2Response {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountForClient", WrapperNamespace="http://sync.today/", IsWrapped=true)]
-public partial class GetAccountForClientRequest {
+[System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountForClient2", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class GetAccountForClient2Request {
     
     [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
-    public System.Guid userid;
+    public string userid;
     
     [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=1)]
-    public System.Guid clientId;
+    public string clientId;
     
-    public GetAccountForClientRequest() {
+    public GetAccountForClient2Request() {
     }
     
-    public GetAccountForClientRequest(System.Guid userid, System.Guid clientId) {
+    public GetAccountForClient2Request(string userid, string clientId) {
         this.userid = userid;
         this.clientId = clientId;
     }
@@ -596,17 +594,71 @@ public partial class GetAccountForClientRequest {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountForClientResponse", WrapperNamespace="http://sync.today/", IsWrapped=true)]
-public partial class GetAccountForClientResponse {
+[System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountForClient2Response", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class GetAccountForClient2Response {
     
     [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
-    public Account GetAccountForClientResult;
+    public Account GetAccountForClient2Result;
     
-    public GetAccountForClientResponse() {
+    public GetAccountForClient2Response() {
     }
     
-    public GetAccountForClientResponse(Account GetAccountForClientResult) {
-        this.GetAccountForClientResult = GetAccountForClientResult;
+    public GetAccountForClient2Response(Account GetAccountForClient2Result) {
+        this.GetAccountForClient2Result = GetAccountForClient2Result;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(WrapperName="GetUsers2", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class GetUsers2Request {
+    
+    public GetUsers2Request() {
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(WrapperName="GetUsers2Response", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class GetUsers2Response {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    public User[] GetUsers2Result;
+    
+    public GetUsers2Response() {
+    }
+    
+    public GetUsers2Response(User[] GetUsers2Result) {
+        this.GetUsers2Result = GetUsers2Result;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(WrapperName="DateTimeUtcNowOurTicks", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class DateTimeUtcNowOurTicksRequest {
+    
+    public DateTimeUtcNowOurTicksRequest() {
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(WrapperName="DateTimeUtcNowOurTicksResponse", WrapperNamespace="http://sync.today/", IsWrapped=true)]
+public partial class DateTimeUtcNowOurTicksResponse {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    public long DateTimeUtcNowOurTicksResult;
+    
+    public DateTimeUtcNowOurTicksResponse() {
+    }
+    
+    public DateTimeUtcNowOurTicksResponse(long DateTimeUtcNowOurTicksResult) {
+        this.DateTimeUtcNowOurTicksResult = DateTimeUtcNowOurTicksResult;
     }
 }
 
@@ -635,39 +687,6 @@ public partial class TaskDatabaseSoapClient : System.ServiceModel.ClientBase<Tas
     
     public TaskDatabaseSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress) {
-    }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    GetAccountResponse TaskDatabaseSoap.GetAccount(GetAccountRequest request) {
-        return base.Channel.GetAccount(request);
-    }
-    
-    public Account GetAccount(System.Guid accountId) {
-        GetAccountRequest inValue = new GetAccountRequest();
-        inValue.accountId = accountId;
-        GetAccountResponse retVal = ((TaskDatabaseSoap)(this)).GetAccount(inValue);
-        return retVal.GetAccountResult;
-    }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    System.IAsyncResult TaskDatabaseSoap.BeginGetAccount(GetAccountRequest request, System.AsyncCallback callback, object asyncState) {
-        return base.Channel.BeginGetAccount(request, callback, asyncState);
-    }
-    
-    public System.IAsyncResult BeginGetAccount(System.Guid accountId, System.AsyncCallback callback, object asyncState) {
-        GetAccountRequest inValue = new GetAccountRequest();
-        inValue.accountId = accountId;
-        return ((TaskDatabaseSoap)(this)).BeginGetAccount(inValue, callback, asyncState);
-    }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    GetAccountResponse TaskDatabaseSoap.EndGetAccount(System.IAsyncResult result) {
-        return base.Channel.EndGetAccount(result);
-    }
-    
-    public Account EndGetAccount(System.IAsyncResult result) {
-        GetAccountResponse retVal = ((TaskDatabaseSoap)(this)).EndGetAccount(result);
-        return retVal.GetAccountResult;
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -885,6 +904,43 @@ public partial class TaskDatabaseSoapClient : System.ServiceModel.ClientBase<Tas
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    SaveTask2Response TaskDatabaseSoap.SaveTask2(SaveTask2Request request) {
+        return base.Channel.SaveTask2(request);
+    }
+    
+    public NuTask SaveTask2(string userEmail, NuTask task, string clientId) {
+        SaveTask2Request inValue = new SaveTask2Request();
+        inValue.userEmail = userEmail;
+        inValue.task = task;
+        inValue.clientId = clientId;
+        SaveTask2Response retVal = ((TaskDatabaseSoap)(this)).SaveTask2(inValue);
+        return retVal.SaveTask2Result;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseSoap.BeginSaveTask2(SaveTask2Request request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginSaveTask2(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginSaveTask2(string userEmail, NuTask task, string clientId, System.AsyncCallback callback, object asyncState) {
+        SaveTask2Request inValue = new SaveTask2Request();
+        inValue.userEmail = userEmail;
+        inValue.task = task;
+        inValue.clientId = clientId;
+        return ((TaskDatabaseSoap)(this)).BeginSaveTask2(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    SaveTask2Response TaskDatabaseSoap.EndSaveTask2(System.IAsyncResult result) {
+        return base.Channel.EndSaveTask2(result);
+    }
+    
+    public NuTask EndSaveTask2(System.IAsyncResult result) {
+        SaveTask2Response retVal = ((TaskDatabaseSoap)(this)).EndSaveTask2(result);
+        return retVal.SaveTask2Result;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     ChangeTaskExternalIdResponse TaskDatabaseSoap.ChangeTaskExternalId(ChangeTaskExternalIdRequest request) {
         return base.Channel.ChangeTaskExternalId(request);
     }
@@ -957,39 +1013,6 @@ public partial class TaskDatabaseSoapClient : System.ServiceModel.ClientBase<Tas
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    LoginUserResponse TaskDatabaseSoap.LoginUser(LoginUserRequest request) {
-        return base.Channel.LoginUser(request);
-    }
-    
-    public bool LoginUser(User user) {
-        LoginUserRequest inValue = new LoginUserRequest();
-        inValue.user = user;
-        LoginUserResponse retVal = ((TaskDatabaseSoap)(this)).LoginUser(inValue);
-        return retVal.LoginUserResult;
-    }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    System.IAsyncResult TaskDatabaseSoap.BeginLoginUser(LoginUserRequest request, System.AsyncCallback callback, object asyncState) {
-        return base.Channel.BeginLoginUser(request, callback, asyncState);
-    }
-    
-    public System.IAsyncResult BeginLoginUser(User user, System.AsyncCallback callback, object asyncState) {
-        LoginUserRequest inValue = new LoginUserRequest();
-        inValue.user = user;
-        return ((TaskDatabaseSoap)(this)).BeginLoginUser(inValue, callback, asyncState);
-    }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    LoginUserResponse TaskDatabaseSoap.EndLoginUser(System.IAsyncResult result) {
-        return base.Channel.EndLoginUser(result);
-    }
-    
-    public bool EndLoginUser(System.IAsyncResult result) {
-        LoginUserResponse retVal = ((TaskDatabaseSoap)(this)).EndLoginUser(result);
-        return retVal.LoginUserResult;
-    }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     LoginUser2Response TaskDatabaseSoap.LoginUser2(LoginUser2Request request) {
         return base.Channel.LoginUser2(request);
     }
@@ -1025,38 +1048,100 @@ public partial class TaskDatabaseSoapClient : System.ServiceModel.ClientBase<Tas
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    GetAccountForClientResponse TaskDatabaseSoap.GetAccountForClient(GetAccountForClientRequest request) {
-        return base.Channel.GetAccountForClient(request);
+    GetAccountForClient2Response TaskDatabaseSoap.GetAccountForClient2(GetAccountForClient2Request request) {
+        return base.Channel.GetAccountForClient2(request);
     }
     
-    public Account GetAccountForClient(System.Guid userid, System.Guid clientId) {
-        GetAccountForClientRequest inValue = new GetAccountForClientRequest();
+    public Account GetAccountForClient2(string userid, string clientId) {
+        GetAccountForClient2Request inValue = new GetAccountForClient2Request();
         inValue.userid = userid;
         inValue.clientId = clientId;
-        GetAccountForClientResponse retVal = ((TaskDatabaseSoap)(this)).GetAccountForClient(inValue);
-        return retVal.GetAccountForClientResult;
+        GetAccountForClient2Response retVal = ((TaskDatabaseSoap)(this)).GetAccountForClient2(inValue);
+        return retVal.GetAccountForClient2Result;
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    System.IAsyncResult TaskDatabaseSoap.BeginGetAccountForClient(GetAccountForClientRequest request, System.AsyncCallback callback, object asyncState) {
-        return base.Channel.BeginGetAccountForClient(request, callback, asyncState);
+    System.IAsyncResult TaskDatabaseSoap.BeginGetAccountForClient2(GetAccountForClient2Request request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginGetAccountForClient2(request, callback, asyncState);
     }
     
-    public System.IAsyncResult BeginGetAccountForClient(System.Guid userid, System.Guid clientId, System.AsyncCallback callback, object asyncState) {
-        GetAccountForClientRequest inValue = new GetAccountForClientRequest();
+    public System.IAsyncResult BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState) {
+        GetAccountForClient2Request inValue = new GetAccountForClient2Request();
         inValue.userid = userid;
         inValue.clientId = clientId;
-        return ((TaskDatabaseSoap)(this)).BeginGetAccountForClient(inValue, callback, asyncState);
+        return ((TaskDatabaseSoap)(this)).BeginGetAccountForClient2(inValue, callback, asyncState);
     }
     
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    GetAccountForClientResponse TaskDatabaseSoap.EndGetAccountForClient(System.IAsyncResult result) {
-        return base.Channel.EndGetAccountForClient(result);
+    GetAccountForClient2Response TaskDatabaseSoap.EndGetAccountForClient2(System.IAsyncResult result) {
+        return base.Channel.EndGetAccountForClient2(result);
     }
     
-    public Account EndGetAccountForClient(System.IAsyncResult result) {
-        GetAccountForClientResponse retVal = ((TaskDatabaseSoap)(this)).EndGetAccountForClient(result);
-        return retVal.GetAccountForClientResult;
+    public Account EndGetAccountForClient2(System.IAsyncResult result) {
+        GetAccountForClient2Response retVal = ((TaskDatabaseSoap)(this)).EndGetAccountForClient2(result);
+        return retVal.GetAccountForClient2Result;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetUsers2Response TaskDatabaseSoap.GetUsers2(GetUsers2Request request) {
+        return base.Channel.GetUsers2(request);
+    }
+    
+    public User[] GetUsers2() {
+        GetUsers2Request inValue = new GetUsers2Request();
+        GetUsers2Response retVal = ((TaskDatabaseSoap)(this)).GetUsers2(inValue);
+        return retVal.GetUsers2Result;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseSoap.BeginGetUsers2(GetUsers2Request request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginGetUsers2(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginGetUsers2(System.AsyncCallback callback, object asyncState) {
+        GetUsers2Request inValue = new GetUsers2Request();
+        return ((TaskDatabaseSoap)(this)).BeginGetUsers2(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetUsers2Response TaskDatabaseSoap.EndGetUsers2(System.IAsyncResult result) {
+        return base.Channel.EndGetUsers2(result);
+    }
+    
+    public User[] EndGetUsers2(System.IAsyncResult result) {
+        GetUsers2Response retVal = ((TaskDatabaseSoap)(this)).EndGetUsers2(result);
+        return retVal.GetUsers2Result;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    DateTimeUtcNowOurTicksResponse TaskDatabaseSoap.DateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest request) {
+        return base.Channel.DateTimeUtcNowOurTicks(request);
+    }
+    
+    public long DateTimeUtcNowOurTicks() {
+        DateTimeUtcNowOurTicksRequest inValue = new DateTimeUtcNowOurTicksRequest();
+        DateTimeUtcNowOurTicksResponse retVal = ((TaskDatabaseSoap)(this)).DateTimeUtcNowOurTicks(inValue);
+        return retVal.DateTimeUtcNowOurTicksResult;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseSoap.BeginDateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginDateTimeUtcNowOurTicks(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+        DateTimeUtcNowOurTicksRequest inValue = new DateTimeUtcNowOurTicksRequest();
+        return ((TaskDatabaseSoap)(this)).BeginDateTimeUtcNowOurTicks(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    DateTimeUtcNowOurTicksResponse TaskDatabaseSoap.EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+        return base.Channel.EndDateTimeUtcNowOurTicks(result);
+    }
+    
+    public long EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+        DateTimeUtcNowOurTicksResponse retVal = ((TaskDatabaseSoap)(this)).EndDateTimeUtcNowOurTicks(result);
+        return retVal.DateTimeUtcNowOurTicksResult;
     }
 }
 
@@ -1068,6 +1153,7 @@ public interface TaskDatabaseHttpGet {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/GetAccount2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetAccount2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetAccount2Response1 GetAccount2(GetAccount2Request1 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/GetAccount2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetAccount2Response")]
@@ -1079,6 +1165,7 @@ public interface TaskDatabaseHttpGet {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/GetTasks2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetTasks2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTasks2Response1 GetTasks2(GetTasks2Request1 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/GetTasks2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetTasks2Response")]
@@ -1090,6 +1177,7 @@ public interface TaskDatabaseHttpGet {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/GetTask2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetTask2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTask2Response1 GetTask2(GetTask2Request1 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/GetTask2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetTask2Response")]
@@ -1101,6 +1189,7 @@ public interface TaskDatabaseHttpGet {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/GetUserSaltRequest", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetUserSaltResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetUserSaltResponse1 GetUserSalt(GetUserSaltRequest1 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/GetUserSaltRequest", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetUserSaltResponse")]
@@ -1112,12 +1201,49 @@ public interface TaskDatabaseHttpGet {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/LoginUser2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/LoginUser2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     LoginUser2Response1 LoginUser2(LoginUser2Request1 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/LoginUser2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/LoginUser2Response")]
     System.IAsyncResult BeginLoginUser2(LoginUser2Request1 request, System.AsyncCallback callback, object asyncState);
     
     LoginUser2Response1 EndLoginUser2(System.IAsyncResult result);
+    
+    // CODEGEN: Generating message contract since the operation GetAccountForClient2 is neither RPC nor document wrapped.
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/GetAccountForClient2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetAccountForClient2Response")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    GetAccountForClient2Response1 GetAccountForClient2(GetAccountForClient2Request1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/GetAccountForClient2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetAccountForClient2Response")]
+    System.IAsyncResult BeginGetAccountForClient2(GetAccountForClient2Request1 request, System.AsyncCallback callback, object asyncState);
+    
+    GetAccountForClient2Response1 EndGetAccountForClient2(System.IAsyncResult result);
+    
+    // CODEGEN: Generating message contract since the operation GetUsers2 is neither RPC nor document wrapped.
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/GetUsers2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetUsers2Response")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    GetUsers2Response1 GetUsers2(GetUsers2Request1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/GetUsers2Request", ReplyAction="http://sync.today/TaskDatabaseHttpGet/GetUsers2Response")]
+    System.IAsyncResult BeginGetUsers2(GetUsers2Request1 request, System.AsyncCallback callback, object asyncState);
+    
+    GetUsers2Response1 EndGetUsers2(System.IAsyncResult result);
+    
+    // CODEGEN: Generating message contract since the operation DateTimeUtcNowOurTicks is neither RPC nor document wrapped.
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpGet/DateTimeUtcNowOurTicksRequest", ReplyAction="http://sync.today/TaskDatabaseHttpGet/DateTimeUtcNowOurTicksResponse")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    DateTimeUtcNowOurTicksResponse1 DateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpGet/DateTimeUtcNowOurTicksRequest", ReplyAction="http://sync.today/TaskDatabaseHttpGet/DateTimeUtcNowOurTicksResponse")]
+    System.IAsyncResult BeginDateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest1 request, System.AsyncCallback callback, object asyncState);
+    
+    DateTimeUtcNowOurTicksResponse1 EndDateTimeUtcNowOurTicks(System.IAsyncResult result);
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1308,6 +1434,100 @@ public partial class LoginUser2Response1 {
     
     public LoginUser2Response1(User User) {
         this.User = User;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetAccountForClient2Request1 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+    public string userid;
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
+    public string clientId;
+    
+    public GetAccountForClient2Request1() {
+    }
+    
+    public GetAccountForClient2Request1(string userid, string clientId) {
+        this.userid = userid;
+        this.clientId = clientId;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetAccountForClient2Response1 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+    public Account Account;
+    
+    public GetAccountForClient2Response1() {
+    }
+    
+    public GetAccountForClient2Response1(Account Account) {
+        this.Account = Account;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetUsers2Request1 {
+    
+    public GetUsers2Request1() {
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetUsers2Response1 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+    public User[] ArrayOfUser;
+    
+    public GetUsers2Response1() {
+    }
+    
+    public GetUsers2Response1(User[] ArrayOfUser) {
+        this.ArrayOfUser = ArrayOfUser;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class DateTimeUtcNowOurTicksRequest1 {
+    
+    public DateTimeUtcNowOurTicksRequest1() {
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class DateTimeUtcNowOurTicksResponse1 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    public long @long;
+    
+    public DateTimeUtcNowOurTicksResponse1() {
+    }
+    
+    public DateTimeUtcNowOurTicksResponse1(long @long) {
+        this.@long = @long;
     }
 }
 
@@ -1510,6 +1730,103 @@ public partial class TaskDatabaseHttpGetClient : System.ServiceModel.ClientBase<
         LoginUser2Response1 retVal = ((TaskDatabaseHttpGet)(this)).EndLoginUser2(result);
         return retVal.User;
     }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetAccountForClient2Response1 TaskDatabaseHttpGet.GetAccountForClient2(GetAccountForClient2Request1 request) {
+        return base.Channel.GetAccountForClient2(request);
+    }
+    
+    public Account GetAccountForClient2(string userid, string clientId) {
+        GetAccountForClient2Request1 inValue = new GetAccountForClient2Request1();
+        inValue.userid = userid;
+        inValue.clientId = clientId;
+        GetAccountForClient2Response1 retVal = ((TaskDatabaseHttpGet)(this)).GetAccountForClient2(inValue);
+        return retVal.Account;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseHttpGet.BeginGetAccountForClient2(GetAccountForClient2Request1 request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginGetAccountForClient2(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState) {
+        GetAccountForClient2Request1 inValue = new GetAccountForClient2Request1();
+        inValue.userid = userid;
+        inValue.clientId = clientId;
+        return ((TaskDatabaseHttpGet)(this)).BeginGetAccountForClient2(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetAccountForClient2Response1 TaskDatabaseHttpGet.EndGetAccountForClient2(System.IAsyncResult result) {
+        return base.Channel.EndGetAccountForClient2(result);
+    }
+    
+    public Account EndGetAccountForClient2(System.IAsyncResult result) {
+        GetAccountForClient2Response1 retVal = ((TaskDatabaseHttpGet)(this)).EndGetAccountForClient2(result);
+        return retVal.Account;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetUsers2Response1 TaskDatabaseHttpGet.GetUsers2(GetUsers2Request1 request) {
+        return base.Channel.GetUsers2(request);
+    }
+    
+    public User[] GetUsers2() {
+        GetUsers2Request1 inValue = new GetUsers2Request1();
+        GetUsers2Response1 retVal = ((TaskDatabaseHttpGet)(this)).GetUsers2(inValue);
+        return retVal.ArrayOfUser;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseHttpGet.BeginGetUsers2(GetUsers2Request1 request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginGetUsers2(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginGetUsers2(System.AsyncCallback callback, object asyncState) {
+        GetUsers2Request1 inValue = new GetUsers2Request1();
+        return ((TaskDatabaseHttpGet)(this)).BeginGetUsers2(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetUsers2Response1 TaskDatabaseHttpGet.EndGetUsers2(System.IAsyncResult result) {
+        return base.Channel.EndGetUsers2(result);
+    }
+    
+    public User[] EndGetUsers2(System.IAsyncResult result) {
+        GetUsers2Response1 retVal = ((TaskDatabaseHttpGet)(this)).EndGetUsers2(result);
+        return retVal.ArrayOfUser;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    DateTimeUtcNowOurTicksResponse1 TaskDatabaseHttpGet.DateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest1 request) {
+        return base.Channel.DateTimeUtcNowOurTicks(request);
+    }
+    
+    public long DateTimeUtcNowOurTicks() {
+        DateTimeUtcNowOurTicksRequest1 inValue = new DateTimeUtcNowOurTicksRequest1();
+        DateTimeUtcNowOurTicksResponse1 retVal = ((TaskDatabaseHttpGet)(this)).DateTimeUtcNowOurTicks(inValue);
+        return retVal.@long;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseHttpGet.BeginDateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest1 request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginDateTimeUtcNowOurTicks(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+        DateTimeUtcNowOurTicksRequest1 inValue = new DateTimeUtcNowOurTicksRequest1();
+        return ((TaskDatabaseHttpGet)(this)).BeginDateTimeUtcNowOurTicks(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    DateTimeUtcNowOurTicksResponse1 TaskDatabaseHttpGet.EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+        return base.Channel.EndDateTimeUtcNowOurTicks(result);
+    }
+    
+    public long EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+        DateTimeUtcNowOurTicksResponse1 retVal = ((TaskDatabaseHttpGet)(this)).EndDateTimeUtcNowOurTicks(result);
+        return retVal.@long;
+    }
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1520,6 +1837,7 @@ public interface TaskDatabaseHttpPost {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/GetAccount2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetAccount2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetAccount2Response2 GetAccount2(GetAccount2Request2 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/GetAccount2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetAccount2Response")]
@@ -1531,6 +1849,7 @@ public interface TaskDatabaseHttpPost {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/GetTasks2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetTasks2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTasks2Response2 GetTasks2(GetTasks2Request2 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/GetTasks2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetTasks2Response")]
@@ -1542,6 +1861,7 @@ public interface TaskDatabaseHttpPost {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/GetTask2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetTask2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetTask2Response2 GetTask2(GetTask2Request2 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/GetTask2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetTask2Response")]
@@ -1553,6 +1873,7 @@ public interface TaskDatabaseHttpPost {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/GetUserSaltRequest", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetUserSaltResponse")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     GetUserSaltResponse2 GetUserSalt(GetUserSaltRequest2 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/GetUserSaltRequest", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetUserSaltResponse")]
@@ -1564,12 +1885,49 @@ public interface TaskDatabaseHttpPost {
     [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/LoginUser2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/LoginUser2Response")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
     LoginUser2Response2 LoginUser2(LoginUser2Request2 request);
     
     [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/LoginUser2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/LoginUser2Response")]
     System.IAsyncResult BeginLoginUser2(LoginUser2Request2 request, System.AsyncCallback callback, object asyncState);
     
     LoginUser2Response2 EndLoginUser2(System.IAsyncResult result);
+    
+    // CODEGEN: Generating message contract since the operation GetAccountForClient2 is neither RPC nor document wrapped.
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/GetAccountForClient2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetAccountForClient2Response")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    GetAccountForClient2Response2 GetAccountForClient2(GetAccountForClient2Request2 request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/GetAccountForClient2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetAccountForClient2Response")]
+    System.IAsyncResult BeginGetAccountForClient2(GetAccountForClient2Request2 request, System.AsyncCallback callback, object asyncState);
+    
+    GetAccountForClient2Response2 EndGetAccountForClient2(System.IAsyncResult result);
+    
+    // CODEGEN: Generating message contract since the operation GetUsers2 is neither RPC nor document wrapped.
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/GetUsers2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetUsers2Response")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    GetUsers2Response2 GetUsers2(GetUsers2Request2 request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/GetUsers2Request", ReplyAction="http://sync.today/TaskDatabaseHttpPost/GetUsers2Response")]
+    System.IAsyncResult BeginGetUsers2(GetUsers2Request2 request, System.AsyncCallback callback, object asyncState);
+    
+    GetUsers2Response2 EndGetUsers2(System.IAsyncResult result);
+    
+    // CODEGEN: Generating message contract since the operation DateTimeUtcNowOurTicks is neither RPC nor document wrapped.
+    [System.ServiceModel.OperationContractAttribute(Action="http://sync.today/TaskDatabaseHttpPost/DateTimeUtcNowOurTicksRequest", ReplyAction="http://sync.today/TaskDatabaseHttpPost/DateTimeUtcNowOurTicksResponse")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+    [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+    DateTimeUtcNowOurTicksResponse2 DateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest2 request);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/TaskDatabaseHttpPost/DateTimeUtcNowOurTicksRequest", ReplyAction="http://sync.today/TaskDatabaseHttpPost/DateTimeUtcNowOurTicksResponse")]
+    System.IAsyncResult BeginDateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest2 request, System.AsyncCallback callback, object asyncState);
+    
+    DateTimeUtcNowOurTicksResponse2 EndDateTimeUtcNowOurTicks(System.IAsyncResult result);
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1760,6 +2118,100 @@ public partial class LoginUser2Response2 {
     
     public LoginUser2Response2(User User) {
         this.User = User;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetAccountForClient2Request2 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+    public string userid;
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
+    public string clientId;
+    
+    public GetAccountForClient2Request2() {
+    }
+    
+    public GetAccountForClient2Request2(string userid, string clientId) {
+        this.userid = userid;
+        this.clientId = clientId;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetAccountForClient2Response2 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+    public Account Account;
+    
+    public GetAccountForClient2Response2() {
+    }
+    
+    public GetAccountForClient2Response2(Account Account) {
+        this.Account = Account;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetUsers2Request2 {
+    
+    public GetUsers2Request2() {
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class GetUsers2Response2 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+    public User[] ArrayOfUser;
+    
+    public GetUsers2Response2() {
+    }
+    
+    public GetUsers2Response2(User[] ArrayOfUser) {
+        this.ArrayOfUser = ArrayOfUser;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class DateTimeUtcNowOurTicksRequest2 {
+    
+    public DateTimeUtcNowOurTicksRequest2() {
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class DateTimeUtcNowOurTicksResponse2 {
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://sync.today/", Order=0)]
+    public long @long;
+    
+    public DateTimeUtcNowOurTicksResponse2() {
+    }
+    
+    public DateTimeUtcNowOurTicksResponse2(long @long) {
+        this.@long = @long;
     }
 }
 
@@ -1962,6 +2414,103 @@ public partial class TaskDatabaseHttpPostClient : System.ServiceModel.ClientBase
         LoginUser2Response2 retVal = ((TaskDatabaseHttpPost)(this)).EndLoginUser2(result);
         return retVal.User;
     }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetAccountForClient2Response2 TaskDatabaseHttpPost.GetAccountForClient2(GetAccountForClient2Request2 request) {
+        return base.Channel.GetAccountForClient2(request);
+    }
+    
+    public Account GetAccountForClient2(string userid, string clientId) {
+        GetAccountForClient2Request2 inValue = new GetAccountForClient2Request2();
+        inValue.userid = userid;
+        inValue.clientId = clientId;
+        GetAccountForClient2Response2 retVal = ((TaskDatabaseHttpPost)(this)).GetAccountForClient2(inValue);
+        return retVal.Account;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseHttpPost.BeginGetAccountForClient2(GetAccountForClient2Request2 request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginGetAccountForClient2(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState) {
+        GetAccountForClient2Request2 inValue = new GetAccountForClient2Request2();
+        inValue.userid = userid;
+        inValue.clientId = clientId;
+        return ((TaskDatabaseHttpPost)(this)).BeginGetAccountForClient2(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetAccountForClient2Response2 TaskDatabaseHttpPost.EndGetAccountForClient2(System.IAsyncResult result) {
+        return base.Channel.EndGetAccountForClient2(result);
+    }
+    
+    public Account EndGetAccountForClient2(System.IAsyncResult result) {
+        GetAccountForClient2Response2 retVal = ((TaskDatabaseHttpPost)(this)).EndGetAccountForClient2(result);
+        return retVal.Account;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetUsers2Response2 TaskDatabaseHttpPost.GetUsers2(GetUsers2Request2 request) {
+        return base.Channel.GetUsers2(request);
+    }
+    
+    public User[] GetUsers2() {
+        GetUsers2Request2 inValue = new GetUsers2Request2();
+        GetUsers2Response2 retVal = ((TaskDatabaseHttpPost)(this)).GetUsers2(inValue);
+        return retVal.ArrayOfUser;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseHttpPost.BeginGetUsers2(GetUsers2Request2 request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginGetUsers2(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginGetUsers2(System.AsyncCallback callback, object asyncState) {
+        GetUsers2Request2 inValue = new GetUsers2Request2();
+        return ((TaskDatabaseHttpPost)(this)).BeginGetUsers2(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    GetUsers2Response2 TaskDatabaseHttpPost.EndGetUsers2(System.IAsyncResult result) {
+        return base.Channel.EndGetUsers2(result);
+    }
+    
+    public User[] EndGetUsers2(System.IAsyncResult result) {
+        GetUsers2Response2 retVal = ((TaskDatabaseHttpPost)(this)).EndGetUsers2(result);
+        return retVal.ArrayOfUser;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    DateTimeUtcNowOurTicksResponse2 TaskDatabaseHttpPost.DateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest2 request) {
+        return base.Channel.DateTimeUtcNowOurTicks(request);
+    }
+    
+    public long DateTimeUtcNowOurTicks() {
+        DateTimeUtcNowOurTicksRequest2 inValue = new DateTimeUtcNowOurTicksRequest2();
+        DateTimeUtcNowOurTicksResponse2 retVal = ((TaskDatabaseHttpPost)(this)).DateTimeUtcNowOurTicks(inValue);
+        return retVal.@long;
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult TaskDatabaseHttpPost.BeginDateTimeUtcNowOurTicks(DateTimeUtcNowOurTicksRequest2 request, System.AsyncCallback callback, object asyncState) {
+        return base.Channel.BeginDateTimeUtcNowOurTicks(request, callback, asyncState);
+    }
+    
+    public System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+        DateTimeUtcNowOurTicksRequest2 inValue = new DateTimeUtcNowOurTicksRequest2();
+        return ((TaskDatabaseHttpPost)(this)).BeginDateTimeUtcNowOurTicks(inValue, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    DateTimeUtcNowOurTicksResponse2 TaskDatabaseHttpPost.EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+        return base.Channel.EndDateTimeUtcNowOurTicks(result);
+    }
+    
+    public long EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+        DateTimeUtcNowOurTicksResponse2 retVal = ((TaskDatabaseHttpPost)(this)).EndDateTimeUtcNowOurTicks(result);
+        return retVal.@long;
+    }
 }
 
 
@@ -1982,8 +2531,6 @@ public partial class Account {
     private string passwordField;
     
     private string serverField;
-    
-    private CommunicatorConnectInfo connectInfoField;
     
     private string accountAssemblyNameField;
     
@@ -2044,17 +2591,6 @@ public partial class Account {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-    public CommunicatorConnectInfo ConnectInfo {
-        get {
-            return this.connectInfoField;
-        }
-        set {
-            this.connectInfoField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public string AccountAssemblyName {
         get {
             return this.accountAssemblyNameField;
@@ -2066,16 +2602,16 @@ public partial class Account {
 }
 
 /// <remarks/>
-[System.Xml.Serialization.XmlIncludeAttribute(typeof(SimpleCommunicatorConnectInfo))]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-public abstract partial class CommunicatorConnectInfo {
+public abstract partial class NuContactName {
 }
 
 /// <remarks/>
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(NuContact))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuTask))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuRequirement))]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
@@ -2113,6 +2649,220 @@ public abstract partial class NuObject {
 }
 
 /// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+public abstract partial class NuContact : NuObject {
+    
+    private NuContactName nameField;
+    
+    private NuContactPhoneNumbers phoneNumbersField;
+    
+    private NuContactEmailAddresses emailAddressesField;
+    
+    private string addressField;
+    
+    private NuContactPhysicalAddresses physicalAddressesField;
+    
+    private string jobPositionField;
+    
+    private string companyField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public NuContactName Name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    public NuContactPhoneNumbers PhoneNumbers {
+        get {
+            return this.phoneNumbersField;
+        }
+        set {
+            this.phoneNumbersField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+    public NuContactEmailAddresses EmailAddresses {
+        get {
+            return this.emailAddressesField;
+        }
+        set {
+            this.emailAddressesField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+    public string Address {
+        get {
+            return this.addressField;
+        }
+        set {
+            this.addressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+    public NuContactPhysicalAddresses PhysicalAddresses {
+        get {
+            return this.physicalAddressesField;
+        }
+        set {
+            this.physicalAddressesField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+    public string JobPosition {
+        get {
+            return this.jobPositionField;
+        }
+        set {
+            this.jobPositionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+    public string Company {
+        get {
+            return this.companyField;
+        }
+        set {
+            this.companyField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://sync.today/")]
+public partial class NuContactPhoneNumbers {
+    
+    private schema schemaField;
+    
+    private System.Xml.XmlElement anyField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2001/XMLSchema", Order=0)]
+    public schema schema {
+        get {
+            return this.schemaField;
+        }
+        set {
+            this.schemaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
+    public System.Xml.XmlElement Any {
+        get {
+            return this.anyField;
+        }
+        set {
+            this.anyField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.w3.org/2001/XMLSchema")]
+public partial class schema {
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://sync.today/")]
+public partial class NuContactEmailAddresses {
+    
+    private schema schemaField;
+    
+    private System.Xml.XmlElement anyField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2001/XMLSchema", Order=0)]
+    public schema schema {
+        get {
+            return this.schemaField;
+        }
+        set {
+            this.schemaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
+    public System.Xml.XmlElement Any {
+        get {
+            return this.anyField;
+        }
+        set {
+            this.anyField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://sync.today/")]
+public partial class NuContactPhysicalAddresses {
+    
+    private schema schemaField;
+    
+    private System.Xml.XmlElement anyField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2001/XMLSchema", Order=0)]
+    public schema schema {
+        get {
+            return this.schemaField;
+        }
+        set {
+            this.schemaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
+    public System.Xml.XmlElement Any {
+        get {
+            return this.anyField;
+        }
+        set {
+            this.anyField = value;
+        }
+    }
+}
+
+/// <remarks/>
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuRequirement))]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
 [System.SerializableAttribute()]
@@ -2138,6 +2888,8 @@ public partial class NuTask : NuObject {
     private string companyField;
     
     private bool completedField;
+    
+    private string projectNameField;
     
     private NuRequirement[] parentsField;
     
@@ -2241,7 +2993,18 @@ public partial class NuTask : NuObject {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayAttribute(Order=9)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+    public string ProjectName {
+        get {
+            return this.projectNameField;
+        }
+        set {
+            this.projectNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute(Order=10)]
     public NuRequirement[] Parents {
         get {
             return this.parentsField;
@@ -2278,14 +3041,59 @@ public partial class NuRequirement : NuTask {
 }
 
 /// <remarks/>
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DataNuObjectRelationOfNuUser))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(User))]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-public partial class User {
+public abstract partial class DataNuObjectRelation {
     
     private System.Guid internalIdField;
+    
+    private System.Guid belongsToUserField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public System.Guid InternalId {
+        get {
+            return this.internalIdField;
+        }
+        set {
+            this.internalIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    public System.Guid BelongsToUser {
+        get {
+            return this.belongsToUserField;
+        }
+        set {
+            this.belongsToUserField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(User))]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+public abstract partial class DataNuObjectRelationOfNuUser : DataNuObjectRelation {
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+public partial class User : DataNuObjectRelationOfNuUser {
     
     private System.DateTime createdField;
     
@@ -2303,17 +3111,6 @@ public partial class User {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public System.Guid InternalId {
-        get {
-            return this.internalIdField;
-        }
-        set {
-            this.internalIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public System.DateTime Created {
         get {
             return this.createdField;
@@ -2324,7 +3121,7 @@ public partial class User {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public bool IsBlocked {
         get {
             return this.isBlockedField;
@@ -2335,7 +3132,7 @@ public partial class User {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public int Maintenance {
         get {
             return this.maintenanceField;
@@ -2346,7 +3143,7 @@ public partial class User {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public string FirstName {
         get {
             return this.firstNameField;
@@ -2357,7 +3154,7 @@ public partial class User {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string LastName {
         get {
             return this.lastNameField;
@@ -2368,7 +3165,7 @@ public partial class User {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string Email {
         get {
             return this.emailField;
@@ -2379,74 +3176,13 @@ public partial class User {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public string Password {
         get {
             return this.passwordField;
         }
         set {
             this.passwordField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("XamarinStudio", "4.0.0.0")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-public partial class SimpleCommunicatorConnectInfo : CommunicatorConnectInfo {
-    
-    private string usernameField;
-    
-    private string passwordField;
-    
-    private string serverField;
-    
-    private System.Guid internalIdField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public string Username {
-        get {
-            return this.usernameField;
-        }
-        set {
-            this.usernameField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public string Password {
-        get {
-            return this.passwordField;
-        }
-        set {
-            this.passwordField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    public string Server {
-        get {
-            return this.serverField;
-        }
-        set {
-            this.serverField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-    public System.Guid InternalId {
-        get {
-            return this.internalIdField;
-        }
-        set {
-            this.internalIdField = value;
         }
     }
 }

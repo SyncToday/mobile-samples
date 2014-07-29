@@ -71,6 +71,7 @@ namespace Tasky.BL.Managers
 		
 		public static int DeleteTask(int id)
 		{
+            RemoteTaskManager.DeleteTask(id);
             return DAL.TaskRepository.DeleteTask(id);
 		}
 		

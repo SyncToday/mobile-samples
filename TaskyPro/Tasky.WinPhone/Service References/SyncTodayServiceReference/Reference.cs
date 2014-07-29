@@ -18,16 +18,10 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://sync.today/", ConfigurationName="SyncTodayServiceReference.TaskDatabaseSoap")]
     public interface TaskDatabaseSoap {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetAccount", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
-        System.IAsyncResult BeginGetAccount(System.Guid accountId, System.AsyncCallback callback, object asyncState);
-        
-        Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccount(System.IAsyncResult result);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetAccount2", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginGetAccount2(string accountId, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccount2(System.IAsyncResult result);
@@ -35,6 +29,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetTasks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginGetTasks(Tasky.WinPhone.SyncTodayServiceReference.Account account, Tasky.WinPhone.SyncTodayServiceReference.User user, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask[] EndGetTasks(System.IAsyncResult result);
@@ -42,6 +37,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetTasks2", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginGetTasks2(string accountId, string userInternalId, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask[] EndGetTasks2(System.IAsyncResult result);
@@ -49,6 +45,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetTask", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginGetTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, Tasky.WinPhone.SyncTodayServiceReference.User user, string id, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask EndGetTask(System.IAsyncResult result);
@@ -56,6 +53,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetTask2", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginGetTask2(string accountId, string userInternalId, string id, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask EndGetTask2(System.IAsyncResult result);
@@ -63,44 +61,74 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/SaveTask", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginSaveTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, Tasky.WinPhone.SyncTodayServiceReference.User user, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask EndSaveTask(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/SaveTask2", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.IAsyncResult BeginSaveTask2(string userEmail, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, string clientId, System.AsyncCallback callback, object asyncState);
+        
+        Tasky.WinPhone.SyncTodayServiceReference.NuTask EndSaveTask2(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/ChangeTaskExternalId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginChangeTaskExternalId(Tasky.WinPhone.SyncTodayServiceReference.Account account, Tasky.WinPhone.SyncTodayServiceReference.User user, string oldId, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.NuTask EndChangeTaskExternalId(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/DeleteTask", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.IAsyncResult BeginDeleteTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, System.AsyncCallback callback, object asyncState);
+        
+        bool EndDeleteTask(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetUserSalt", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginGetUserSalt(string email, System.AsyncCallback callback, object asyncState);
         
         string EndGetUserSalt(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/LoginUser", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
-        System.IAsyncResult BeginLoginUser(Tasky.WinPhone.SyncTodayServiceReference.User user, System.AsyncCallback callback, object asyncState);
-        
-        bool EndLoginUser(System.IAsyncResult result);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/LoginUser2", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
         System.IAsyncResult BeginLoginUser2(string email, string password, System.AsyncCallback callback, object asyncState);
         
         Tasky.WinPhone.SyncTodayServiceReference.User EndLoginUser2(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetAccountForClient", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetAccountForClient2", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
-        System.IAsyncResult BeginGetAccountForClient(System.Guid userid, System.Guid clientId, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.IAsyncResult BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState);
         
-        Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccountForClient(System.IAsyncResult result);
+        Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccountForClient2(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/GetUsers2", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.IAsyncResult BeginGetUsers2(System.AsyncCallback callback, object asyncState);
+        
+        Tasky.WinPhone.SyncTodayServiceReference.User[] EndGetUsers2(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://sync.today/DateTimeUtcNowOurTicks", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NuObject))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataNuObjectRelation))]
+        System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState);
+        
+        long EndDateTimeUtcNowOurTicks(System.IAsyncResult result);
     }
     
     /// <remarks/>
@@ -118,8 +146,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         private string passwordField;
         
         private string serverField;
-        
-        private CommunicatorConnectInfo connectInfoField;
         
         private string accountAssemblyNameField;
         
@@ -185,18 +211,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public CommunicatorConnectInfo ConnectInfo {
-            get {
-                return this.connectInfoField;
-            }
-            set {
-                this.connectInfoField = value;
-                this.RaisePropertyChanged("ConnectInfo");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string AccountAssemblyName {
             get {
                 return this.accountAssemblyNameField;
@@ -218,11 +232,10 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SimpleCommunicatorConnectInfo))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-    public abstract partial class CommunicatorConnectInfo : object, System.ComponentModel.INotifyPropertyChanged {
+    public abstract partial class NuContactName : object, System.ComponentModel.INotifyPropertyChanged {
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
@@ -235,6 +248,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuContact))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuTask))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuRequirement))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
@@ -281,6 +295,127 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+    public abstract partial class NuContact : NuObject {
+        
+        private NuContactName nameField;
+        
+        private Tasky.WinPhone.SyncTodayServiceReference.ArrayOfXElement phoneNumbersField;
+        
+        private Tasky.WinPhone.SyncTodayServiceReference.ArrayOfXElement emailAddressesField;
+        
+        private string addressField;
+        
+        private Tasky.WinPhone.SyncTodayServiceReference.ArrayOfXElement physicalAddressesField;
+        
+        private string jobPositionField;
+        
+        private string companyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public NuContactName Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+                this.RaisePropertyChanged("Name");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public Tasky.WinPhone.SyncTodayServiceReference.ArrayOfXElement PhoneNumbers {
+            get {
+                return this.phoneNumbersField;
+            }
+            set {
+                this.phoneNumbersField = value;
+                this.RaisePropertyChanged("PhoneNumbers");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public Tasky.WinPhone.SyncTodayServiceReference.ArrayOfXElement EmailAddresses {
+            get {
+                return this.emailAddressesField;
+            }
+            set {
+                this.emailAddressesField = value;
+                this.RaisePropertyChanged("EmailAddresses");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string Address {
+            get {
+                return this.addressField;
+            }
+            set {
+                this.addressField = value;
+                this.RaisePropertyChanged("Address");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public Tasky.WinPhone.SyncTodayServiceReference.ArrayOfXElement PhysicalAddresses {
+            get {
+                return this.physicalAddressesField;
+            }
+            set {
+                this.physicalAddressesField = value;
+                this.RaisePropertyChanged("PhysicalAddresses");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string JobPosition {
+            get {
+                return this.jobPositionField;
+            }
+            set {
+                this.jobPositionField = value;
+                this.RaisePropertyChanged("JobPosition");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string Company {
+            get {
+                return this.companyField;
+            }
+            set {
+                this.companyField = value;
+                this.RaisePropertyChanged("Company");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.w3.org/2001/XMLSchema")]
+    public partial class schema : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(NuRequirement))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -304,6 +439,8 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         private string companyField;
         
         private bool completedField;
+        
+        private string projectNameField;
         
         private NuRequirement[] parentsField;
         
@@ -416,7 +553,19 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string ProjectName {
+            get {
+                return this.projectNameField;
+            }
+            set {
+                this.projectNameField = value;
+                this.RaisePropertyChanged("ProjectName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=10)]
         public NuRequirement[] Parents {
             get {
                 return this.parentsField;
@@ -451,12 +600,64 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DataNuObjectRelationOfNuUser))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(User))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-    public partial class User : object, System.ComponentModel.INotifyPropertyChanged {
+    public abstract partial class DataNuObjectRelation : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.Guid internalIdField;
+        
+        private System.Guid belongsToUserField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public System.Guid InternalId {
+            get {
+                return this.internalIdField;
+            }
+            set {
+                this.internalIdField = value;
+                this.RaisePropertyChanged("InternalId");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public System.Guid BelongsToUser {
+            get {
+                return this.belongsToUserField;
+            }
+            set {
+                this.belongsToUserField = value;
+                this.RaisePropertyChanged("BelongsToUser");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(User))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+    public abstract partial class DataNuObjectRelationOfNuUser : DataNuObjectRelation {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
+    public partial class User : DataNuObjectRelationOfNuUser {
         
         private System.DateTime createdField;
         
@@ -474,18 +675,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public System.Guid InternalId {
-            get {
-                return this.internalIdField;
-            }
-            set {
-                this.internalIdField = value;
-                this.RaisePropertyChanged("InternalId");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public System.DateTime Created {
             get {
                 return this.createdField;
@@ -497,7 +686,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public bool IsBlocked {
             get {
                 return this.isBlockedField;
@@ -509,7 +698,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         public int Maintenance {
             get {
                 return this.maintenanceField;
@@ -521,7 +710,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string FirstName {
             get {
                 return this.firstNameField;
@@ -533,7 +722,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string LastName {
             get {
                 return this.lastNameField;
@@ -545,7 +734,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public string Email {
             get {
                 return this.emailField;
@@ -557,7 +746,7 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string Password {
             get {
                 return this.passwordField;
@@ -565,103 +754,12 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             set {
                 this.passwordField = value;
                 this.RaisePropertyChanged("Password");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.33440")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://sync.today/")]
-    public partial class SimpleCommunicatorConnectInfo : CommunicatorConnectInfo {
-        
-        private string usernameField;
-        
-        private string passwordField;
-        
-        private string serverField;
-        
-        private System.Guid internalIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string Username {
-            get {
-                return this.usernameField;
-            }
-            set {
-                this.usernameField = value;
-                this.RaisePropertyChanged("Username");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-                this.RaisePropertyChanged("Password");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Server {
-            get {
-                return this.serverField;
-            }
-            set {
-                this.serverField = value;
-                this.RaisePropertyChanged("Server");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public System.Guid InternalId {
-            get {
-                return this.internalIdField;
-            }
-            set {
-                this.internalIdField = value;
-                this.RaisePropertyChanged("InternalId");
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface TaskDatabaseSoapChannel : Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetAccountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetAccountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public Tasky.WinPhone.SyncTodayServiceReference.Account Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Tasky.WinPhone.SyncTodayServiceReference.Account)(this.results[0]));
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -780,6 +878,25 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SaveTask2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SaveTask2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Tasky.WinPhone.SyncTodayServiceReference.NuTask Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Tasky.WinPhone.SyncTodayServiceReference.NuTask)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ChangeTaskExternalIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -793,6 +910,25 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((Tasky.WinPhone.SyncTodayServiceReference.NuTask)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DeleteTaskCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DeleteTaskCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }
@@ -818,25 +954,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LoginUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public LoginUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public bool Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class LoginUser2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -856,11 +973,11 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetAccountForClientCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetAccountForClient2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public GetAccountForClientCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public GetAccountForClient2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -875,13 +992,45 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetUsers2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetUsers2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Tasky.WinPhone.SyncTodayServiceReference.User[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Tasky.WinPhone.SyncTodayServiceReference.User[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DateTimeUtcNowOurTicksCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public DateTimeUtcNowOurTicksCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public long Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((long)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class TaskDatabaseSoapClient : System.ServiceModel.ClientBase<Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap>, Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap {
-        
-        private BeginOperationDelegate onBeginGetAccountDelegate;
-        
-        private EndOperationDelegate onEndGetAccountDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetAccountCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetAccount2Delegate;
         
@@ -919,11 +1068,23 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         private System.Threading.SendOrPostCallback onSaveTaskCompletedDelegate;
         
+        private BeginOperationDelegate onBeginSaveTask2Delegate;
+        
+        private EndOperationDelegate onEndSaveTask2Delegate;
+        
+        private System.Threading.SendOrPostCallback onSaveTask2CompletedDelegate;
+        
         private BeginOperationDelegate onBeginChangeTaskExternalIdDelegate;
         
         private EndOperationDelegate onEndChangeTaskExternalIdDelegate;
         
         private System.Threading.SendOrPostCallback onChangeTaskExternalIdCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDeleteTaskDelegate;
+        
+        private EndOperationDelegate onEndDeleteTaskDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeleteTaskCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetUserSaltDelegate;
         
@@ -931,23 +1092,29 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         private System.Threading.SendOrPostCallback onGetUserSaltCompletedDelegate;
         
-        private BeginOperationDelegate onBeginLoginUserDelegate;
-        
-        private EndOperationDelegate onEndLoginUserDelegate;
-        
-        private System.Threading.SendOrPostCallback onLoginUserCompletedDelegate;
-        
         private BeginOperationDelegate onBeginLoginUser2Delegate;
         
         private EndOperationDelegate onEndLoginUser2Delegate;
         
         private System.Threading.SendOrPostCallback onLoginUser2CompletedDelegate;
         
-        private BeginOperationDelegate onBeginGetAccountForClientDelegate;
+        private BeginOperationDelegate onBeginGetAccountForClient2Delegate;
         
-        private EndOperationDelegate onEndGetAccountForClientDelegate;
+        private EndOperationDelegate onEndGetAccountForClient2Delegate;
         
-        private System.Threading.SendOrPostCallback onGetAccountForClientCompletedDelegate;
+        private System.Threading.SendOrPostCallback onGetAccountForClient2CompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetUsers2Delegate;
+        
+        private EndOperationDelegate onEndGetUsers2Delegate;
+        
+        private System.Threading.SendOrPostCallback onGetUsers2CompletedDelegate;
+        
+        private BeginOperationDelegate onBeginDateTimeUtcNowOurTicksDelegate;
+        
+        private EndOperationDelegate onEndDateTimeUtcNowOurTicksDelegate;
+        
+        private System.Threading.SendOrPostCallback onDateTimeUtcNowOurTicksCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -1002,8 +1169,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             }
         }
         
-        public event System.EventHandler<GetAccountCompletedEventArgs> GetAccountCompleted;
-        
         public event System.EventHandler<GetAccount2CompletedEventArgs> GetAccount2Completed;
         
         public event System.EventHandler<GetTasksCompletedEventArgs> GetTasksCompleted;
@@ -1016,65 +1181,25 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         
         public event System.EventHandler<SaveTaskCompletedEventArgs> SaveTaskCompleted;
         
+        public event System.EventHandler<SaveTask2CompletedEventArgs> SaveTask2Completed;
+        
         public event System.EventHandler<ChangeTaskExternalIdCompletedEventArgs> ChangeTaskExternalIdCompleted;
+        
+        public event System.EventHandler<DeleteTaskCompletedEventArgs> DeleteTaskCompleted;
         
         public event System.EventHandler<GetUserSaltCompletedEventArgs> GetUserSaltCompleted;
         
-        public event System.EventHandler<LoginUserCompletedEventArgs> LoginUserCompleted;
-        
         public event System.EventHandler<LoginUser2CompletedEventArgs> LoginUser2Completed;
         
-        public event System.EventHandler<GetAccountForClientCompletedEventArgs> GetAccountForClientCompleted;
+        public event System.EventHandler<GetAccountForClient2CompletedEventArgs> GetAccountForClient2Completed;
+        
+        public event System.EventHandler<GetUsers2CompletedEventArgs> GetUsers2Completed;
+        
+        public event System.EventHandler<DateTimeUtcNowOurTicksCompletedEventArgs> DateTimeUtcNowOurTicksCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginGetAccount(System.Guid accountId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetAccount(accountId, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Tasky.WinPhone.SyncTodayServiceReference.Account Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndGetAccount(System.IAsyncResult result) {
-            return base.Channel.EndGetAccount(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetAccount(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            System.Guid accountId = ((System.Guid)(inValues[0]));
-            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginGetAccount(accountId, callback, asyncState);
-        }
-        
-        private object[] OnEndGetAccount(System.IAsyncResult result) {
-            Tasky.WinPhone.SyncTodayServiceReference.Account retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndGetAccount(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetAccountCompleted(object state) {
-            if ((this.GetAccountCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetAccountCompleted(this, new GetAccountCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetAccountAsync(System.Guid accountId) {
-            this.GetAccountAsync(accountId, null);
-        }
-        
-        public void GetAccountAsync(System.Guid accountId, object userState) {
-            if ((this.onBeginGetAccountDelegate == null)) {
-                this.onBeginGetAccountDelegate = new BeginOperationDelegate(this.OnBeginGetAccount);
-            }
-            if ((this.onEndGetAccountDelegate == null)) {
-                this.onEndGetAccountDelegate = new EndOperationDelegate(this.OnEndGetAccount);
-            }
-            if ((this.onGetAccountCompletedDelegate == null)) {
-                this.onGetAccountCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetAccountCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetAccountDelegate, new object[] {
-                        accountId}, this.onEndGetAccountDelegate, this.onGetAccountCompletedDelegate, userState);
-        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginGetAccount2(string accountId, System.AsyncCallback callback, object asyncState) {
@@ -1369,6 +1494,56 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginSaveTask2(string userEmail, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, string clientId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSaveTask2(userEmail, task, clientId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Tasky.WinPhone.SyncTodayServiceReference.NuTask Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndSaveTask2(System.IAsyncResult result) {
+            return base.Channel.EndSaveTask2(result);
+        }
+        
+        private System.IAsyncResult OnBeginSaveTask2(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userEmail = ((string)(inValues[0]));
+            Tasky.WinPhone.SyncTodayServiceReference.NuTask task = ((Tasky.WinPhone.SyncTodayServiceReference.NuTask)(inValues[1]));
+            string clientId = ((string)(inValues[2]));
+            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginSaveTask2(userEmail, task, clientId, callback, asyncState);
+        }
+        
+        private object[] OnEndSaveTask2(System.IAsyncResult result) {
+            Tasky.WinPhone.SyncTodayServiceReference.NuTask retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndSaveTask2(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSaveTask2Completed(object state) {
+            if ((this.SaveTask2Completed != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SaveTask2Completed(this, new SaveTask2CompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SaveTask2Async(string userEmail, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, string clientId) {
+            this.SaveTask2Async(userEmail, task, clientId, null);
+        }
+        
+        public void SaveTask2Async(string userEmail, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, string clientId, object userState) {
+            if ((this.onBeginSaveTask2Delegate == null)) {
+                this.onBeginSaveTask2Delegate = new BeginOperationDelegate(this.OnBeginSaveTask2);
+            }
+            if ((this.onEndSaveTask2Delegate == null)) {
+                this.onEndSaveTask2Delegate = new EndOperationDelegate(this.OnEndSaveTask2);
+            }
+            if ((this.onSaveTask2CompletedDelegate == null)) {
+                this.onSaveTask2CompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveTask2Completed);
+            }
+            base.InvokeAsync(this.onBeginSaveTask2Delegate, new object[] {
+                        userEmail,
+                        task,
+                        clientId}, this.onEndSaveTask2Delegate, this.onSaveTask2CompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginChangeTaskExternalId(Tasky.WinPhone.SyncTodayServiceReference.Account account, Tasky.WinPhone.SyncTodayServiceReference.User user, string oldId, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginChangeTaskExternalId(account, user, oldId, task, callback, asyncState);
         }
@@ -1421,6 +1596,54 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginDeleteTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeleteTask(account, externalId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndDeleteTask(System.IAsyncResult result) {
+            return base.Channel.EndDeleteTask(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeleteTask(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Tasky.WinPhone.SyncTodayServiceReference.Account account = ((Tasky.WinPhone.SyncTodayServiceReference.Account)(inValues[0]));
+            string externalId = ((string)(inValues[1]));
+            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginDeleteTask(account, externalId, callback, asyncState);
+        }
+        
+        private object[] OnEndDeleteTask(System.IAsyncResult result) {
+            bool retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndDeleteTask(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDeleteTaskCompleted(object state) {
+            if ((this.DeleteTaskCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeleteTaskCompleted(this, new DeleteTaskCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeleteTaskAsync(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId) {
+            this.DeleteTaskAsync(account, externalId, null);
+        }
+        
+        public void DeleteTaskAsync(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, object userState) {
+            if ((this.onBeginDeleteTaskDelegate == null)) {
+                this.onBeginDeleteTaskDelegate = new BeginOperationDelegate(this.OnBeginDeleteTask);
+            }
+            if ((this.onEndDeleteTaskDelegate == null)) {
+                this.onEndDeleteTaskDelegate = new EndOperationDelegate(this.OnEndDeleteTask);
+            }
+            if ((this.onDeleteTaskCompletedDelegate == null)) {
+                this.onDeleteTaskCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeleteTaskCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeleteTaskDelegate, new object[] {
+                        account,
+                        externalId}, this.onEndDeleteTaskDelegate, this.onDeleteTaskCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginGetUserSalt(string email, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetUserSalt(email, callback, asyncState);
         }
@@ -1464,52 +1687,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             }
             base.InvokeAsync(this.onBeginGetUserSaltDelegate, new object[] {
                         email}, this.onEndGetUserSaltDelegate, this.onGetUserSaltCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginLoginUser(Tasky.WinPhone.SyncTodayServiceReference.User user, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginLoginUser(user, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        bool Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndLoginUser(System.IAsyncResult result) {
-            return base.Channel.EndLoginUser(result);
-        }
-        
-        private System.IAsyncResult OnBeginLoginUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            Tasky.WinPhone.SyncTodayServiceReference.User user = ((Tasky.WinPhone.SyncTodayServiceReference.User)(inValues[0]));
-            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginLoginUser(user, callback, asyncState);
-        }
-        
-        private object[] OnEndLoginUser(System.IAsyncResult result) {
-            bool retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndLoginUser(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnLoginUserCompleted(object state) {
-            if ((this.LoginUserCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.LoginUserCompleted(this, new LoginUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void LoginUserAsync(Tasky.WinPhone.SyncTodayServiceReference.User user) {
-            this.LoginUserAsync(user, null);
-        }
-        
-        public void LoginUserAsync(Tasky.WinPhone.SyncTodayServiceReference.User user, object userState) {
-            if ((this.onBeginLoginUserDelegate == null)) {
-                this.onBeginLoginUserDelegate = new BeginOperationDelegate(this.OnBeginLoginUser);
-            }
-            if ((this.onEndLoginUserDelegate == null)) {
-                this.onEndLoginUserDelegate = new EndOperationDelegate(this.OnEndLoginUser);
-            }
-            if ((this.onLoginUserCompletedDelegate == null)) {
-                this.onLoginUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnLoginUserCompleted);
-            }
-            base.InvokeAsync(this.onBeginLoginUserDelegate, new object[] {
-                        user}, this.onEndLoginUserDelegate, this.onLoginUserCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1561,51 +1738,139 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginGetAccountForClient(System.Guid userid, System.Guid clientId, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetAccountForClient(userid, clientId, callback, asyncState);
+        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetAccountForClient2(userid, clientId, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Tasky.WinPhone.SyncTodayServiceReference.Account Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndGetAccountForClient(System.IAsyncResult result) {
-            return base.Channel.EndGetAccountForClient(result);
+        Tasky.WinPhone.SyncTodayServiceReference.Account Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndGetAccountForClient2(System.IAsyncResult result) {
+            return base.Channel.EndGetAccountForClient2(result);
         }
         
-        private System.IAsyncResult OnBeginGetAccountForClient(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            System.Guid userid = ((System.Guid)(inValues[0]));
-            System.Guid clientId = ((System.Guid)(inValues[1]));
-            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginGetAccountForClient(userid, clientId, callback, asyncState);
+        private System.IAsyncResult OnBeginGetAccountForClient2(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userid = ((string)(inValues[0]));
+            string clientId = ((string)(inValues[1]));
+            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginGetAccountForClient2(userid, clientId, callback, asyncState);
         }
         
-        private object[] OnEndGetAccountForClient(System.IAsyncResult result) {
-            Tasky.WinPhone.SyncTodayServiceReference.Account retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndGetAccountForClient(result);
+        private object[] OnEndGetAccountForClient2(System.IAsyncResult result) {
+            Tasky.WinPhone.SyncTodayServiceReference.Account retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndGetAccountForClient2(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnGetAccountForClientCompleted(object state) {
-            if ((this.GetAccountForClientCompleted != null)) {
+        private void OnGetAccountForClient2Completed(object state) {
+            if ((this.GetAccountForClient2Completed != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetAccountForClientCompleted(this, new GetAccountForClientCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.GetAccountForClient2Completed(this, new GetAccountForClient2CompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void GetAccountForClientAsync(System.Guid userid, System.Guid clientId) {
-            this.GetAccountForClientAsync(userid, clientId, null);
+        public void GetAccountForClient2Async(string userid, string clientId) {
+            this.GetAccountForClient2Async(userid, clientId, null);
         }
         
-        public void GetAccountForClientAsync(System.Guid userid, System.Guid clientId, object userState) {
-            if ((this.onBeginGetAccountForClientDelegate == null)) {
-                this.onBeginGetAccountForClientDelegate = new BeginOperationDelegate(this.OnBeginGetAccountForClient);
+        public void GetAccountForClient2Async(string userid, string clientId, object userState) {
+            if ((this.onBeginGetAccountForClient2Delegate == null)) {
+                this.onBeginGetAccountForClient2Delegate = new BeginOperationDelegate(this.OnBeginGetAccountForClient2);
             }
-            if ((this.onEndGetAccountForClientDelegate == null)) {
-                this.onEndGetAccountForClientDelegate = new EndOperationDelegate(this.OnEndGetAccountForClient);
+            if ((this.onEndGetAccountForClient2Delegate == null)) {
+                this.onEndGetAccountForClient2Delegate = new EndOperationDelegate(this.OnEndGetAccountForClient2);
             }
-            if ((this.onGetAccountForClientCompletedDelegate == null)) {
-                this.onGetAccountForClientCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetAccountForClientCompleted);
+            if ((this.onGetAccountForClient2CompletedDelegate == null)) {
+                this.onGetAccountForClient2CompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetAccountForClient2Completed);
             }
-            base.InvokeAsync(this.onBeginGetAccountForClientDelegate, new object[] {
+            base.InvokeAsync(this.onBeginGetAccountForClient2Delegate, new object[] {
                         userid,
-                        clientId}, this.onEndGetAccountForClientDelegate, this.onGetAccountForClientCompletedDelegate, userState);
+                        clientId}, this.onEndGetAccountForClient2Delegate, this.onGetAccountForClient2CompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginGetUsers2(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetUsers2(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Tasky.WinPhone.SyncTodayServiceReference.User[] Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndGetUsers2(System.IAsyncResult result) {
+            return base.Channel.EndGetUsers2(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetUsers2(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginGetUsers2(callback, asyncState);
+        }
+        
+        private object[] OnEndGetUsers2(System.IAsyncResult result) {
+            Tasky.WinPhone.SyncTodayServiceReference.User[] retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndGetUsers2(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetUsers2Completed(object state) {
+            if ((this.GetUsers2Completed != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetUsers2Completed(this, new GetUsers2CompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetUsers2Async() {
+            this.GetUsers2Async(null);
+        }
+        
+        public void GetUsers2Async(object userState) {
+            if ((this.onBeginGetUsers2Delegate == null)) {
+                this.onBeginGetUsers2Delegate = new BeginOperationDelegate(this.OnBeginGetUsers2);
+            }
+            if ((this.onEndGetUsers2Delegate == null)) {
+                this.onEndGetUsers2Delegate = new EndOperationDelegate(this.OnEndGetUsers2);
+            }
+            if ((this.onGetUsers2CompletedDelegate == null)) {
+                this.onGetUsers2CompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetUsers2Completed);
+            }
+            base.InvokeAsync(this.onBeginGetUsers2Delegate, null, this.onEndGetUsers2Delegate, this.onGetUsers2CompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDateTimeUtcNowOurTicks(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        long Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap.EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+            return base.Channel.EndDateTimeUtcNowOurTicks(result);
+        }
+        
+        private System.IAsyncResult OnBeginDateTimeUtcNowOurTicks(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).BeginDateTimeUtcNowOurTicks(callback, asyncState);
+        }
+        
+        private object[] OnEndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+            long retVal = ((Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap)(this)).EndDateTimeUtcNowOurTicks(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnDateTimeUtcNowOurTicksCompleted(object state) {
+            if ((this.DateTimeUtcNowOurTicksCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DateTimeUtcNowOurTicksCompleted(this, new DateTimeUtcNowOurTicksCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DateTimeUtcNowOurTicksAsync() {
+            this.DateTimeUtcNowOurTicksAsync(null);
+        }
+        
+        public void DateTimeUtcNowOurTicksAsync(object userState) {
+            if ((this.onBeginDateTimeUtcNowOurTicksDelegate == null)) {
+                this.onBeginDateTimeUtcNowOurTicksDelegate = new BeginOperationDelegate(this.OnBeginDateTimeUtcNowOurTicks);
+            }
+            if ((this.onEndDateTimeUtcNowOurTicksDelegate == null)) {
+                this.onEndDateTimeUtcNowOurTicksDelegate = new EndOperationDelegate(this.OnEndDateTimeUtcNowOurTicks);
+            }
+            if ((this.onDateTimeUtcNowOurTicksCompletedDelegate == null)) {
+                this.onDateTimeUtcNowOurTicksCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDateTimeUtcNowOurTicksCompleted);
+            }
+            base.InvokeAsync(this.onBeginDateTimeUtcNowOurTicksDelegate, null, this.onEndDateTimeUtcNowOurTicksDelegate, this.onDateTimeUtcNowOurTicksCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -1682,19 +1947,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             
             public TaskDatabaseSoapClientChannel(System.ServiceModel.ClientBase<Tasky.WinPhone.SyncTodayServiceReference.TaskDatabaseSoap> client) : 
                     base(client) {
-            }
-            
-            public System.IAsyncResult BeginGetAccount(System.Guid accountId, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = accountId;
-                System.IAsyncResult _result = base.BeginInvoke("GetAccount", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccount(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                Tasky.WinPhone.SyncTodayServiceReference.Account _result = ((Tasky.WinPhone.SyncTodayServiceReference.Account)(base.EndInvoke("GetAccount", _args, result)));
-                return _result;
             }
             
             public System.IAsyncResult BeginGetAccount2(string accountId, System.AsyncCallback callback, object asyncState) {
@@ -1783,6 +2035,21 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
                 return _result;
             }
             
+            public System.IAsyncResult BeginSaveTask2(string userEmail, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, string clientId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[3];
+                _args[0] = userEmail;
+                _args[1] = task;
+                _args[2] = clientId;
+                System.IAsyncResult _result = base.BeginInvoke("SaveTask2", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Tasky.WinPhone.SyncTodayServiceReference.NuTask EndSaveTask2(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Tasky.WinPhone.SyncTodayServiceReference.NuTask _result = ((Tasky.WinPhone.SyncTodayServiceReference.NuTask)(base.EndInvoke("SaveTask2", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginChangeTaskExternalId(Tasky.WinPhone.SyncTodayServiceReference.Account account, Tasky.WinPhone.SyncTodayServiceReference.User user, string oldId, Tasky.WinPhone.SyncTodayServiceReference.NuTask task, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[4];
                 _args[0] = account;
@@ -1799,6 +2066,20 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
                 return _result;
             }
             
+            public System.IAsyncResult BeginDeleteTask(Tasky.WinPhone.SyncTodayServiceReference.Account account, string externalId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = account;
+                _args[1] = externalId;
+                System.IAsyncResult _result = base.BeginInvoke("DeleteTask", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndDeleteTask(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("DeleteTask", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginGetUserSalt(string email, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = email;
@@ -1809,19 +2090,6 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
             public string EndGetUserSalt(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 string _result = ((string)(base.EndInvoke("GetUserSalt", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginLoginUser(Tasky.WinPhone.SyncTodayServiceReference.User user, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = user;
-                System.IAsyncResult _result = base.BeginInvoke("LoginUser", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public bool EndLoginUser(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                bool _result = ((bool)(base.EndInvoke("LoginUser", _args, result)));
                 return _result;
             }
             
@@ -1839,18 +2107,86 @@ namespace Tasky.WinPhone.SyncTodayServiceReference {
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetAccountForClient(System.Guid userid, System.Guid clientId, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginGetAccountForClient2(string userid, string clientId, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[2];
                 _args[0] = userid;
                 _args[1] = clientId;
-                System.IAsyncResult _result = base.BeginInvoke("GetAccountForClient", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("GetAccountForClient2", _args, callback, asyncState);
                 return _result;
             }
             
-            public Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccountForClient(System.IAsyncResult result) {
+            public Tasky.WinPhone.SyncTodayServiceReference.Account EndGetAccountForClient2(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                Tasky.WinPhone.SyncTodayServiceReference.Account _result = ((Tasky.WinPhone.SyncTodayServiceReference.Account)(base.EndInvoke("GetAccountForClient", _args, result)));
+                Tasky.WinPhone.SyncTodayServiceReference.Account _result = ((Tasky.WinPhone.SyncTodayServiceReference.Account)(base.EndInvoke("GetAccountForClient2", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginGetUsers2(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetUsers2", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Tasky.WinPhone.SyncTodayServiceReference.User[] EndGetUsers2(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Tasky.WinPhone.SyncTodayServiceReference.User[] _result = ((Tasky.WinPhone.SyncTodayServiceReference.User[])(base.EndInvoke("GetUsers2", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginDateTimeUtcNowOurTicks(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("DateTimeUtcNowOurTicks", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public long EndDateTimeUtcNowOurTicks(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                long _result = ((long)(base.EndInvoke("DateTimeUtcNowOurTicks", _args, result)));
+                return _result;
+            }
+        }
+    }
+    
+    [System.Xml.Serialization.XmlSchemaProviderAttribute(null, IsAny=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Silverlight.Phone.ServiceReference", "3.7.0.0")]
+    public partial class ArrayOfXElement : object, System.Xml.Serialization.IXmlSerializable {
+        
+        private System.Collections.Generic.List<System.Xml.Linq.XElement> nodesList = new System.Collections.Generic.List<System.Xml.Linq.XElement>();
+        
+        public ArrayOfXElement() {
+        }
+        
+        public virtual System.Collections.Generic.List<System.Xml.Linq.XElement> Nodes {
+            get {
+                return this.nodesList;
+            }
+        }
+        
+        public virtual System.Xml.Schema.XmlSchema GetSchema() {
+            throw new System.NotImplementedException();
+        }
+        
+        public virtual void WriteXml(System.Xml.XmlWriter writer) {
+            System.Collections.Generic.IEnumerator<System.Xml.Linq.XElement> e = nodesList.GetEnumerator();
+            for (
+            ; e.MoveNext(); 
+            ) {
+                ((System.Xml.Serialization.IXmlSerializable)(e.Current)).WriteXml(writer);
+            }
+        }
+        
+        public virtual void ReadXml(System.Xml.XmlReader reader) {
+            for (
+            ; (reader.NodeType != System.Xml.XmlNodeType.EndElement); 
+            ) {
+                if ((reader.NodeType == System.Xml.XmlNodeType.Element)) {
+                    System.Xml.Linq.XElement elem = new System.Xml.Linq.XElement("default");
+                    ((System.Xml.Serialization.IXmlSerializable)(elem)).ReadXml(reader);
+                    Nodes.Add(elem);
+                }
+                else {
+                    reader.Skip();
+                }
             }
         }
     }
