@@ -25,6 +25,15 @@ namespace TaskyWinPhone
 
             UsernameText.Text = RemoteTaskManager.UserName;
             PasswordText.Password = RemoteTaskManager.Password;
+
+            ApplicationTitle.Text = RemoteTaskManager.GetApplicationName();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            ApplicationTitle.Text = RemoteTaskManager.GetApplicationName();
         }
 
         private void HandleSave(object sender, EventArgs e)
@@ -41,6 +50,8 @@ namespace TaskyWinPhone
 
             // Store the encrypted PIN in isolated storage.
             this.WritePinToFile(ProtectedPinByte);
+
+            RemoteTaskManager.Login();
 
             NavigationService.GoBack();
         }

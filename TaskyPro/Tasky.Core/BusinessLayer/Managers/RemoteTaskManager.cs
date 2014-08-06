@@ -37,13 +37,14 @@ namespace Tasky.BL.Managers
     {
         public static string UserName = string.Empty; //"test@test.com";
 
-        public static string Password = "Password123";
+        public static string Password = string.Empty; //Password123";
         public static string ClientRegistrationID = "8c3a75ed-5c06-4b36-bd6e-87b8c7f20452";
         public static string ServerUrl = "http://wsdl.sync.today/TaskDatabase.asmx";
 
         private static string finalPassword;
         internal static User loggedUser;
         internal static Account clientAccount;
+
 #if Win8 || WINDOWS_PHONE
         internal static TaskDatabaseSoapClient wsdl; 
 #else        
@@ -95,6 +96,7 @@ namespace Tasky.BL.Managers
 
 #if WINDOWS_PHONE
         private static long _DateTimeUtcNowOurTicks = 0;
+        internal static string salt;
 #endif
         public static long DateTimeUtcNowOurTicks()
         {
@@ -104,14 +106,7 @@ namespace Tasky.BL.Managers
             return task.Result;
 			#else
 #if WINDOWS_PHONE
-            _DateTimeUtcNowOurTicks = 0;
-            wsdl.DateTimeUtcNowOurTicksCompleted += wsdl_DateTimeUtcNowOurTicksCompleted;
-            wsdl.DateTimeUtcNowOurTicksAsync();
-            while (_DateTimeUtcNowOurTicks == 0)
-            {
-                Thread.Sleep(500);
-            }
-            return _DateTimeUtcNowOurTicks;
+            throw new NotImplementedException();
 #else
 			return wsdl.DateTimeUtcNowOurTicks();
 			#endif
@@ -122,6 +117,10 @@ namespace Tasky.BL.Managers
         static void wsdl_DateTimeUtcNowOurTicksCompleted(object sender, DateTimeUtcNowOurTicksCompletedEventArgs e)
         {
             _DateTimeUtcNowOurTicks = e.Result;
+
+            CalculateFinalPassword(salt);
+            wsdl.LoginUser2Completed += wsdl_LoginUser2Completed;
+            wsdl.LoginUser2Async(UserName, finalPassword);
         }
 #endif
 
@@ -138,7 +137,11 @@ namespace Tasky.BL.Managers
         public static string CreateHash2(string hashedPassword1, string salt2)
         {
             byte[] salt = Convert.FromBase64String(salt2);
+#if WINDOWS_PHONE
+            hashedPassword1 += _DateTimeUtcNowOurTicks;
+#else
             hashedPassword1 += DateTimeUtcNowOurTicks();
+#endif
             // Hash the password and encode the parameters
             byte[] hash = PBKDF2(hashedPassword1, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
             return PBKDF2_ITERATIONS + ":" +
@@ -150,7 +153,9 @@ namespace Tasky.BL.Managers
         public static string[] Users { get { return users; } }
 
         public delegate void GetUsersCompleted();
-
+#if WINDOWS_PHONE
+        private static GetUsersCompleted _OnGetUsersCompleted;
+#endif
         public 
 		#if Win8
 		async 
@@ -169,17 +174,15 @@ namespace Tasky.BL.Managers
 					User[] remoteUsers =await wsdl.GetUsers2Async();
 #else
 #if WINDOWS_PHONE
+                _OnGetUsersCompleted = OnGetUsersCompleted;
                 wsdl.GetUsers2Completed += wsdl_GetUsers2Completed;
                 wsdl.GetUsers2Async();
-                while (_remoteUsers == null)
-                {
-                    Thread.Sleep(500);
-                }
-                User[] remoteUsers = _remoteUsers;
 #else
 					User[] remoteUsers = wsdl.GetUsers2();
 #endif
 #endif
+#if !WINDOWS_PHONE
+
                 foreach (var remoteUser in remoteUsers)
                 {
                     locUsers.Add(remoteUser.Email);
@@ -188,20 +191,38 @@ namespace Tasky.BL.Managers
                 users = locUsers.ToArray();
                 if (OnGetUsersCompleted != null)
                     OnGetUsersCompleted();
+#endif
             }
         }
 #if WINDOWS_PHONE
         static User[] _remoteUsers = null;
         static void wsdl_GetUsers2Completed(object sender, GetUsers2CompletedEventArgs e)
         {
+            List<string> locUsers = new List<string>(); 
             _remoteUsers = e.Result;
+
+                User[] remoteUsers = _remoteUsers;
+
+                foreach (var remoteUser in remoteUsers)
+                {
+                    locUsers.Add(remoteUser.Email);
+                }
+                if (!locUsers.Contains(UserName)) locUsers.Add(UserName);                
+                users = locUsers.ToArray();
+                if (_OnGetUsersCompleted != null)
+                    _OnGetUsersCompleted();
+        }
+
+        public static string GetApplicationName()
+        {
+            return string.Format(TaskyWinPhone.App.AppName, RemoteTaskManager.loggedUser == null ? "not logged" : RemoteTaskManager.loggedUser.Email);
         }
 #endif
 
 #if Win8
         internal async static System.Threading.Tasks.Task Login()
 #else
-        private static void Login()
+        internal static void Login()
 #endif
         {
             if (loggedUser != null && clientAccount != null) return;
@@ -261,14 +282,17 @@ namespace Tasky.BL.Managers
 #if WINDOWS_PHONE
         static void wsdl_GetUserSaltCompleted(object sender, GetUserSaltCompletedEventArgs e)
         {
-            CalculateFinalPassword(e.Result);
-            wsdl.LoginUser2Completed += wsdl_LoginUser2Completed;
-            wsdl.LoginUser2Async(UserName, finalPassword);
+            if (string.IsNullOrWhiteSpace(e.Result)) return;
+            salt = e.Result;
+
+            wsdl.DateTimeUtcNowOurTicksCompleted += wsdl_DateTimeUtcNowOurTicksCompleted;
+            wsdl.DateTimeUtcNowOurTicksAsync();
         }
 
         static void wsdl_LoginUser2Completed(object sender, LoginUser2CompletedEventArgs e)
         {
             loggedUser = e.Result;
+            if (loggedUser == null) return;
             wsdl.GetAccountForClient2Completed += wsdl_GetAccountForClientCompleted;
             wsdl.GetAccountForClient2Async(loggedUser.InternalId.ToString(), Guid.Parse(ClientRegistrationID).ToString());
         }
@@ -345,6 +369,8 @@ namespace Tasky.BL.Managers
 		#endif 
 		void ChangeExternalId(string oldId, Task newTask)
         {
+            if (string.IsNullOrWhiteSpace(oldId)) return;
+
 			#if Win8
 			await 
 			#endif 

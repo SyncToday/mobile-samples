@@ -62,7 +62,7 @@
 
             <shell:ApplicationBarIconButton 
                 IconUri="/Images/save.png"
-                Text="save" 
+                Text="save+login" 
                 Click="HandleSave"/>
 
         </shell:ApplicationBar>

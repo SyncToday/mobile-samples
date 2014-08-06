@@ -62,6 +62,8 @@ namespace TaskyWinPhone {
             GetLoginInformation();
         }
 
+        internal static string AppName = "Tasky for Sync.Today Mobile ({0})";
+
         //http://stackoverflow.com/questions/21007033/username-and-password-data-windows-phone-8-app
         internal static string FilePath = "TaskyPinfile";
 

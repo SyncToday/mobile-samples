@@ -15,6 +15,7 @@ namespace TaskyWinPhone {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
+        public string Owner { get; set; }
         public bool Done { get; set; }
     
         public TaskViewModel ()
@@ -31,6 +32,7 @@ namespace TaskyWinPhone {
             Name = item.Name;
             Notes = item.Notes;
             Done = item.Done;
+            Owner = item.Owner;
         }
 
         public Task GetTask() {
@@ -38,8 +40,24 @@ namespace TaskyWinPhone {
                 ID = this.ID,
                 Name = this.Name,
                 Notes = this.Notes,
-                Done = this.Done
+                Done = this.Done,
+                Owner = this.Owner
             };
+        }
+
+        private int _OwnerListPickerSelectedIndex;
+        public int OwnerListPickerSelectedIndex
+        {
+            get
+            {
+                return _OwnerListPickerSelectedIndex;
+            }
+
+            set
+            {
+                _OwnerListPickerSelectedIndex = value;
+                OnPropertyChanged("OwnerListPickerSelectedIndex");
+            }
         }
     }
 }

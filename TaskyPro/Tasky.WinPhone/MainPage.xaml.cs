@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Tasky.BL.Managers;
 
 namespace TaskyWinPhone {
     public partial class MainPage : PhoneApplicationPage {
@@ -20,11 +21,15 @@ namespace TaskyWinPhone {
 
             DataContext = new TaskListViewModel();
             Loaded += new RoutedEventHandler(MainPage_Loaded);
+
+            ApplicationTitle.Text = RemoteTaskManager.GetApplicationName();
         }
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             ((TaskListViewModel)DataContext).BeginUpdate(Dispatcher);
+
+            ApplicationTitle.Text = RemoteTaskManager.GetApplicationName();
         }
 
         private void HandleAdd(object sender, EventArgs e)
